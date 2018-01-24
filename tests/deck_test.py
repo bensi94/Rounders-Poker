@@ -25,3 +25,12 @@ def test_all_cards_unique():
             uniq.append(card.isCard())
             seen.add(card.isCard())
     assert len(uniq) == 52
+
+#Deal should return list of two card tuples, with unique cards,
+def test_deal():
+    deck = Deck()
+    seen = set()
+    deal = deck.deal()
+    assert deal[0][0]._suite == "clubs" and deal[0][0]._rank == "ace"
+    assert deal[1][1]._suite == "clubs" and deal[1][1]._rank == "4"
+    assert deck.currentCard == 3
