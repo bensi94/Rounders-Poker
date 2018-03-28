@@ -23,7 +23,7 @@ class PokerGame:
 
     def hand(self):
         self.payBlinds()
-        deck.deal()
+        self._deck.deal()
 
     def payBlinds(self):
         if self._player1._isDealer:

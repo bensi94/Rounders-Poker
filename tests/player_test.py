@@ -1,6 +1,5 @@
 from player import Player
 
-
 #Player should get name and starting stack
 def test_init():
     player = Player('Benedikt', 10000, True)
