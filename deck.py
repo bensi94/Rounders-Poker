@@ -1,23 +1,32 @@
+#External 
+from collections import deque
+import itertools
+import random
+
+#Internal
 from constants import SUITES, RANKS
 from card import Card
 from random import shuffle
 
+
 class Deck:
 
-    cards = []
-    currentCard = 0
-
     def __init__(self):
+        list_of_cards = []
         for suite in SUITES:
             for rank in RANKS:
-                self.cards.append(Card(suite, rank))
+                list_of_cards.append(Card(suite, rank))
+        shuffle(list_of_cards)
+        self.cards = deque(list_of_cards)
 
+    def get_hand(self):
+        return (self.cards.popleft(), self.cards.popleft())
 
-    def shuffleCards(self):
-        self.currentCard = 0
-        shuffle(self.cards)
+    def get_flop(self):
+        self.cards.popleft() # Burn card (standard in texas hold'em poker)
+        return (self.cards.popleft(), self.cards.popleft(), self.cards.popleft())
 
-    def deal(self):
-         hands = [(self.cards[self.currentCard], self.cards[self.currentCard+1]), (self.cards[self.currentCard+2], self.cards[self.currentCard+3])]
-         self.currentCard += 3
-         return hands
+    # Used to get turn or river
+    def get_next_card(self):
+        self.cards.popleft()  # Burn card (standard in texas hold'em poker)
+        return self.cards.popleft()
