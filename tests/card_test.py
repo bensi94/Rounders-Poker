@@ -1,6 +1,6 @@
 from card import Card
 
 #Should generate rank of suite by input
-def test_isCard():
+def test__str__():
     card = Card('clubs', 'ace')
-    assert 'ace of clubs' == card.isCard()
+    assert 'ace of clubs' == card.__str__()
