@@ -3,14 +3,14 @@ from deck import Deck
 #Should generate 52 cards
 def test_cards_total():
     deck = Deck()
-    assert len(deck.cards) == 52
+    assert len(deck._cards) == 52
 
 #All cards should be unique
 def test_all_cards_unique():
     seen = set()
     uniq = []
     deck = Deck()
-    for card in deck.cards:
+    for card in deck._cards:
         if card.__str__() not in seen:
             uniq.append(card.__str__())
             seen.add(card.__str__())
@@ -23,7 +23,7 @@ def test_get_hand():
     deck = Deck()
     card1, card2 = deck.get_hand()
     assert card1.__str__() != card2.__str__()
-    assert len(deck.cards) == 50
+    assert len(deck._cards) == 50
 
 
 # Get flop in two player scenario
@@ -34,7 +34,7 @@ def test_get_flop():
 
     card1, card2, card3 = deck.get_flop() # 48-4(flop+burn card) = 44
     assert card1.__str__() != card2.__str__() != card3.__str__()
-    assert len(deck.cards) == 44
+    assert len(deck._cards) == 44
 
 
 # Get turn in two player scenario
@@ -45,7 +45,7 @@ def test_get_next_card_turn():
     deck.get_flop() # flop + burn card, 48-3-1 = 44
     deck.get_next_card()  # Turn + burn card, 44-1-1 = 42
 
-    assert len(deck.cards) == 42
+    assert len(deck._cards) == 42
 
 # Get river in two player scenario
 def test_get_next_card_river():
@@ -55,5 +55,5 @@ def test_get_next_card_river():
     deck.get_flop()  # flop + burn card, 48-3-1 = 44
     deck.get_next_card()  # Turn + burn card, 44-1-1 = 42
     deck.get_next_card()  # River + burn card, 42-1-1 = 40
-    assert len(deck.cards) == 40
+    assert len(deck._cards) == 40
 

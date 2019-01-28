@@ -17,16 +17,16 @@ class Deck:
             for rank in RANKS:
                 list_of_cards.append(Card(suite, rank))
         shuffle(list_of_cards)
-        self.cards = deque(list_of_cards)
+        self._cards = deque(list_of_cards)
 
     def get_hand(self):
-        return (self.cards.popleft(), self.cards.popleft())
+        return (self._cards.popleft(), self._cards.popleft())
 
     def get_flop(self):
-        self.cards.popleft() # Burn card (standard in texas hold'em poker)
-        return (self.cards.popleft(), self.cards.popleft(), self.cards.popleft())
+        self._cards.popleft() # Burn card (standard in texas hold'em poker)
+        return (self._cards.popleft(), self._cards.popleft(), self._cards.popleft())
 
     # Used to get turn or river
     def get_next_card(self):
-        self.cards.popleft()  # Burn card (standard in texas hold'em poker)
-        return self.cards.popleft()
+        self._cards.popleft()  # Burn card (standard in texas hold'em poker)
+        return self._cards.popleft()
