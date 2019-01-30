@@ -1,5 +1,9 @@
+#External
 from collections import OrderedDict
 import random
+
+#Internal
+from constants import PENDING, RUNNING
 
 class Table:
     
@@ -13,25 +17,25 @@ class Table:
             self._seats[seat] = None
         
         # Pending means the game is not running at table
-        self._state = 'PENDING'
-        self._player_count = 0
+        self._state = PENDING
+        self._seat_count = 0
         # Dealer button
         self._button = None
 
-    def sit_at_table(self, player, seat):
+    def sit_at_table(self, user, seat):
         if seat not in self._seats:
-            return 'Invalid seat, player not seated'
+            return False, 'Invalid seat, user not seated'
         elif self._seats[seat] != None:
-            return 'Seat occupied, player not seated'
+            return False, 'Seat occupied, user not seated'
 
-        self._seats[seat] = player
-        self._player_count += 1
+        self._seats[seat] = user
+        self._seat_count += 1
 
         # If game is not running and two or more player are seated the game starts
-        if self._state == 'PENDING' and self._player_count > 1:
-            self._state = 'RUNNING'
+        if self._state == PENDING and self._seat_count > 1:
+            self._state = RUNNING
             self._init_button()
-        return 'Player seated at seat: ' + str(seat)
+        return True, 'User seated at seat: ' + str(seat)
 
     # Puts the dealer button in a valid 
     def _init_button(self):
@@ -43,11 +47,11 @@ class Table:
 
     def empty_seat(self, seat):
         if seat in self._seats:
-            self._player_count -= 1
+            self._seat_count -= 1
             self._seats[seat] = None
 
-        if self._player_count < 2:
-            self._state = 'PENDING'
+        if self._seat_count < 2:
+            self._state = PENDING
         
     def move_button(self):
         self._button += 1
@@ -58,3 +62,4 @@ class Table:
             self._button += 1
             if self._button > self._max_players:
                 self._button = 1
+    
