@@ -63,3 +63,5 @@ class Table:
             if self._button > self._max_players:
                 self._button = 1
     
+    def get_button(self):
+        return self._button

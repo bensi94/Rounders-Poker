@@ -55,7 +55,7 @@ def test_sit_at_table_not_exist():
         assert table._seats[seat] != user
     assert return_msg == 'Invalid seat, user not seated'
     assert return_value == False
-    
+
 # If one user sits down the game should be pending
 def test_sit_at_table_pending():
     table = Table(2, (10, 20))
@@ -124,3 +124,18 @@ def test_move_button_high():
     table._button = 9
     table.move_button()
     assert table._button == 3
+
+def test_get_button():
+    table = Table(9, (10, 20))
+
+    # MOCK USER
+    user1 = 'MOCK USER 1'
+    user2 = 'MOCK USER 2'
+
+    table.sit_at_table(user1, 3)
+    table.sit_at_table(user1, 9)
+
+    table._button = 3
+    table.move_button()
+    
+    assert table.get_button() == 9
