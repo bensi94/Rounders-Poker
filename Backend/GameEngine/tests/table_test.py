@@ -139,3 +139,14 @@ def test_get_button():
     table.move_button()
     
     assert table.get_button() == 9
+
+def test_update_blinds_and_get_blinds():
+    table = Table(9, (10, 20))
+
+    updated_blinds = (20, 40)
+
+    table.update_blinds(updated_blinds)
+
+    assert table.get_blinds() == updated_blinds
+
+

@@ -46,7 +46,6 @@ def test_fold():
     player.bet(50)
     player.fold()
 
-    assert player._bet == 0
     assert player._stack == 50
     assert player._status == STATUS_FOLDED
 
@@ -63,3 +62,31 @@ def test_get_state():
     assert state['status'] == STATUS_ACTIVE
     assert state['stack'] == stack-bet
     assert state['bet'] == bet
+
+def test_pay_blind_full():
+    stack = 100
+    blind = 20
+
+    player = Player(stack)
+    player.pay_blind(blind)
+
+    assert player._bet == blind
+    assert player._stack == stack - blind
+
+# Test when blind is more than stack
+def test_pay_blind_less():
+    stack = 10
+    blind = 20
+
+    player = Player(stack)
+    player.pay_blind(blind)
+
+    assert player._bet == stack
+    assert player._stack == 0
+
+def test_reset_bet():
+    player1 = Player(100)
+    player1.bet(20)
+    player1.reset_bet()
+
+    assert player1._bet == 0

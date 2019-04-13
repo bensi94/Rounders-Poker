@@ -2,6 +2,7 @@
 # For now it's meant for cash game tables, might change to
 # layer supertype pattern when tournaments come in later
 from table import Table
+from hand import Hand
 from constants import MAX_PLAYERS, SMALL_BLIND, BIG_BLIND
 
 class GameController:
@@ -30,6 +31,7 @@ class GameController:
         # Then seat 1 to button and the button seat last
         return more_then_button + less_then_button + [self._players[button]]
 
-
-     
-
+    
+    def run_hand(self):
+        self._hand = Hand(self.get_button_ordered_players(), self._table.get_blinds())
+        self._hand.deal_hand()

@@ -65,3 +65,9 @@ class Table:
     
     def get_button(self):
         return self._button
+
+    def update_blinds(self, blinds):
+        self._small_blind, self._big_blind = blinds
+
+    def get_blinds(self):
+        return self._small_blind, self._big_blind

@@ -9,7 +9,6 @@ class Player:
 
     def give_hand(self, hand):
         self._hand = hand
-        self._bet = 0
         self._status = STATUS_ACTIVE
 
     def set_seat(self, seat):
@@ -30,8 +29,20 @@ class Player:
         return True
 
     def fold(self):
-        self._bet = 0
         self._status = STATUS_FOLDED
+
+    def reset_bet(self):
+        self._bet = 0
+
+
+    def pay_blind(self, blind_val):
+        if blind_val > self._stack:
+            self._bet += self._stack
+            self._stack = 0
+        else:
+            self._stack = self._stack - blind_val
+            self._bet += blind_val
+        
 
     # The state of the player is an object that is used to pass to other players
     # To determine possible actions
