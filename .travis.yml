@@ -8,6 +8,7 @@ services:
 before_script: pip install docker-compose
 
 script:
+  - docker-compose build
   - docker-compose run backend sh -c "python manage.py test && flake8"
   - docker-compose run backend sh -c "python -m pytest GameEngine/tests/"
-  - docker-compose run frontend  sh -c "yarn run eslint"
+  - docker-compose run frontend sh -c "yarn run eslint"
