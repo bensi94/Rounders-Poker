@@ -29,7 +29,7 @@
 	"scripts": {
 		"start": "webpack-dev-server --mode development",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"eslint-fix": "eslint--fix \"src/**/*.js\"",
+		"eslint-fix": "eslint--fix \"Src/**/*.js\"",
 		"build": "webpack --mode production"
 	}
 }
