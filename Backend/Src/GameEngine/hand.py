@@ -1,4 +1,5 @@
-from deck import Deck
+from GameEngine.deck import Deck
+
 
 class Hand:
 
@@ -21,5 +22,5 @@ class Hand:
             self._players[0].pay_blind(self._small_blind)
             self._players[1].pay_blind(self._big_blind)
 
-    def deal():
-        for player in self._players
+    # def deal():
+    #     for player in self._players

@@ -1,11 +1,9 @@
-#External 
+# External
 from collections import deque
-import itertools
-import random
 
-#Internal
-from constants import SUITES, RANKS
-from card import Card
+# Internal
+from GameEngine.constants import SUITES, RANKS
+from GameEngine.card import Card
 from random import shuffle
 
 
@@ -23,8 +21,10 @@ class Deck:
         return (self._cards.popleft(), self._cards.popleft())
 
     def get_flop(self):
-        self._cards.popleft() # Burn card (standard in texas hold'em poker)
-        return (self._cards.popleft(), self._cards.popleft(), self._cards.popleft())
+        self._cards.popleft()  # Burn card (standard in texas hold'em poker)
+        return (self._cards.popleft(),
+                self._cards.popleft(),
+                self._cards.popleft())
 
     # Used to get turn or river
     def get_next_card(self):

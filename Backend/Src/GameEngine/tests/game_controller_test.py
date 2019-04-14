@@ -1,4 +1,5 @@
-from game_controller import GameController
+from GameEngine.game_controller import GameController
+
 
 def test_get_button_ordered_players():
     controller = GameController()
@@ -9,13 +10,18 @@ def test_get_button_ordered_players():
 
     # Check all buttons for these players, works like multiple tests in one
     controller._table._button = 7
-    assert controller.get_button_ordered_players() == ['Sveinn', 'Iza', 'Bensi', 'Eythor']
+    assert controller.get_button_ordered_players() == ['Sveinn', 'Iza',
+                                                       'Bensi', 'Eythor']
     controller._table._button = 5
-    assert controller.get_button_ordered_players() == ['Eythor', 'Sveinn', 'Iza', 'Bensi']
+    assert controller.get_button_ordered_players() == ['Eythor', 'Sveinn',
+                                                       'Iza', 'Bensi']
     controller._table._button = 3
-    assert controller.get_button_ordered_players() == ['Bensi', 'Eythor', 'Sveinn', 'Iza']
+    assert controller.get_button_ordered_players() == ['Bensi', 'Eythor',
+                                                       'Sveinn', 'Iza']
     controller._table._button = 2
-    assert controller.get_button_ordered_players() == ['Iza', 'Bensi', 'Eythor', 'Sveinn']
+    assert controller.get_button_ordered_players() == ['Iza', 'Bensi',
+                                                       'Eythor', 'Sveinn']
+
 
 # Tests for two players
 def test_get_button_ordered_players_two():
@@ -27,4 +33,3 @@ def test_get_button_ordered_players_two():
     assert controller.get_button_ordered_players() == ['Iza', 'Bensi']
     controller._table._button = 3
     assert controller.get_button_ordered_players() == ['Bensi', 'Iza']
-

@@ -1,6 +1,7 @@
-from player import Player
-from card import Card
-from constants import STATUS_ACTIVE, STATUS_FOLDED
+from GameEngine.player import Player
+from GameEngine.card import Card
+from GameEngine.constants import STATUS_ACTIVE, STATUS_FOLDED
+
 
 def test_give_hand():
     player = Player(100)
@@ -13,6 +14,7 @@ def test_give_hand():
     assert player._hand[0].__str__() == '8 of hearts'
     assert player._hand[1].__str__() == '9 of spades'
 
+
 def test_get_and_set_seat():
     player = Player(100)
 
@@ -21,6 +23,7 @@ def test_get_and_set_seat():
 
     assert player.get_seat() == seat
 
+
 def test_bet_valid():
     player = Player(100)
 
@@ -28,7 +31,8 @@ def test_bet_valid():
 
     assert player._stack == 50
     assert player._bet == 50
-    assert retrun_val == True
+    assert retrun_val is True
+
 
 def test_bet_invalid():
     player = Player(100)
@@ -37,7 +41,7 @@ def test_bet_invalid():
 
     assert player._stack == 100
     assert player._bet == 0
-    assert retrun_val == False
+    assert retrun_val is False
 
 
 def test_fold():
@@ -58,10 +62,11 @@ def test_get_state():
     player.bet(bet)
 
     state = player.get_state()
-    
+
     assert state['status'] == STATUS_ACTIVE
     assert state['stack'] == stack-bet
     assert state['bet'] == bet
+
 
 def test_pay_blind_full():
     stack = 100
@@ -73,6 +78,7 @@ def test_pay_blind_full():
     assert player._bet == blind
     assert player._stack == stack - blind
 
+
 # Test when blind is more than stack
 def test_pay_blind_less():
     stack = 10
@@ -83,6 +89,7 @@ def test_pay_blind_less():
 
     assert player._bet == stack
     assert player._stack == 0
+
 
 def test_reset_bet():
     player1 = Player(100)
