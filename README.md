@@ -1,14 +1,15 @@
-# Poker AI
+# Rounders - Online Poker platform
 
-Bare with me I'm just getting started...
-
-### The idea
-
-My idea is to make three things for practice and educational purpose, the first one is a playable texas holdem poker game, second one is to make a website where anyone can play the game, the third one is to make a AI for the game and let it train it self to get better at it. 
+##  Project Design and Technology 
 
 
-### Running tests
+### Frontend 
 
-```bash
-python -m pytest tests/
-```
+* Created with React
+* Configured with webpack and babel
+* Tested with jest and linting with eslint
+
+### Backend
+
+* Created with Django
+* Tested with Pytest and Django
