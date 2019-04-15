@@ -5,10 +5,8 @@ python:
 services:
   - docker
 
-before_script: pip install docker-compose
+before_script: 
+  - pip install docker-compose
+  - chmod +x lintingAndTests.sh
 
-script:
-  - docker-compose build
-  - docker-compose run backend sh -c "python manage.py test && flake8"
-  - docker-compose run backend sh -c "python -m pytest GameEngine/tests/"
-  - docker-compose run frontend sh -c "yarn run eslint"
+script: ./lintingAndTests.sh

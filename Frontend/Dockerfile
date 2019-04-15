@@ -6,10 +6,8 @@ RUN mkdir Frontend
 WORKDIR /Frontend
 
 # Install requirements on container from package.json
-COPY ./package.json /Frontend/package.json
+COPY . /Frontend
 RUN yarn install
-
-COPY . Frontend
 
 # Create a new user to run the frontend, so it will not be run by root
 # This is done to reduce damage if the container is compromised
