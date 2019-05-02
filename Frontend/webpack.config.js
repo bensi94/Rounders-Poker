@@ -12,6 +12,10 @@ module.exports = {
         contentBase: './dist',
         host: '0.0.0.0'
     },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        mainFields: ['jsnext:main', 'main']
+    },
     module: {
         rules: [
             {
@@ -20,12 +24,16 @@ module.exports = {
                 use: ['babel-loader', 'eslint-loader']
             },
             {
-                test: /\.less$/,
+                test: /\.(less|css)$/,
                 use: [
                     'style-loader',
                     'css-loader',
                     'less-loader'
                 ]
+            },
+            {
+                test: /\.(ttf|eot|svg|woff|woff2)(\?.+)?$/,
+                loader: 'file-loader?name=[hash:12].[ext]'
             }
         ]
     },
