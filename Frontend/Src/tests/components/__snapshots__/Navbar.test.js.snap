@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
+<Menu
+  className="navBar"
+  menuTrigger="hover"
+  mode="horizontal"
+  theme="dark"
+>
+  <Link
+    className="navlink"
+    to="/"
+  >
+    <MenuItem
+      index="1"
+    >
+      Rounders Poker
+    </MenuItem>
+  </Link>
+  <Link
+    className="navlink"
+    to="/login"
+  >
+    <MenuItem
+      className="right-item"
+      index="2"
+    >
+      Log In
+    </MenuItem>
+  </Link>
+  <Link
+    className="navlink"
+    to="/signup"
+  >
+    <MenuItem
+      className="right-item"
+      index="3"
+    >
+      Sign up
+    </MenuItem>
+  </Link>
+</Menu>
+`;

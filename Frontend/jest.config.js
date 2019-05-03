@@ -9,7 +9,7 @@ module.exports = {
     coverageDirectory: 'coverage',
 
     // An array of file extensions your modules use
-    moduleFileExtensions: ['js', 'json', 'jsx'],
+    moduleFileExtensions: ['js', 'jsx'],
 
     // The paths to modules that run some code to configure or set up the testing environment before each test
     setupFiles: ['<rootDir>/Src/tests/enzyme.config.js'],
