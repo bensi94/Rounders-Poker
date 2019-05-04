@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
+exports[`Login Test suite Should render Login(snapshot) correctly 1`] = `
 <Row
   align="top"
   justify="center"
@@ -14,26 +14,15 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
     labelWidth="100"
     model={
       Object {
-        "confirmPassword": "",
         "password": "",
         "username": "",
       }
     }
     rules={
       Object {
-        "confirmPassword": Array [
-          Object {
-            "message": "Please input the password again",
-            "required": true,
-            "trigger": "blur",
-          },
-          Object {
-            "validator": [Function],
-          },
-        ],
         "password": Array [
           Object {
-            "message": "Please input the password",
+            "message": "Please input the password ",
             "required": true,
             "trigger": "blur",
           },
@@ -57,7 +46,7 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
     <h2
       className="signup-login-title"
     >
-      Sign up
+      Login
     </h2>
     <FormItem
       label="Username"
@@ -87,20 +76,6 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
         value=""
       />
     </FormItem>
-    <FormItem
-      label="Confirm password"
-      prop="confirmPassword"
-    >
-      <Input
-        autoComplete="off"
-        autosize={false}
-        onChange={[Function]}
-        rows={2}
-        trim={false}
-        type="password"
-        value=""
-      />
-    </FormItem>
     <FormItem>
       <Button
         disabled={false}
@@ -110,7 +85,7 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
         plain={false}
         type="primary"
       >
-        Sign up
+        Login
       </Button>
       <Button
         disabled={false}

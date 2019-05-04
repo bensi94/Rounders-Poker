@@ -32,7 +32,7 @@ class Signup extends React.Component {
                             callback(new Error('Password must be at least 5 characters'));
                         } else {
                             if (this.state.form.confirmPassword !== '') {
-                                this.refs.form.validateField('password');
+                                this.refs.form.validateField('confirmPassword');
                             }
                             callback();
                         }
@@ -86,9 +86,9 @@ class Signup extends React.Component {
                     model={this.state.form}
                     rules={this.state.rules}
                     labelWidth="100"
-                    className="signup-form"
+                    className="signup-login-form"
                 >
-                    <h2 className="title">Sign up</h2>
+                    <h2 className="signup-login-title">Sign up</h2>
                     <Form.Item label="Username" prop="username">
                         <Input type="text"
                             value={this.state.form.username}

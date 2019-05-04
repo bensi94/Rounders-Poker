@@ -19,7 +19,7 @@ class Navbar extends React.Component {
                 </NavLink>
                 <NavLink exact to="/login" className="navlink" activeClassName="active-navlink">
                     <Menu.Item className="right-item" index="2">
-                        Log In
+                        Login
                     </Menu.Item>
                 </NavLink>
                 <NavLink exact to="/signup" className="navlink" activeClassName="active-navlink">

@@ -29,7 +29,7 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
       className="right-item"
       index="2"
     >
-      Log In
+      Login
     </MenuItem>
   </NavLink>
   <NavLink

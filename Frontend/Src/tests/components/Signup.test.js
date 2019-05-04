@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Signup from '../../components/Signup';
 
 describe('Signup Test suite', () => {
-    let wrapper = null;
+    let wrapper;
 
     beforeEach(() => {
         wrapper = shallow(<Signup />);
