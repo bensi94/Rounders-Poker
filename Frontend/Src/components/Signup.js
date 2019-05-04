@@ -18,8 +18,9 @@ class Signup extends React.Component {
                     { validator: (rule, value, callback) => {
                         if (value === '') {
                             callback(new Error('Please input the username'));
+                        } else {
+                            callback();
                         }
-                        callback();
                     } }
                 ],
                 password: [
@@ -27,6 +28,8 @@ class Signup extends React.Component {
                     { validator: (rule, value, callback) => {
                         if (value === '') {
                             callback(new Error('Please input the password'));
+                        } else if (value.length < 5) {
+                            callback(new Error('Password must be at least 5 characters'));
                         } else {
                             if (this.state.form.confirmPassword !== '') {
                                 this.refs.form.validateField('password');
@@ -56,8 +59,9 @@ class Signup extends React.Component {
 
         this.refs.form.validate((valid) => {
             if (valid) {
-                //alert('submit');
+                console.log('isValid');
             } else {
+                console.log('invalid');
                 return false;
             }
         });

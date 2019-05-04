@@ -7,8 +7,10 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
   mode="horizontal"
   theme="dark"
 >
-  <Link
+  <NavLink
+    activeClassName="active-navlink"
     className="navlink"
+    exact={true}
     to="/"
   >
     <MenuItem
@@ -16,9 +18,11 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
     >
       Rounders Poker
     </MenuItem>
-  </Link>
-  <Link
+  </NavLink>
+  <NavLink
+    activeClassName="active-navlink"
     className="navlink"
+    exact={true}
     to="/login"
   >
     <MenuItem
@@ -27,9 +31,11 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
     >
       Log In
     </MenuItem>
-  </Link>
-  <Link
+  </NavLink>
+  <NavLink
+    activeClassName="active-navlink"
     className="navlink"
+    exact={true}
     to="/signup"
   >
     <MenuItem
@@ -38,6 +44,6 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
     >
       Sign up
     </MenuItem>
-  </Link>
+  </NavLink>
 </Menu>
 `;

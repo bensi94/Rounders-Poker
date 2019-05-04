@@ -12,6 +12,6 @@ describe('Navbar Test suite', () => {
 
     it('Should have router link to each menu', () => {
         const wrapper = shallow(<Navbar />);
-        expect(wrapper.find('Link')).toHaveLength(3);
+        expect(wrapper.find('NavLink')).toHaveLength(3);
     });
 });
