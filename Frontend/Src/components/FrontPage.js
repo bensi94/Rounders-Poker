@@ -2,7 +2,7 @@ import React from 'react';
 
 
 class FrontPage extends React.Component {
-    render () {
+    render() {
         return <h1>FrontPage</h1>;
     }
 }

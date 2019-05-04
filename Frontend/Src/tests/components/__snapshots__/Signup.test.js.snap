@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
+<Row
+  align="top"
+  justify="center"
+  tag="div"
+  type="flex"
+>
+  <Form
+    className="signup-form"
+    labelPosition="right"
+    labelSuffix=""
+    labelWidth="100"
+    model={
+      Object {
+        "confirmPassword": "",
+        "password": "",
+        "username": "",
+      }
+    }
+    rules={
+      Object {
+        "confirmPassword": Array [
+          Object {
+            "message": "Please input the password again",
+            "required": true,
+            "trigger": "blur",
+          },
+          Object {
+            "validator": [Function],
+          },
+        ],
+        "password": Array [
+          Object {
+            "message": "Please input the password",
+            "required": true,
+            "trigger": "blur",
+          },
+          Object {
+            "validator": [Function],
+          },
+        ],
+        "username": Array [
+          Object {
+            "message": "Please input the username",
+            "required": true,
+            "trigger": "blur",
+          },
+          Object {
+            "validator": [Function],
+          },
+        ],
+      }
+    }
+  >
+    <h2
+      className="title"
+    >
+      Sign up
+    </h2>
+    <FormItem
+      label="Username"
+      prop="username"
+    >
+      <Input
+        autoComplete="off"
+        autosize={false}
+        onChange={[Function]}
+        rows={2}
+        trim={false}
+        type="text"
+        value=""
+      />
+    </FormItem>
+    <FormItem
+      label="Pasword"
+      prop="password"
+    >
+      <Input
+        autoComplete="off"
+        autosize={false}
+        onChange={[Function]}
+        rows={2}
+        trim={false}
+        type="password"
+        value=""
+      />
+    </FormItem>
+    <FormItem
+      label="Confirm password"
+      prop="confirmPassword"
+    >
+      <Input
+        autoComplete="off"
+        autosize={false}
+        onChange={[Function]}
+        rows={2}
+        trim={false}
+        type="password"
+        value=""
+      />
+    </FormItem>
+    <FormItem>
+      <Button
+        disabled={false}
+        loading={false}
+        nativeType="button"
+        onClick={[Function]}
+        plain={false}
+        type="primary"
+      >
+        Sign up
+      </Button>
+      <Button
+        disabled={false}
+        loading={false}
+        nativeType="button"
+        onClick={[Function]}
+        plain={false}
+        type="default"
+      >
+        Reset
+      </Button>
+    </FormItem>
+  </Form>
+</Row>
+`;

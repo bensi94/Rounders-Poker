@@ -23,6 +23,7 @@
 		"css-loader": "^2.1.1",
 		"enzyme": "^3.9.0",
 		"enzyme-adapter-react-16": "^1.12.1",
+		"enzyme-to-json": "^3.3.5",
 		"eslint": "^5.16.0",
 		"eslint-config-react": "^1.1.7",
 		"eslint-loader": "^2.1.2",
@@ -44,7 +45,7 @@
 		"test:watch": "jest --watchAll",
 		"test:coverage": "jest --coverage --colors",
 		"eslint-fix": "eslint--fix \"./Src/**/*.js\"",
-		"eslint": "./node_modules/.bin/eslint **.js",
+		"eslint": "./node_modules/.bin/eslint **.js \"./Src/**/*.js\"",
 		"build": "webpack --mode production"
 	}
 }
