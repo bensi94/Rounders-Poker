@@ -5,18 +5,18 @@ services:
     build:
       context: ./Backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     volumes:
       - ./Backend/Src:/Src
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+             python manage.py runserver ${BACKEND_HOST}:${BACKEND_PORT}"
     environment:
-      - DB_HOST=db
-      - DB_NAME=backend
-      - DB_USER=postgres
-      - DB_PASS=localpassword
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
     depends_on:
       - db
 
@@ -24,7 +24,7 @@ services:
     build:
       context: ./Frontend
     ports:
-      - "8080:8080"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     volumes:
       - ./Frontend/Src:/Frontend/Src
       - ./Frontend/.eslintrc:/Frontend/.eslintrc
@@ -40,6 +40,6 @@ services:
   db:
     image: postgres:11-alpine
     environment:
-      - POSTGRES_DB=backend
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=localpassword
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}

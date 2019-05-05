@@ -9,7 +9,10 @@
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"react-hot-loader": "^4.8.4",
-		"react-router-dom": "^5.0.0"
+		"react-redux": "^7.0.3",
+		"react-router-dom": "^5.0.0",
+		"redux": "^4.0.1",
+		"redux-thunk": "^2.3.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
@@ -34,6 +37,7 @@
 		"less": "^3.9.0",
 		"less-loader": "^4.1.0",
 		"react-test-renderer": "^16.8.6",
+		"redux-devtools-extension": "^2.13.8",
 		"style-loader": "^0.23.1",
 		"webpack": "^4.30.0",
 		"webpack-cli": "^3.3.0",
