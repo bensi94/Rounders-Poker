@@ -10,3 +10,17 @@ services:
       - ./Backend/Src:/Src
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+  frontend:
+    build:
+      context: ./Frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Frontend/Src:/Frontend/Src
+      - ./Frontend/.eslintrc:/Frontend/.eslintrc
+      - ./Frontend/webpack.config.js:/Frontend/webpack.config.js
+      - ./Frontend/index.html:/Frontend/index.html
+      - ./Frontend/package.json:/Frontend/package.json
+      - ./Frontend/.babelrc:/Frontend/.babelrc
+    command: >
+      sh -c "yarn run start"
