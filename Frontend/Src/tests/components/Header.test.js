@@ -3,10 +3,14 @@ import { shallow } from 'enzyme';
 
 import Header from '../../components/Header';
 
-
 describe('Header Test suite', () => {
-    it('Should have header \'Rounders Poker \'', () => {
+    it('Should render Header(snapshot) correctly', () => {
         const wrapper = shallow(<Header />);
-        expect(wrapper.find('h1').text()).toEqual('Rounders Poker');
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('Should have header Navbar', () => {
+        const wrapper = shallow(<Header />);
+        expect(wrapper.find('Navbar')).toHaveLength(1);
     });
 });

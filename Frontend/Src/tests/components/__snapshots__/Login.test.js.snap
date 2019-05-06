@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Test suite Should render Login(snapshot) correctly 1`] = `
+<Row
+  align="top"
+  justify="center"
+  tag="div"
+  type="flex"
+>
+  <Form
+    className="signup-login-form"
+    labelPosition="right"
+    labelSuffix=""
+    labelWidth="100"
+    model={
+      Object {
+        "password": "",
+        "username": "",
+      }
+    }
+    rules={
+      Object {
+        "password": Array [
+          Object {
+            "message": "Please input the password ",
+            "required": true,
+            "trigger": "blur",
+          },
+          Object {
+            "validator": [Function],
+          },
+        ],
+        "username": Array [
+          Object {
+            "message": "Please input the username",
+            "required": true,
+            "trigger": "blur",
+          },
+          Object {
+            "validator": [Function],
+          },
+        ],
+      }
+    }
+  >
+    <h2
+      className="signup-login-title"
+    >
+      Login
+    </h2>
+    <FormItem
+      label="Username"
+      prop="username"
+    >
+      <Input
+        autoComplete="off"
+        autosize={false}
+        onChange={[Function]}
+        rows={2}
+        trim={false}
+        type="text"
+        value=""
+      />
+    </FormItem>
+    <FormItem
+      label="Pasword"
+      prop="password"
+    >
+      <Input
+        autoComplete="off"
+        autosize={false}
+        onChange={[Function]}
+        rows={2}
+        trim={false}
+        type="password"
+        value=""
+      />
+    </FormItem>
+    <FormItem>
+      <Button
+        disabled={false}
+        loading={false}
+        nativeType="button"
+        onClick={[Function]}
+        plain={false}
+        type="primary"
+      >
+        Login
+      </Button>
+      <Button
+        disabled={false}
+        loading={false}
+        nativeType="button"
+        onClick={[Function]}
+        plain={false}
+        type="default"
+      >
+        Reset
+      </Button>
+    </FormItem>
+  </Form>
+</Row>
+`;
