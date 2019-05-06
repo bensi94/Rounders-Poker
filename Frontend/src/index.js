@@ -1,10 +1,14 @@
+// Dependencies
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Project files
 import './styles/main.less';
+import Header from './components/Header';
 
 const App = () => {
     return (
-        <h1 className="header">Rounders Poker</h1>
+        <Header />
     );
 };
 
