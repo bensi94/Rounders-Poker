@@ -9,7 +9,17 @@ services:
     volumes:
       - ./Backend/Src:/Src
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=backend
+      - DB_USER=postgres
+      - DB_PASS=localpassword
+    depends_on:
+      - db
+
   frontend:
     build:
       context: ./Frontend
@@ -24,3 +34,12 @@ services:
       - ./Frontend/.babelrc:/Frontend/.babelrc
     command: >
       sh -c "yarn run start"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_DB=backend
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=localpassword
