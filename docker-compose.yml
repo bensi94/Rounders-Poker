@@ -11,7 +11,7 @@ services:
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
-             python manage.py runserver ${BACKEND_HOST}:${BACKEND_PORT}"
+             python manage.py runserver ${HOST}:${BACKEND_PORT}"
     environment:
       - DB_HOST=${DB_HOST}
       - DB_NAME=${DB_NAME}
@@ -34,6 +34,9 @@ services:
       - ./Frontend/.babelrc:/Frontend/.babelrc
     command: >
       sh -c "yarn run start"
+    environment:
+      - HOST=${HOST}
+      - BASE_API_URL=${HOST}:${BACKEND_PORT}
     depends_on:
       - backend
 
