@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import axios from 'axios';
+import axios from '../../util/axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import { signup } from '../../actions/auth';
@@ -36,7 +36,7 @@ describe('Auth-Actions Test suite', () => {
         };
 
         mockAxios
-            .onPost(`${baseUrl}/api/user/create`)
+            .onPost(`${baseUrl}/api/user/create/`)
             .reply(201, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
@@ -70,7 +70,7 @@ describe('Auth-Actions Test suite', () => {
         };
 
         mockAxios
-            .onPost(`${baseUrl}/api/user/create`)
+            .onPost(`${baseUrl}/api/user/create/`)
             .reply(400, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
@@ -96,7 +96,7 @@ describe('Auth-Actions Test suite', () => {
         };
 
         mockAxios
-            .onPost(`${baseUrl}/api/user/create`)
+            .onPost(`${baseUrl}/api/user/create/`)
             .reply(400, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
@@ -111,8 +111,3 @@ describe('Auth-Actions Test suite', () => {
         });
     });
 });
-// {
-//     "username": [
-//         "user with this username already exists."
-//     ]
-// }

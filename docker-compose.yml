@@ -17,6 +17,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
+      - FRONTEND_ORIGIN=${FRONTEND_HOST}:${FRONTEND_PORT}
     depends_on:
       - db
 
@@ -36,7 +37,7 @@ services:
       sh -c "yarn run start"
     environment:
       - HOST=${HOST}
-      - BASE_API_URL=${HOST}:${BACKEND_PORT}
+      - BASE_API_URL=${API_HOST}:${BACKEND_PORT}
     depends_on:
       - backend
 

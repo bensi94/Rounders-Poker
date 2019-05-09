@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Signup from '../../components/Signup';
+import { Signup } from '../../components/Signup';
 
 describe('Signup Test suite', () => {
     let wrapper;
@@ -23,10 +23,19 @@ describe('Signup Test suite', () => {
         expect(wrapper.state('form').username).toBe(usernameVal);
     });
 
+    it('Should change name', () => {
+        const name = 'Benedikt Oskarsson';
+
+        // Input field at 1 is the name field, this sets the name
+        wrapper.find('Input').at(1).simulate('change', name);
+
+        expect(wrapper.state('form').name).toBe(name);
+    });
+
     it('Should change password', () => {
         const passVal = 'testpassword';
-        // Input field at 1 is the password field, this sets the password
-        wrapper.find('Input').at(1).simulate('change', passVal);
+        // Input field at 2 is the password field, this sets the password
+        wrapper.find('Input').at(2).simulate('change', passVal);
 
         expect(wrapper.state('form').password).toBe(passVal);
     });
@@ -50,6 +59,17 @@ describe('Signup Test suite', () => {
 
         expect(callback).toHaveBeenCalledTimes(1);
         expect(callback).toHaveBeenCalledWith(new Error('Please input the username'));
+    });
+
+    it('Should have a name that is not empty', () => {
+        const name = '';
+        const callback = jest.fn();
+
+        // Calling the validator with an empty name
+        wrapper.instance().state.rules.name[1].validator('', name, callback);
+
+        expect(callback).toHaveBeenCalledTimes(1);
+        expect(callback).toHaveBeenCalledWith(new Error('Please input name'));
     });
 
     it('Should have password length of at least 5', () => {
@@ -78,27 +98,38 @@ describe('Signup Test suite', () => {
         expect(callback).toHaveBeenCalledWith(new Error('The passwords do not match'));
     });
 
-    it('Should accept valid password', () => {
-        const passwordVal = 'testpass';
-        const confirmPassVal = 'testpass';
-        const callback = jest.fn();
-
-        // Input field at 1 is the password field, this sets the password
-        wrapper.find('Input').at(1).simulate('change', passwordVal);
-
-        // Calling the validator with an empty username
-        wrapper.instance().state.rules.confirmPassword[1].validator('', confirmPassVal, callback);
-
-        expect(callback).toHaveBeenCalledTimes(1);
-        expect(callback).toHaveBeenCalledWith();
-    });
-
     it('Should accept valid username', () => {
         const username = 'bensi94';
         const callback = jest.fn();
 
         // Calling the validator with an empty username
         wrapper.instance().state.rules.username[1].validator('', username, callback);
+
+        expect(callback).toHaveBeenCalledTimes(1);
+        expect(callback).toHaveBeenCalledWith();
+    });
+
+    it('Should accept valid name', () => {
+        const name = 'Benedikt Oskarsson';
+        const callback = jest.fn();
+
+        // Calling the validator with an empty name
+        wrapper.instance().state.rules.name[1].validator('', name, callback);
+
+        expect(callback).toHaveBeenCalledTimes(1);
+        expect(callback).toHaveBeenCalledWith();
+    });
+
+    it('Should accept valid password', () => {
+        const passwordVal = 'testpass';
+        const confirmPassVal = 'testpass';
+        const callback = jest.fn();
+
+        // Input field at 1 is the password field, this sets the password
+        wrapper.find('Input').at(2).simulate('change', passwordVal);
+
+        // Calling the validator with an empty username
+        wrapper.instance().state.rules.confirmPassword[1].validator('', confirmPassVal, callback);
 
         expect(callback).toHaveBeenCalledTimes(1);
         expect(callback).toHaveBeenCalledWith();

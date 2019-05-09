@@ -1,18 +1,10 @@
-import axios from 'axios';
+import axios from '../util/axios';
 import { SIGNUP_SUCCESS, SIGNUP_FAIL } from '../constants';
-
-const baseUrl = process.env.BASE_API_URL;
-
-const config = {
-    headers: {
-        "Content-Type": "application/json"
-    }
-};
 
 export const signup = (user) => {
     const body = JSON.stringify(user);
     return (dispatch) => {
-        return axios.post(`${baseUrl}/api/user/create`, body, config)
+        return axios.post('/api/user/create/', body)
             .then(res => {
                 dispatch({
                     type: SIGNUP_SUCCESS,

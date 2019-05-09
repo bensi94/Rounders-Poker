@@ -15,6 +15,7 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
     model={
       Object {
         "confirmPassword": "",
+        "name": "",
         "password": "",
         "username": "",
       }
@@ -24,6 +25,16 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
         "confirmPassword": Array [
           Object {
             "message": "Please input the password again",
+            "required": true,
+            "trigger": "blur",
+          },
+          Object {
+            "validator": [Function],
+          },
+        ],
+        "name": Array [
+          Object {
+            "message": "Please input name",
             "required": true,
             "trigger": "blur",
           },
@@ -62,6 +73,20 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
     <FormItem
       label="Username"
       prop="username"
+    >
+      <Input
+        autoComplete="off"
+        autosize={false}
+        onChange={[Function]}
+        rows={2}
+        trim={false}
+        type="text"
+        value=""
+      />
+    </FormItem>
+    <FormItem
+      label="Name"
+      prop="name"
     >
       <Input
         autoComplete="off"
