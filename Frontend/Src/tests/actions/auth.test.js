@@ -11,7 +11,7 @@ const mockStore = configureMockStore(middlewares);
 const baseUrl = process.env.BASE_API_URL;
 const mockAxios = new MockAdapter(axios);
 
-describe('Auth Test suite', () => {
+describe('Auth-Actions Test suite', () => {
     let store;
     beforeEach(() => {
         store = mockStore({});
