@@ -92,7 +92,7 @@ DATABASES = {
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:8080'
+    os.environ.get('FRONTEND_ORIGIN')
 )
 
 CSRF_COOKIE_NAME = "csrftoken"
