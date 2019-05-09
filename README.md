@@ -9,6 +9,32 @@ This project is currently a work in progress.
 
 ![App profile](https://github.com/bensi94/Rounders-Poker/blob/master/app-profile.png)
 
+## Running the application  
+
+Only dependency to run the application is Docker.  
+To build the application run:
+`docker-compose build && docker-compose up`  
+
+### Frontend
+
+The frontend will run on port 8080 (can be changed in docker-compose file).  
+[localhost:8080](http://localhost:8080)
+
+### Backend
+The backend will run on port 8000 (can be changed in docker-compose file).  
+[localhost:8000](http://localhost:8000)  
+
+**Valid Routes:**
+*  [/admin](http://localhost:8000/admin) - Login as superuser(admin)
+*  [/api/user/create](http://localhost:8000/api/user/create) - Create user
+*  [/api/user/me](http://localhost:8000/api/user/me) - Used to update user (needs token for authorization)
+*  [/api/user/token](http://localhost:8000/api/user/token) - Returns the token of user on valid user data
+
+**Create superuser:**  
+Command:  
+`docker-compose run backend sh -c "python manage.py createsuperuser"`  
+It will ask you for username and password. From there you can create, delete and change users.
+
 ##  Project Design and Technology 
 
 
