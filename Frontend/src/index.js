@@ -2,20 +2,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'element-theme-default';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
 
 // Project files
 import './styles/main.less';
 import Header from './components/Header';
 import store from './store';
+import history from './util/history';
+
 
 const App = () => {
     return (
         <Provider store={store}>
-            <Router>
+            <ConnectedRouter history={history}>
                 <Header />
-            </Router>
+            </ConnectedRouter>
         </Provider>
     );
 };

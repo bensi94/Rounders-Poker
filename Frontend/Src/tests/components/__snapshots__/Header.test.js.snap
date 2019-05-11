@@ -2,7 +2,7 @@
 
 exports[`Header Test suite Should render Header(snapshot) correctly 1`] = `
 <Fragment>
-  <Navbar />
+  <ConnectFunction />
   <Switch>
     <Route
       component={[Function]}
@@ -10,7 +10,15 @@ exports[`Header Test suite Should render Header(snapshot) correctly 1`] = `
       path="/"
     />
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Login)",
+          "type": [Function],
+        }
+      }
       exact={true}
       path="/login"
     />

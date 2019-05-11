@@ -8,9 +8,4 @@ describe('Header Test suite', () => {
         const wrapper = shallow(<Header />);
         expect(wrapper).toMatchSnapshot();
     });
-
-    it('Should have header Navbar', () => {
-        const wrapper = shallow(<Header />);
-        expect(wrapper.find('Navbar')).toHaveLength(1);
-    });
 });
