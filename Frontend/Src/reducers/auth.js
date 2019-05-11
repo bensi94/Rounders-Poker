@@ -3,7 +3,8 @@ import {
     SIGNUP_FAIL,
     CLEAR_SIGNUP,
     USER_LOGGED_IN,
-    INVALID_LOGIN_CREDENTIALS
+    INVALID_LOGIN_CREDENTIALS,
+    CLEAR_LOGIN
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -29,6 +30,7 @@ export default (state = {}, action) => {
             return {
                 error: 'Could not log in with provided user credentials'
             };
+        case CLEAR_LOGIN: return {};
         default: return state;
     }
 };

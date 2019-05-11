@@ -3,8 +3,14 @@ import thunk from 'redux-thunk';
 import axios from '../../util/axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import { signup, clearSignup, login } from '../../actions/auth';
-import { SIGNUP_SUCCESS, SIGNUP_FAIL, CLEAR_SIGNUP, USER_LOGGED_IN, INVALID_LOGIN_CREDENTIALS } from '../../constants';
+import { signup, clearSignup, login, clearLogin } from '../../actions/auth';
+import { SIGNUP_SUCCESS,
+    SIGNUP_FAIL,
+    CLEAR_SIGNUP,
+    USER_LOGGED_IN,
+    INVALID_LOGIN_CREDENTIALS,
+    CLEAR_LOGIN
+} from '../../constants';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -161,5 +167,10 @@ describe('Auth-Actions Test suite', () => {
             expect(store.getActions()[0].type).toBe(INVALID_LOGIN_CREDENTIALS);
             expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
         });
+    });
+
+    it('Should clear login on clear login', () => {
+        store.dispatch(clearLogin());
+        expect(store.getActions()[0].type).toBe(CLEAR_LOGIN);
     });
 });

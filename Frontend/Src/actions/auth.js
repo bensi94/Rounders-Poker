@@ -1,5 +1,11 @@
 import axios from '../util/axios';
-import { SIGNUP_SUCCESS, SIGNUP_FAIL, CLEAR_SIGNUP, USER_LOGGED_IN, INVALID_LOGIN_CREDENTIALS } from '../constants';
+import { SIGNUP_SUCCESS,
+    SIGNUP_FAIL,
+    CLEAR_SIGNUP,
+    USER_LOGGED_IN,
+    INVALID_LOGIN_CREDENTIALS,
+    CLEAR_LOGIN
+} from '../constants';
 
 export const signup = (user) => {
     const body = JSON.stringify(user);
@@ -49,5 +55,11 @@ export const login = (user) => {
                     });
                 }
             });
+    };
+};
+
+export const clearLogin = () => {
+    return {
+        type: CLEAR_LOGIN
     };
 };
