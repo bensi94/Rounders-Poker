@@ -7,7 +7,7 @@ describe('Signup Test suite', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<Signup />);
+        wrapper = shallow(<Signup signup={jest.fn()} redirectLogin={jest.fn()} clearSignup={jest.fn()}/>);
     });
 
     it('Should render Signup(snapshot) correctly', () => {

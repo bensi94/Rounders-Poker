@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Login from '../../components/Login';
+import { Login } from '../../components/Login';
 
 describe('Login Test suite', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<Login />);
+        wrapper = shallow(<Login clearSignup={jest.fn()}/>);
     });
 
     it('Should render Login(snapshot) correctly', () => {

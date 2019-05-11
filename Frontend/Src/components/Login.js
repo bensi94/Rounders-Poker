@@ -1,8 +1,11 @@
 import React from 'react';
-import { Form, Input, Button, Layout } from 'element-react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Form, Input, Button, Layout, Notification } from 'element-react';
 
+import { clearSignup } from '../actions/auth';
 
-class Login extends React.Component {
+export class Login extends React.Component {
     constructor(props) {
         super(props);
 
@@ -34,6 +37,15 @@ class Login extends React.Component {
                 ]
             }
         };
+
+        this.notification = this.notification.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.username) {
+            this.notification(this.props.username);
+            this.props.clearSignup();
+        }
     }
 
     handleSubmit(e) {
@@ -61,6 +73,15 @@ class Login extends React.Component {
         });
     }
 
+    notification(name) {
+        // eslint-disable-next-line new-cap
+        Notification({
+            title: 'User created',
+            message: 'Created new user: ' + name,
+            type: 'success'
+        });
+    }
+
     render() {
         return (
             <Layout.Row type="flex" justify="center">
@@ -75,14 +96,12 @@ class Login extends React.Component {
                         <Input type="text"
                             value={this.state.form.username}
                             onChange={this.onChange.bind(this, 'username')}
-                            autoComplete="off"
                         />
                     </Form.Item>
                     <Form.Item label="Pasword" prop="password">
                         <Input type="password"
                             value={this.state.form.password}
                             onChange={this.onChange.bind(this, 'password')}
-                            autoComplete="off"
                         />
                     </Form.Item>
                     <Form.Item>
@@ -95,4 +114,19 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+Login.propTypes = {
+    username: PropTypes.string,
+    clearSignup: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => {
+    return {
+        username: state.auth.username
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    clearSignup: () => dispatch(clearSignup())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

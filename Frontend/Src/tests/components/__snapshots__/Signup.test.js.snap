@@ -137,16 +137,6 @@ exports[`Signup Test suite Should render Signup(snapshot) correctly 1`] = `
       >
         Sign up
       </Button>
-      <Button
-        disabled={false}
-        loading={false}
-        nativeType="button"
-        onClick={[Function]}
-        plain={false}
-        type="default"
-      >
-        Reset
-      </Button>
     </FormItem>
   </Form>
 </Row>
