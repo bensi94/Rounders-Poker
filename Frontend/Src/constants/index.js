@@ -4,3 +4,6 @@ export const CLEAR_SIGNUP = 'CLEAR_SIGNUP';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const INVALID_LOGIN_CREDENTIALS = 'INVALID_LOGIN_CREDENTIALS';
 export const CLEAR_LOGIN = 'CLEAR_LOGIN';
+
+
+export const COOKIE_TOKEN_NAME = 'Token';

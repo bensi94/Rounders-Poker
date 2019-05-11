@@ -7,7 +7,12 @@ describe('Login Test suite', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<Login clearSignup={jest.fn()}/>);
+        wrapper = shallow(
+            <Login clearSignup={jest.fn()}
+                clearLogin={jest.fn()}
+                login={jest.fn()}
+                redirectFront={jest.fn()}
+            />);
     });
 
     it('Should render Login(snapshot) correctly', () => {

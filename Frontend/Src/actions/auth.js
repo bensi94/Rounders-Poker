@@ -4,8 +4,10 @@ import { SIGNUP_SUCCESS,
     CLEAR_SIGNUP,
     USER_LOGGED_IN,
     INVALID_LOGIN_CREDENTIALS,
-    CLEAR_LOGIN
+    CLEAR_LOGIN,
+    COOKIE_TOKEN_NAME
 } from '../constants';
+import Cookie from 'js-cookie';
 
 export const signup = (user) => {
     const body = JSON.stringify(user);
@@ -37,6 +39,7 @@ export const login = (user) => {
     return (dispatch) => {
         return axios.post('/api/user/token/', body)
             .then(res => {
+                Cookie.set(COOKIE_TOKEN_NAME, res.data.token);
                 dispatch({
                     type: USER_LOGGED_IN,
                     payload: res.data

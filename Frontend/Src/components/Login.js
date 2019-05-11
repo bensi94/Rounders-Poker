@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Input, Button, Layout, Notification } from 'element-react';
+import { push } from 'connected-react-router';
 
-import { clearSignup } from '../actions/auth';
+import { clearSignup, clearLogin, login } from '../actions/auth';
+
 
 export class Login extends React.Component {
     constructor(props) {
@@ -20,6 +22,8 @@ export class Login extends React.Component {
                     { validator: (rule, value, callback) => {
                         if (value === '') {
                             callback(new Error('Please input the username'));
+                        } else if (this.props.error) {
+                            callback(new Error(this.props.error));
                         } else {
                             callback();
                         }
@@ -48,14 +52,23 @@ export class Login extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.token) {
+            this.props.redirectFront();
+        } else if (this.props.error) {
+            this.refs.form.validate();
+            this.props.clearLogin();
+        }
+    }
+
+
     handleSubmit(e) {
         e.preventDefault();
 
         this.refs.form.validate((valid) => {
             if (valid) {
-                console.log('isValid');
+                this.props.login(this.state.form);
             } else {
-                console.log('invalid');
                 return false;
             }
         });
@@ -115,18 +128,28 @@ export class Login extends React.Component {
 }
 
 Login.propTypes = {
+    clearSignup: PropTypes.func.isRequired,
+    clearLogin: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    redirectFront: PropTypes.func.isRequired,
     username: PropTypes.string,
-    clearSignup: PropTypes.func.isRequired
+    token: PropTypes.string,
+    error: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
     return {
-        username: state.auth.username
+        username: state.auth.username,
+        token: state.auth.token,
+        error: state.auth.error
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    clearSignup: () => dispatch(clearSignup())
+    clearSignup: () => dispatch(clearSignup()),
+    clearLogin: () => dispatch(clearLogin()),
+    login: (user) => dispatch(login(user)),
+    redirectFront: () => dispatch(push('/'))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
