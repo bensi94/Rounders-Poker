@@ -1,5 +1,5 @@
 import authReducer from '../../reducers/auth';
-import { SIGNUP_SUCCESS, SIGNUP_FAIL } from '../../constants';
+import { SIGNUP_SUCCESS, SIGNUP_FAIL, CLEAR_SIGNUP } from '../../constants';
 
 describe('Auth-Reducers Test suite', () => {
     it('Should add signed up user to store', () => {
@@ -24,12 +24,26 @@ describe('Auth-Reducers Test suite', () => {
             ]
         };
 
+        const response = {
+            error: {
+                username: "user with this username already exists."
+            }
+        };
+
         const action = {
             type: SIGNUP_FAIL,
             payload: payload
         };
 
         const state = authReducer({}, action);
-        expect(state).toMatchObject(payload);
+        expect(state).toMatchObject(response);
+    });
+
+    it('Should clear return cleared on CLEAR_SIGNUP', () => {
+        const action = {
+            type: CLEAR_SIGNUP
+        };
+        const state = authReducer({}, action);
+        expect(state).toMatchObject({});
     });
 });
