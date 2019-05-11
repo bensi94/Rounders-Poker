@@ -1,4 +1,10 @@
-import { SIGNUP_SUCCESS, SIGNUP_FAIL, CLEAR_SIGNUP } from '../constants';
+import {
+    SIGNUP_SUCCESS,
+    SIGNUP_FAIL,
+    CLEAR_SIGNUP,
+    USER_LOGGED_IN,
+    INVALID_LOGIN_CREDENTIALS
+} from '../constants';
 
 export default (state = {}, action) => {
     switch (action.type) {
@@ -18,6 +24,11 @@ export default (state = {}, action) => {
                 password
             } };
         case CLEAR_SIGNUP: return {};
+        case USER_LOGGED_IN: return action.payload;
+        case INVALID_LOGIN_CREDENTIALS:
+            return {
+                error: 'Could not log in with provided user credentials'
+            };
         default: return state;
     }
 };

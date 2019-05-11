@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import axios from '../../util/axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import { signup, clearSignup } from '../../actions/auth';
-import { SIGNUP_SUCCESS, SIGNUP_FAIL, CLEAR_SIGNUP } from '../../constants';
+import { signup, clearSignup, login } from '../../actions/auth';
+import { SIGNUP_SUCCESS, SIGNUP_FAIL, CLEAR_SIGNUP, USER_LOGGED_IN, INVALID_LOGIN_CREDENTIALS } from '../../constants';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -114,5 +114,52 @@ describe('Auth-Actions Test suite', () => {
     it('Should dispatch CLEAR_SIGNUP on clearSignup', () => {
         store.dispatch(clearSignup());
         expect(store.getActions()[0].type).toBe(CLEAR_SIGNUP);
+    });
+
+    it('Should get a token back on login', () => {
+        const user = {
+            username: 'bensi94',
+            password: 'testpass'
+        };
+
+        const responseObj = {
+            token: 'testtoken'
+        };
+
+        mockAxios
+            .onPost(`${baseUrl}/api/user/token/`)
+            .reply(200, JSON.stringify(responseObj));
+
+        // By returning the promise we let jest know that the promise
+        // needs to be rosolved  before going to the next one
+        return store.dispatch(login(user)).then(() => {
+            expect(store.getActions()[0].type).toBe(USER_LOGGED_IN);
+            expect(store.getActions()[0].payload).toMatchObject(responseObj);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+        });
+    });
+
+    it('Should get unable to authenticate if invalid', () => {
+        const user = {
+            username: 'wronguser',
+            password: 'wrongPassword'
+        };
+
+        const responseObj = {
+            non_field_errors: [
+                "Unable to authenticate with provided credentails"
+            ]
+        };
+
+        mockAxios
+            .onPost(`${baseUrl}/api/user/token/`)
+            .reply(400, JSON.stringify(responseObj));
+
+        // By returning the promise we let jest know that the promise
+        // needs to be rosolved  before going to the next one
+        return store.dispatch(login(user)).then(() => {
+            expect(store.getActions()[0].type).toBe(INVALID_LOGIN_CREDENTIALS);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+        });
     });
 });
