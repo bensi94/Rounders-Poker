@@ -5,8 +5,11 @@
 	"license": "MIT",
 	"dependencies": {
 		"axios": "^0.18.0",
+		"connected-react-router": "^6.4.0",
 		"element-react": "^1.4.33",
 		"element-theme-default": "^1.4.13",
+		"history": "^4.9.0",
+		"prop-types": "^15.7.2",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"react-hot-loader": "^4.8.4",
