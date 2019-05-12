@@ -5,6 +5,9 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { clearLogin } from '../actions/auth';
+import { checkUser } from '../actions/user';
+
 
 export class Navbar extends React.Component {
     constructor(props) {
@@ -30,6 +33,19 @@ export class Navbar extends React.Component {
                     >
                         <Menu.Item index="1">
                             Rounders Poker
+                        </Menu.Item>
+                    </NavLink>
+                    <NavLink exact to="/"
+                        className="navlink"
+                        activeClassName="active-navlink"
+                        isActive={this.updateIsActive}
+                        onClick={() => {
+                            this.props.logOut();
+                            this.props.checkUser();
+                        }}
+                    >
+                        <Menu.Item className="right-item" index="2">
+                            Log out
                         </Menu.Item>
                     </NavLink>
                 </Menu>
@@ -72,7 +88,9 @@ export class Navbar extends React.Component {
 
 Navbar.propTypes = {
     active: PropTypes.string.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    logOut: PropTypes.func.isRequired,
+    checkUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -82,4 +100,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch) => ({
+    logOut: () => dispatch(clearLogin()),
+    checkUser: () => dispatch(checkUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

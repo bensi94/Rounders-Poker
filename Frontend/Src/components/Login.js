@@ -54,8 +54,8 @@ export class Login extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.token) {
-            this.props.redirectFront();
+        if (this.props.token && this.props.isAuthenticated) {
+            this.props.redirectGame();
         } else if (this.props.error) {
             this.refs.form.validate();
             this.props.clearLogin();
@@ -69,7 +69,9 @@ export class Login extends React.Component {
         this.refs.form.validate((valid) => {
             if (valid) {
                 this.props.login(this.state.form).then(() => {
-                    this.props.checkUser();
+                    this.props.checkUser().then(() => {
+                        this.props.redirectGame();
+                    });
                 });
             } else {
                 return false;
@@ -134,18 +136,20 @@ Login.propTypes = {
     clearSignup: PropTypes.func.isRequired,
     clearLogin: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
-    redirectFront: PropTypes.func.isRequired,
+    redirectGame: PropTypes.func.isRequired,
     checkUser: PropTypes.func.isRequired,
     username: PropTypes.string,
     token: PropTypes.string,
-    error: PropTypes.string
+    error: PropTypes.string,
+    isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
     return {
         username: state.auth.username,
         token: state.auth.token,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.user.isAuthenticated
     };
 };
 
@@ -153,7 +157,7 @@ const mapDispatchToProps = (dispatch) => ({
     clearSignup: () => dispatch(clearSignup()),
     clearLogin: () => dispatch(clearLogin()),
     login: (user) => dispatch(login(user)),
-    redirectFront: () => dispatch(push('/')),
+    redirectGame: () => dispatch(push('/game')),
     checkUser: () => dispatch(checkUser())
 });
 
