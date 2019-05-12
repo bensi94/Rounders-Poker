@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
 export const checkUser = () => {
     const token = Cookies.get(COOKIE_TOKEN_NAME);
     if (token) {
-        setAuthorizationToken(token);
+        setAuthorizationToken(`${COOKIE_TOKEN_NAME} ${token}`);
         return (dispatch) => {
             return axios.get('/api/user/me/')
                 .then(res => {

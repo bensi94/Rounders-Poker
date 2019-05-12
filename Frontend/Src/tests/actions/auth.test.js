@@ -2,12 +2,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from '../../util/axios';
 import MockAdapter from 'axios-mock-adapter';
+import Cookies from 'js-cookie';
 
 import { signup, clearSignup, login, clearLogin } from '../../actions/auth';
 import { SIGNUP_SUCCESS,
     SIGNUP_FAIL,
     CLEAR_SIGNUP,
-    USER_LOGGED_IN,
     INVALID_LOGIN_CREDENTIALS,
     CLEAR_LOGIN
 } from '../../constants';
@@ -131,7 +131,9 @@ describe('Auth-Actions Test suite', () => {
         const responseObj = {
             token: 'testtoken'
         };
+        let mockSet = jest.fn();
 
+        Cookies.set = mockSet;
         mockAxios
             .onPost(`${baseUrl}/api/user/token/`)
             .reply(200, JSON.stringify(responseObj));
@@ -139,10 +141,8 @@ describe('Auth-Actions Test suite', () => {
         // By returning the promise we let jest know that the promise
         // needs to be resolved  before going to the next one
         return store.dispatch(login(user)).then(() => {
-            expect(store.getActions()[0].type).toBe(USER_LOGGED_IN);
-            expect(store.getActions()[0].payload).toEqual(responseObj);
             expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(user);
-            expect(mockAxios.axiosInstance.defaults.headers.common['Authorization']).toBe('Token testtoken');
+            expect(mockSet).toHaveBeenCalledWith('Token', responseObj.token);
         });
     });
 

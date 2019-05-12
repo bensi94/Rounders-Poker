@@ -5,6 +5,7 @@ import { Form, Input, Button, Layout, Notification } from 'element-react';
 import { push } from 'connected-react-router';
 
 import { clearSignup, clearLogin, login } from '../actions/auth';
+import { checkUser } from '../actions/user';
 
 
 export class Login extends React.Component {
@@ -67,7 +68,9 @@ export class Login extends React.Component {
 
         this.refs.form.validate((valid) => {
             if (valid) {
-                this.props.login(this.state.form);
+                this.props.login(this.state.form).then(() => {
+                    this.props.checkUser();
+                });
             } else {
                 return false;
             }
@@ -132,6 +135,7 @@ Login.propTypes = {
     clearLogin: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
     redirectFront: PropTypes.func.isRequired,
+    checkUser: PropTypes.func.isRequired,
     username: PropTypes.string,
     token: PropTypes.string,
     error: PropTypes.string
@@ -149,7 +153,8 @@ const mapDispatchToProps = (dispatch) => ({
     clearSignup: () => dispatch(clearSignup()),
     clearLogin: () => dispatch(clearLogin()),
     login: (user) => dispatch(login(user)),
-    redirectFront: () => dispatch(push('/'))
+    redirectFront: () => dispatch(push('/')),
+    checkUser: () => dispatch(checkUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

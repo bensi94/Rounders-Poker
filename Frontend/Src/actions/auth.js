@@ -1,8 +1,7 @@
-import axios, { setAuthorizationToken, clearAuthorizationToken } from '../util/axios';
+import axios, { clearAuthorizationToken } from '../util/axios';
 import { SIGNUP_SUCCESS,
     SIGNUP_FAIL,
     CLEAR_SIGNUP,
-    USER_LOGGED_IN,
     INVALID_LOGIN_CREDENTIALS,
     CLEAR_LOGIN,
     COOKIE_TOKEN_NAME
@@ -40,11 +39,6 @@ export const login = (user) => {
         return axios.post('/api/user/token/', body)
             .then(res => {
                 Cookies.set(COOKIE_TOKEN_NAME, res.data.token);
-                setAuthorizationToken(`${COOKIE_TOKEN_NAME} ${res.data.token}`);
-                dispatch({
-                    type: USER_LOGGED_IN,
-                    payload: res.data
-                });
             })
             .catch(err => {
                 const invalidLoginCredentials = {

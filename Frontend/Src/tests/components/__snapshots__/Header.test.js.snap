@@ -1,43 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header Test suite Should render Header(snapshot) correctly 1`] = `
-<Fragment>
-  <ConnectFunction />
-  <Switch>
-    <Route
-      component={[Function]}
-      exact={true}
-      path="/"
-    />
-    <Route
-      component={
-        Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "displayName": "Connect(Login)",
-          "type": [Function],
-        }
-      }
-      exact={true}
-      path="/login"
-    />
-    <Route
-      component={
-        Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "displayName": "Connect(Signup)",
-          "type": [Function],
-        }
-      }
-      exact={true}
-      path="/signup"
-    />
-    <Route
-      component={[Function]}
-    />
-  </Switch>
-</Fragment>
+<Loading
+  fullscreen={true}
+  loading={true}
+/>
 `;

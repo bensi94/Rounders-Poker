@@ -12,6 +12,7 @@ describe('Login Test suite', () => {
                 clearLogin={jest.fn()}
                 login={jest.fn()}
                 redirectFront={jest.fn()}
+                checkUser={jest.fn()}
             />);
     });
 
