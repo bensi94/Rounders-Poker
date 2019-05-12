@@ -4,7 +4,7 @@ import {
     SET_UNAUTHENTICATED_USER,
     COOKIE_TOKEN_NAME
 } from '../constants';
-import axios, { setAuthorizationToken } from '../util/axios';
+import axios, { setAuthorizationToken, clearAuthorizationToken } from '../util/axios';
 import Cookies from 'js-cookie';
 
 export const checkUser = () => {
@@ -20,6 +20,8 @@ export const checkUser = () => {
                     });
                 })
                 .catch(err => {
+                    clearAuthorizationToken();
+                    Cookies.remove(COOKIE_TOKEN_NAME);
                     dispatch({
                         type: SET_AUTHENTICATION_ERROR,
                         payload: err.response.data
