@@ -13,6 +13,7 @@ describe('Login Test suite', () => {
                 login={jest.fn()}
                 redirectFront={jest.fn()}
                 checkUser={jest.fn()}
+                redirectGame={jest.fn()}
             />);
     });
 
