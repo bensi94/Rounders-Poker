@@ -8,7 +8,8 @@ import { checkUser } from '../../actions/user';
 import {
     SET_AUTHENTICATED_USER,
     SET_AUTHENTICATION_ERROR,
-    SET_UNAUTHENTICATED_USER
+    SET_UNAUTHENTICATED_USER,
+    USER_LOGGED_IN
 } from '../../constants';
 
 const middlewares = [thunk];
@@ -43,6 +44,7 @@ describe('User-Actions Test suite', () => {
         // needs to be resolved  before going to the next one
         return store.dispatch(checkUser()).then(() => {
             expect(store.getActions()[0].type).toBe(SET_AUTHENTICATED_USER);
+            expect(store.getActions()[1].type).toBe(USER_LOGGED_IN);
             expect(JSON.parse(mockAxios.handlers.get[0][4])).toMatchObject(responseObj);
         });
     });

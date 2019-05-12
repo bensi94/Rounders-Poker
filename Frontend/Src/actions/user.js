@@ -2,6 +2,7 @@ import {
     SET_AUTHENTICATED_USER,
     SET_AUTHENTICATION_ERROR,
     SET_UNAUTHENTICATED_USER,
+    USER_LOGGED_IN,
     COOKIE_TOKEN_NAME
 } from '../constants';
 import axios, { setAuthorizationToken, clearAuthorizationToken } from '../util/axios';
@@ -17,6 +18,12 @@ export const checkUser = () => {
                     dispatch({
                         type: SET_AUTHENTICATED_USER,
                         payload: res.data
+                    });
+                    dispatch({
+                        type: USER_LOGGED_IN,
+                        payload: {
+                            token
+                        }
                     });
                 })
                 .catch(err => {
