@@ -1,4 +1,4 @@
-import axios from '../util/axios';
+import axios, { setAuthorizationToken, clearAuthorizationToken } from '../util/axios';
 import { SIGNUP_SUCCESS,
     SIGNUP_FAIL,
     CLEAR_SIGNUP,
@@ -7,7 +7,7 @@ import { SIGNUP_SUCCESS,
     CLEAR_LOGIN,
     COOKIE_TOKEN_NAME
 } from '../constants';
-import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 
 export const signup = (user) => {
     const body = JSON.stringify(user);
@@ -39,7 +39,8 @@ export const login = (user) => {
     return (dispatch) => {
         return axios.post('/api/user/token/', body)
             .then(res => {
-                Cookie.set(COOKIE_TOKEN_NAME, res.data.token);
+                Cookies.set(COOKIE_TOKEN_NAME, res.data.token);
+                setAuthorizationToken(`${COOKIE_TOKEN_NAME} ${res.data.token}`);
                 dispatch({
                     type: USER_LOGGED_IN,
                     payload: res.data
@@ -62,6 +63,8 @@ export const login = (user) => {
 };
 
 export const clearLogin = () => {
+    Cookies.remove(COOKIE_TOKEN_NAME);
+    clearAuthorizationToken();
     return {
         type: CLEAR_LOGIN
     };

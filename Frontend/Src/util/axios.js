@@ -1,13 +1,17 @@
 import axios from 'axios';
 
-const baseUrl = process.env.BASE_API_URL;
+axios.defaults.baseURL = process.env.BASE_API_URL;
+axios.defaults.withCredentials = true;
+axios.defaults.headers.post['Content-Type'] = "application/json";
+axios.defaults.xsrfHeaderName = 'CSRFToken';
+axios.defaults.xsrfCookieName = 'csrftoken';
 
-export default axios.create({
-    withCredentials: true,
-    baseURL: baseUrl,
-    headers: {
-        "Content-Type": "application/json"
-    },
-    xsrfHeaderName: "X-CSRFToken",
-    xsrfCookieName: "csrftoken"
-});
+export const setAuthorizationToken = (tokenString) => {
+    axios.defaults.headers.common['Authorization'] = tokenString;
+};
+
+export const clearAuthorizationToken = () => {
+    Reflect.deleteProperty(axios.defaults.headers.common, 'Authorization');
+};
+
+export default axios;

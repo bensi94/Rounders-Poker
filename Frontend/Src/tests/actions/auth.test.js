@@ -46,7 +46,7 @@ describe('Auth-Actions Test suite', () => {
             .reply(201, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
-        // needs to be rosolved  before going to the next one
+        // needs to be resolved  before going to the next one
         return store.dispatch(signup(user)).then(() => {
             expect(store.getActions()[0].type).toBe(SIGNUP_SUCCESS);
             expect(store.getActions()[0].payload).toMatchObject(responseObj);
@@ -80,7 +80,7 @@ describe('Auth-Actions Test suite', () => {
             .reply(400, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
-        // needs to be rosolved  before going to the next one
+        // needs to be resolved  before going to the next one
         return store.dispatch(signup(user)).then(() => {
             expect(store.getActions()[0].type).toBe(SIGNUP_FAIL);
             expect(store.getActions()[0].payload).toMatchObject(responseObj);
@@ -106,7 +106,7 @@ describe('Auth-Actions Test suite', () => {
             .reply(400, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
-        // needs to be rosolved  before going to the next one
+        // needs to be resolved  before going to the next one
         return store.dispatch(signup(user)).then(() => {
             store.dispatch(signup(user));
         }).then(() => {
@@ -137,11 +137,12 @@ describe('Auth-Actions Test suite', () => {
             .reply(200, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
-        // needs to be rosolved  before going to the next one
+        // needs to be resolved  before going to the next one
         return store.dispatch(login(user)).then(() => {
             expect(store.getActions()[0].type).toBe(USER_LOGGED_IN);
             expect(store.getActions()[0].payload).toMatchObject(responseObj);
             expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+            expect(mockAxios.axiosInstance.defaults.headers.common['Authorization']).toBe('Token testtoken');
         });
     });
 
@@ -162,7 +163,7 @@ describe('Auth-Actions Test suite', () => {
             .reply(400, JSON.stringify(responseObj));
 
         // By returning the promise we let jest know that the promise
-        // needs to be rosolved  before going to the next one
+        // needs to be resolved  before going to the next one
         return store.dispatch(login(user)).then(() => {
             expect(store.getActions()[0].type).toBe(INVALID_LOGIN_CREDENTIALS);
             expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
@@ -172,5 +173,6 @@ describe('Auth-Actions Test suite', () => {
     it('Should clear login on clear login', () => {
         store.dispatch(clearLogin());
         expect(store.getActions()[0].type).toBe(CLEAR_LOGIN);
+        expect(mockAxios.axiosInstance.defaults.headers.common['Authorization']).toBe(undefined);
     });
 });
