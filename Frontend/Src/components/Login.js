@@ -1,8 +1,14 @@
 import React from 'react';
-import { Form, Input, Button, Layout } from 'element-react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Form, Input, Button, Layout, Notification } from 'element-react';
+import { push } from 'connected-react-router';
+
+import { clearSignup, clearLogin, login } from '../actions/auth';
+import { checkUser } from '../actions/user';
 
 
-class Login extends React.Component {
+export class Login extends React.Component {
     constructor(props) {
         super(props);
 
@@ -17,6 +23,8 @@ class Login extends React.Component {
                     { validator: (rule, value, callback) => {
                         if (value === '') {
                             callback(new Error('Please input the username'));
+                        } else if (this.props.error) {
+                            callback(new Error(this.props.error));
                         } else {
                             callback();
                         }
@@ -34,16 +42,38 @@ class Login extends React.Component {
                 ]
             }
         };
+
+        this.notification = this.notification.bind(this);
     }
+
+    componentDidMount() {
+        if (this.props.username) {
+            this.notification(this.props.username);
+            this.props.clearSignup();
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.token && this.props.isAuthenticated) {
+            this.props.redirectGame();
+        } else if (this.props.error) {
+            this.refs.form.validate();
+            this.props.clearLogin();
+        }
+    }
+
 
     handleSubmit(e) {
         e.preventDefault();
 
         this.refs.form.validate((valid) => {
             if (valid) {
-                console.log('isValid');
+                this.props.login(this.state.form).then(() => {
+                    this.props.checkUser().then(() => {
+                        this.props.redirectGame();
+                    });
+                });
             } else {
-                console.log('invalid');
                 return false;
             }
         });
@@ -61,6 +91,15 @@ class Login extends React.Component {
         });
     }
 
+    notification(name) {
+        // eslint-disable-next-line new-cap
+        Notification({
+            title: 'User created',
+            message: 'Created new user: ' + name,
+            type: 'success'
+        });
+    }
+
     render() {
         return (
             <Layout.Row type="flex" justify="center">
@@ -75,14 +114,12 @@ class Login extends React.Component {
                         <Input type="text"
                             value={this.state.form.username}
                             onChange={this.onChange.bind(this, 'username')}
-                            autoComplete="off"
                         />
                     </Form.Item>
                     <Form.Item label="Pasword" prop="password">
                         <Input type="password"
                             value={this.state.form.password}
                             onChange={this.onChange.bind(this, 'password')}
-                            autoComplete="off"
                         />
                     </Form.Item>
                     <Form.Item>
@@ -95,4 +132,33 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+Login.propTypes = {
+    clearSignup: PropTypes.func.isRequired,
+    clearLogin: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    redirectGame: PropTypes.func.isRequired,
+    checkUser: PropTypes.func.isRequired,
+    username: PropTypes.string,
+    token: PropTypes.string,
+    error: PropTypes.string,
+    isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = (state) => {
+    return {
+        username: state.auth.username,
+        token: state.auth.token,
+        error: state.auth.error,
+        isAuthenticated: state.user.isAuthenticated
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    clearSignup: () => dispatch(clearSignup()),
+    clearLogin: () => dispatch(clearLogin()),
+    login: (user) => dispatch(login(user)),
+    redirectGame: () => dispatch(push('/game')),
+    checkUser: () => dispatch(checkUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -11,6 +11,7 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
     activeClassName="active-navlink"
     className="navlink"
     exact={true}
+    isActive={[Function]}
     to="/"
   >
     <MenuItem
@@ -23,6 +24,7 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
     activeClassName="active-navlink"
     className="navlink"
     exact={true}
+    isActive={[Function]}
     to="/login"
   >
     <MenuItem
@@ -36,6 +38,7 @@ exports[`Navbar Test suite Should render Navabar(snapshot) correctly 1`] = `
     activeClassName="active-navlink"
     className="navlink"
     exact={true}
+    isActive={[Function]}
     to="/signup"
   >
     <MenuItem

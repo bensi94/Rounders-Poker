@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
 module.exports = {
     devtool: 'inline-source-map',
     entry: './Src/index.js',
@@ -10,7 +12,7 @@ module.exports = {
     },
     devServer: {
         contentBase: './dist',
-        host: '0.0.0.0',
+        host: process.env.HOST,
         historyApiFallback: true,
         open: true
     },
@@ -42,6 +44,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve('./index.html')
+        }),
+        new webpack.DefinePlugin({
+            'process.env.BASE_API_URL': JSON.stringify(process.env.BASE_API_URL)
         })
     ]
 };

@@ -1,14 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input, Button, Layout } from 'element-react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
+import { signup, clearSignup } from '../actions/auth';
 
 
-class Signup extends React.Component {
+export class Signup extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             form: {
                 username: '',
+                name: '',
                 password: '',
                 confirmPassword: ''
             },
@@ -18,6 +23,20 @@ class Signup extends React.Component {
                     { validator: (rule, value, callback) => {
                         if (value === '') {
                             callback(new Error('Please input the username'));
+                        } else if (this.props.error && this.props.error.username) {
+                            callback(new Error(this.props.error.username));
+                        } else {
+                            callback();
+                        }
+                    } }
+                ],
+                name: [
+                    { required: true, message: 'Please input name', trigger: 'blur' },
+                    { validator: (rule, value, callback) => {
+                        if (value === '') {
+                            callback(new Error('Please input name'));
+                        } else if (this.props.error && this.props.error.name) {
+                            callback(new Error(this.props.error.name));
                         } else {
                             callback();
                         }
@@ -28,6 +47,8 @@ class Signup extends React.Component {
                     { validator: (rule, value, callback) => {
                         if (value === '') {
                             callback(new Error('Please input the password'));
+                        } else if (this.props.error && this.props.error.password) {
+                            callback(new Error(this.props.error.password));
                         } else if (value.length < 5) {
                             callback(new Error('Password must be at least 5 characters'));
                         } else {
@@ -54,14 +75,24 @@ class Signup extends React.Component {
         };
     }
 
+    componentDidUpdate() {
+        if (this.props.username) {
+            this.props.redirectLogin();
+        } else if (this.props.error) {
+            this.refs.form.validate();
+            this.props.clearSignup();
+        }
+    }
+
     handleSubmit(e) {
         e.preventDefault();
 
         this.refs.form.validate((valid) => {
             if (valid) {
-                console.log('isValid');
+                const user = Object.assign({}, this.state.form);
+                Reflect.deleteProperty(user, 'confirmPassword');
+                this.props.signup(user);
             } else {
-                console.log('invalid');
                 return false;
             }
         });
@@ -96,6 +127,13 @@ class Signup extends React.Component {
                             autoComplete="off"
                         />
                     </Form.Item>
+                    <Form.Item label="Name" prop="name">
+                        <Input type="text"
+                            value={this.state.form.name}
+                            onChange={this.onChange.bind(this, 'name')}
+                            autoComplete="off"
+                        />
+                    </Form.Item>
                     <Form.Item label="Pasword" prop="password">
                         <Input type="password"
                             value={this.state.form.password}
@@ -112,7 +150,7 @@ class Signup extends React.Component {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" onClick={this.handleSubmit.bind(this)}>Sign up</Button>
-                        <Button onClick={this.handleReset.bind(this)}>Reset</Button>
+                        {/* <Button onClick={this.handleReset.bind(this)}>Reset</Button> */}
                     </Form.Item>
                 </Form>
             </Layout.Row>
@@ -120,4 +158,29 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup;
+Signup.propTypes = {
+    signup: PropTypes.func.isRequired,
+    redirectLogin: PropTypes.func.isRequired,
+    clearSignup: PropTypes.func.isRequired,
+    error: PropTypes.shape({
+        username: PropTypes.string,
+        password: PropTypes.string,
+        name: PropTypes.string
+    }),
+    username: PropTypes.string
+};
+
+const mapStateToProps = (state) => {
+    return {
+        error: state.auth.error,
+        username: state.auth.username
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    signup: (user) => dispatch(signup(user)),
+    clearSignup: () => dispatch(clearSignup()),
+    redirectLogin: () => dispatch(push('/login'))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
