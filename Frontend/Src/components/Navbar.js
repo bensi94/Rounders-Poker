@@ -20,47 +20,65 @@ export class Navbar extends React.Component {
     }
 
     render() {
-        return (
-            <Menu className="navBar" mode="horizontal" theme="dark">
-                <NavLink exact to="/"
-                    className="navlink"
-                    activeClassName="active-navlink"
-                    isActive={this.updateIsActive}
-                >
-                    <Menu.Item index="1">
-                        Rounders Poker
-                    </Menu.Item>
-                </NavLink>
-                <NavLink exact to="/login"
-                    className="navlink"
-                    activeClassName="active-navlink"
-                    isActive={this.updateIsActive}
-                >
-                    <Menu.Item className="right-item" index="2">
-                        Login
-                    </Menu.Item>
-                </NavLink>
-                <NavLink exact to="/signup"
-                    className="navlink"
-                    activeClassName="active-navlink"
-                    isActive={this.updateIsActive}
-                >
-                    <Menu.Item className="right-item" index="3">
-                        Sign up
-                    </Menu.Item>
-                </NavLink>
-            </Menu>
-        );
+        if (this.props.isAuthenticated) {
+            return (
+                <Menu className="navBar" mode="horizontal" theme="dark">
+                    <NavLink exact to="/game"
+                        className="navlink"
+                        activeClassName="active-navlink"
+                        isActive={this.updateIsActive}
+                    >
+                        <Menu.Item index="1">
+                            Rounders Poker
+                        </Menu.Item>
+                    </NavLink>
+                </Menu>
+            );
+        } else {
+            return (
+                <Menu className="navBar" mode="horizontal" theme="dark">
+                    <NavLink exact to="/"
+                        className="navlink"
+                        activeClassName="active-navlink"
+                        isActive={this.updateIsActive}
+                    >
+                        <Menu.Item index="1">
+                            Rounders Poker
+                        </Menu.Item>
+                    </NavLink>
+                    <NavLink exact to="/login"
+                        className="navlink"
+                        activeClassName="active-navlink"
+                        isActive={this.updateIsActive}
+                    >
+                        <Menu.Item className="right-item" index="2">
+                            Login
+                        </Menu.Item>
+                    </NavLink>
+                    <NavLink exact to="/signup"
+                        className="navlink"
+                        activeClassName="active-navlink"
+                        isActive={this.updateIsActive}
+                    >
+                        <Menu.Item className="right-item" index="3">
+                            Sign up
+                        </Menu.Item>
+                    </NavLink>
+                </Menu>
+            );
+        }
     }
 }
 
 Navbar.propTypes = {
-    active: PropTypes.string.isRequired
+    active: PropTypes.string.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
     return {
-        active: state.router.location.pathname
+        active: state.router.location.pathname,
+        isAuthenticated: state.user.isAuthenticated
     };
 };
 

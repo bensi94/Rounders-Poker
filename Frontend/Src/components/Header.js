@@ -11,6 +11,9 @@ import FrontPage from './FrontPage';
 import Login from './Login';
 import Signup from './Signup';
 import Navbar from './Navbar';
+import Game from './Game';
+import PrivateRoute from '../routers/PrivateRoute';
+import PublicRoute from '../routers/PublicRoute';
 import { checkUser } from '../actions/user';
 
 
@@ -30,8 +33,9 @@ export class Header extends React.Component {
                     <Navbar />
                     <Switch>
                         <Route exact path="/" component={FrontPage} />
-                        <Route exact path="/login" component={Login} />
-                        <Route exact path="/signup" component={Signup} />
+                        <PublicRoute exact path="/login" component={Login} />
+                        <PublicRoute exact path="/signup" component={Signup} />
+                        <PrivateRoute exact path="/game" component={Game} />
                         <Route component={FrontPage} />
                     </Switch>
                 </React.Fragment>
