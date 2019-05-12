@@ -45,7 +45,7 @@ describe('User-Actions Test suite', () => {
         return store.dispatch(checkUser()).then(() => {
             expect(store.getActions()[0].type).toBe(SET_AUTHENTICATED_USER);
             expect(store.getActions()[1].type).toBe(USER_LOGGED_IN);
-            expect(JSON.parse(mockAxios.handlers.get[0][4])).toMatchObject(responseObj);
+            expect(JSON.parse(mockAxios.handlers.get[0][4])).toEqual(responseObj);
         });
     });
 
@@ -62,7 +62,7 @@ describe('User-Actions Test suite', () => {
 
         return store.dispatch(checkUser()).then(() => {
             expect(store.getActions()[0].type).toBe(SET_AUTHENTICATION_ERROR);
-            expect(JSON.parse(mockAxios.handlers.get[0][4])).toMatchObject(responseObj);
+            expect(JSON.parse(mockAxios.handlers.get[0][4])).toEqual(responseObj);
         });
     });
 

@@ -49,8 +49,8 @@ describe('Auth-Actions Test suite', () => {
         // needs to be resolved  before going to the next one
         return store.dispatch(signup(user)).then(() => {
             expect(store.getActions()[0].type).toBe(SIGNUP_SUCCESS);
-            expect(store.getActions()[0].payload).toMatchObject(responseObj);
-            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+            expect(store.getActions()[0].payload).toEqual(responseObj);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(user);
         });
     });
 
@@ -83,8 +83,8 @@ describe('Auth-Actions Test suite', () => {
         // needs to be resolved  before going to the next one
         return store.dispatch(signup(user)).then(() => {
             expect(store.getActions()[0].type).toBe(SIGNUP_FAIL);
-            expect(store.getActions()[0].payload).toMatchObject(responseObj);
-            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+            expect(store.getActions()[0].payload).toEqual(responseObj);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(user);
         });
     });
 
@@ -111,9 +111,9 @@ describe('Auth-Actions Test suite', () => {
             store.dispatch(signup(user));
         }).then(() => {
             expect(store.getActions()[0].type).toBe(SIGNUP_FAIL);
-            expect(store.getActions()[0].payload).toMatchObject(responseObj);
-            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
-            expect(JSON.parse(mockAxios.history.post[1].data)).toMatchObject(user);
+            expect(store.getActions()[0].payload).toEqual(responseObj);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(user);
+            expect(JSON.parse(mockAxios.history.post[1].data)).toEqual(user);
         });
     });
 
@@ -140,8 +140,8 @@ describe('Auth-Actions Test suite', () => {
         // needs to be resolved  before going to the next one
         return store.dispatch(login(user)).then(() => {
             expect(store.getActions()[0].type).toBe(USER_LOGGED_IN);
-            expect(store.getActions()[0].payload).toMatchObject(responseObj);
-            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+            expect(store.getActions()[0].payload).toEqual(responseObj);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(user);
             expect(mockAxios.axiosInstance.defaults.headers.common['Authorization']).toBe('Token testtoken');
         });
     });
@@ -166,7 +166,7 @@ describe('Auth-Actions Test suite', () => {
         // needs to be resolved  before going to the next one
         return store.dispatch(login(user)).then(() => {
             expect(store.getActions()[0].type).toBe(INVALID_LOGIN_CREDENTIALS);
-            expect(JSON.parse(mockAxios.history.post[0].data)).toMatchObject(user);
+            expect(JSON.parse(mockAxios.history.post[0].data)).toEqual(user);
         });
     });
 

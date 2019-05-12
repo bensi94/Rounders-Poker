@@ -20,7 +20,7 @@ describe('Auth-Reducers Test suite', () => {
         };
 
         const state = authReducer({}, action);
-        expect(state).toMatchObject(payload);
+        expect(state).toEqual(payload);
     });
 
     it('Should give correct error object if user exists', () => {
@@ -42,7 +42,7 @@ describe('Auth-Reducers Test suite', () => {
         };
 
         const state = authReducer({}, action);
-        expect(state).toMatchObject(response);
+        expect(state).toEqual(response);
     });
 
     it('Should clear return cleared on CLEAR_SIGNUP', () => {
@@ -50,7 +50,7 @@ describe('Auth-Reducers Test suite', () => {
             type: CLEAR_SIGNUP
         };
         const state = authReducer({}, action);
-        expect(state).toMatchObject({});
+        expect(state).toEqual({});
     });
 
     it('Should add token on login', () => {
@@ -63,7 +63,7 @@ describe('Auth-Reducers Test suite', () => {
         };
 
         const state = authReducer({}, action);
-        expect(state).toMatchObject(payload);
+        expect(state).toEqual(payload);
     });
 
     it('Should return error and message on invalid credentials', () => {
@@ -76,6 +76,6 @@ describe('Auth-Reducers Test suite', () => {
         };
 
         const state = authReducer({}, action);
-        expect(state).toMatchObject(response);
+        expect(state).toEqual(response);
     });
 });
