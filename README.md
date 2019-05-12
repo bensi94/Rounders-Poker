@@ -5,7 +5,7 @@
 ## (WORK IN PROGRESS)
 
 This project is currently a work in progress.  
-**Current stage:** All current project setup should be done, docker containers, Recat frontend, Django backend with all test suites and tools ready, and postgresql database has been set up. Sign up and Login forms has been created on frontend, and routes create, token and me has been created on the backend, to create users and get token for authentication. 
+**Current stage:** All current project setup should be done, docker containers, Recat frontend, Django backend with all test suites and tools ready, and postgresql database has been set up. Users are able to signup, log in and log out. Authentication token is saved in cookies, and logged in users have different access rights then those that are not.
 
 ![App profile](https://github.com/bensi94/Rounders-Poker/blob/master/app-profile.png)
 
