@@ -38,6 +38,7 @@ services:
     environment:
       - HOST=${HOST}
       - BASE_API_URL=${API_HOST}:${BACKEND_PORT}
+      - BASE_WS_URL=${WS_HOST}:${BACKEND_PORT}
     depends_on:
       - backend
 
