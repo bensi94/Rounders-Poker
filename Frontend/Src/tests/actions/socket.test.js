@@ -28,11 +28,16 @@ describe('Socket-actions Test suite', () => {
         const emitObj = [{
             username: 'bensi94'
         }];
+
+        const responseObj = {
+            table: testTable,
+            players: emitObj
+        };
         store.dispatch(initSocket(testTable, mockToken, store));
 
         mockServer.emit('player_list', JSON.stringify(emitObj));
 
         expect(store.getActions()[1].type).toBe(PLAYER_LIST);
-        expect(store.getActions()[1].payload).toEqual(emitObj);
+        expect(store.getActions()[1].payload).toEqual(responseObj);
     });
 });

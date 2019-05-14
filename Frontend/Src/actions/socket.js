@@ -12,7 +12,10 @@ export const initSocket = (table, tokenString, store) => {
     socket.on('player_list', (list) => {
         store.dispatch({
             type: PLAYER_LIST,
-            payload: JSON.parse(list)
+            payload: {
+                table,
+                players: JSON.parse(list)
+            }
         });
     });
 
