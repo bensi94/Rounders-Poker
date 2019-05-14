@@ -1,36 +1,18 @@
 import socketsReducer from '../../reducers/sockets';
-import { SOCKET_CREATED, PLAYER_LIST } from '../../constants';
+import { SOCKET_CREATED } from '../../constants';
 import { SocketIO as io } from 'mock-socket';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 
 const table = 'testTable';
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+
 
 describe('Socket-Reducers Test suite', () => {
-    let store;
     const mockToken = 'Token testToken';
-
-    beforeEach(() => {
-        store = mockStore({});
-    });
 
     it('Should put socket on a table in the redux store', () => {
         const socket = io(`${process.env.BASE_WS_URL}/${table}`, {
             extraHeaders: {
                 Authorization: mockToken
             }
-        });
-
-        socket.on('player_list', (list) => {
-            store.dispatch({
-                type: PLAYER_LIST,
-                payload: {
-                    table,
-                    players: JSON.parse(list)
-                }
-            });
         });
 
         let action = {

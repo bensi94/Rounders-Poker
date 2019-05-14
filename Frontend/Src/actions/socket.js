@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 
-import { SOCKET_CREATED, PLAYER_LIST } from '../constants';
+import { SOCKET_CREATED } from '../constants';
+import { playerList } from './tables';
 
 export const initSocket = (table, tokenString, store) => {
     const socket = io(`${process.env.BASE_WS_URL}/${table}`, {
@@ -10,13 +11,7 @@ export const initSocket = (table, tokenString, store) => {
     });
 
     socket.on('player_list', (list) => {
-        store.dispatch({
-            type: PLAYER_LIST,
-            payload: {
-                table,
-                players: JSON.parse(list)
-            }
-        });
+        store.dispatch(playerList(list, table));
     });
 
     return {
