@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SocketIOClient from 'socket.io-client';
 
-SocketIOClient('bla');
-
-// import store from '../store';
-// import { initSocket } from '../actions/socket';
+import store from '../store';
+import { initSocket } from '../actions/socket';
 
 // Temp const should be replaced when we have multiple tables
 const CURRENT_TABLE = 'game';
@@ -17,7 +14,7 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.initSocket(CURRENT_TABLE, this.props.tokenString, store)
+        this.props.initSocket(CURRENT_TABLE, this.props.tokenString, store);
     }
 
     render() {
@@ -34,15 +31,21 @@ Game.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    return {
-        players: state.tables[CURRENT_TABLE].players,
-        tokenString: `Token ${state.auth.token}`
-    };
+    if (state.tables[CURRENT_TABLE]) {
+        return {
+            players: state.tables[CURRENT_TABLE].players,
+            tokenString: `Token ${state.auth.token}`
+        };
+    } else {
+        return {
+            tokenString: `Token ${state.auth.token}`
+        };
+    }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    // initSocket: (table, tokenString, store) =>
-    //     dispatch(initSocket(table, tokenString, store))
+    initSocket: (table, tokenString, store) =>
+        dispatch(initSocket(table, tokenString, store))
 });
 
 
