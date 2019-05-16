@@ -11,7 +11,7 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const store = createStore(
+export const store = createStore(
     rootReducer(history),
     initialState,
     composeWithDevTools(applyMiddleware(routerMiddleware(history), ...middleware))
