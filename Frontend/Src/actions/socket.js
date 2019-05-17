@@ -1,4 +1,4 @@
-import io from '../../node_modules/socket.io-client/dist/socket.io.slim';
+import io from 'socket.io-client';
 
 import { SOCKET_CREATED } from '../constants';
 import { playerList } from './tables';
