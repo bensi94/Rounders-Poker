@@ -17,8 +17,7 @@ module.exports = {
         open: true
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
-        mainFields: ['jsnext:main', 'main']
+        extensions: ['*', '.js', '.jsx', 'css']
     },
     module: {
         rules: [
