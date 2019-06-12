@@ -1,24 +1,15 @@
-import io from 'socket.io-client';
+import reduxWebsocket, { connect } from '@giantmachines/redux-websocket';
+import { addMiddleware } from 'redux-dynamic-middlewares';
 
-import { SOCKET_CREATED } from '../constants';
-import { playerList } from './tables';
+export const createSocket = (table) => {
+    let url = `${process.env.BASE_WS_URL}/ws/${table}`;
+    addMiddleware(
+        reduxWebsocket({
+            prefix: table
+        })
+    );
 
-export const initSocket = (table, tokenString, store) => {
-    const socket = io(`${process.env.BASE_WS_URL}/${table}`, {
-        extraHeaders: {
-            Authorization: tokenString
-        }
-    });
-
-    socket.on('player_list', (list) => {
-        store.dispatch(playerList(list, table));
-    });
-
-    return {
-        type: SOCKET_CREATED,
-        payload: {
-            table,
-            socket
-        }
+    return (dispatch) => {
+        dispatch(connect(url, table));
     };
 };

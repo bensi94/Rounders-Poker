@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import store from '../store';
-import { initSocket } from '../actions/socket';
+import { createSocket } from '../actions/socket';
 
 // Temp const should be replaced when we have multiple tables
 const CURRENT_TABLE = 'game';
@@ -14,7 +12,7 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.props.initSocket(CURRENT_TABLE, this.props.tokenString, store);
+        this.props.createSocket(CURRENT_TABLE);
     }
 
     render() {
@@ -23,7 +21,7 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-    initSocket: PropTypes.func.isRequired,
+    createSocket: PropTypes.func.isRequired,
     tokenString: PropTypes.string.isRequired,
     players: PropTypes.arrayOf(PropTypes.shape({
         username: PropTypes.string
@@ -44,8 +42,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    initSocket: (table, tokenString, store) =>
-        dispatch(initSocket(table, tokenString, store))
+    createSocket: (table) => dispatch(createSocket(table))
 });
 
 

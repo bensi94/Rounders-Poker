@@ -1,64 +1,76 @@
 import socketsReducer from '../../reducers/sockets';
-import { SOCKET_CREATED } from '../../constants';
-import { SocketIO as io } from 'mock-socket';
-
-const table = 'testTable';
-
+import { WEBSOCKET_CONNECT, WEBSOCKET_OPEN } from '@giantmachines/redux-websocket';
 
 describe('Socket-Reducers Test suite', () => {
-    const mockToken = 'Token testToken';
-
-    it('Should put socket on a table in the redux store', () => {
-        const socket = io(`${process.env.BASE_WS_URL}/${table}`, {
-            extraHeaders: {
-                Authorization: mockToken
-            }
-        });
-
-        let action = {
-            type: SOCKET_CREATED,
+    it('Should put url in redux store', () => {
+        const table = 'testTable';
+        const url = `${process.env.BASE_WS_URL}/${table}`;
+        const action = {
+            type: `${table}::${WEBSOCKET_CONNECT}`,
             payload: {
-                table,
-                socket
+                url
             }
         };
 
         const state = socketsReducer({}, action);
         expect(state).toEqual({
-            [table]: socket
+            [table]: {
+                url
+            }
         });
     });
 
     it('Should add second socket to the store when its created', () => {
-        const socket1 = io(`${process.env.BASE_WS_URL}/${table}`, {
-            extraHeaders: {
-                Authorization: mockToken
-            }
-        });
+        const table1 = 'table';
+        const table2 = 'table2';
 
-        const testTable2 = 'testTable2';
+        const url = `${process.env.BASE_WS_URL}/${table1}`;
+        const url2 = `${process.env.BASE_WS_URL}/${table2}`;
 
-        const socket2 = io(`${process.env.BASE_WS_URL}/testTable2`, {
-            extraHeaders: {
-                Authorization: mockToken
-            }
-        });
-
-        let action = {
-            type: SOCKET_CREATED,
+        const action = {
+            type: `${table2}::${WEBSOCKET_CONNECT}`,
             payload: {
-                table: testTable2,
-                socket: socket2
+                url: url2,
+                table: table2
             }
         };
 
         const state = socketsReducer({
-            [table]: socket1
+            [table1]: {
+                url,
+                open: true
+            }
         }, action);
 
         expect(state).toEqual({
-            [table]: socket1,
-            [testTable2]: socket2
+            [table1]: {
+                url,
+                open: true
+            },
+            [table2]: {
+                url: url2
+            }
+        });
+    });
+
+    it('Should set socket open when it opens', () => {
+        const table = 'testTable';
+        const url = `${process.env.BASE_WS_URL}/${table}`;
+        const action = {
+            type: `${table}::${WEBSOCKET_OPEN}`
+        };
+
+        const state = socketsReducer({
+            [table]: {
+                url
+            }
+        }, action);
+
+        expect(state).toEqual({
+            [table]: {
+                url,
+                open: true
+            }
         });
     });
 });

@@ -1,11 +1,24 @@
-import { SOCKET_CREATED } from '../constants';
+import {
+    WEBSOCKET_CONNECT,
+    WEBSOCKET_OPEN
+} from '@giantmachines/redux-websocket';
 
 export default (state = {}, action) => {
+    let prefix = action.type.split('::')[0];
     switch (action.type) {
-        case SOCKET_CREATED:
+        case `${prefix}::${WEBSOCKET_CONNECT}`:
             return {
                 ...state,
-                [action.payload.table]: action.payload.socket
+                [prefix]: {
+                    url: action.payload.url
+                }
+            };
+        case `${prefix}::${WEBSOCKET_OPEN}`:
+            return {
+                [prefix]: {
+                    ...state[prefix],
+                    open: true
+                }
             };
         default: return state;
     }

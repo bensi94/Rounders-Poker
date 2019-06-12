@@ -1,43 +1,27 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Server } from 'mock-socket';
-
-import { initSocket } from '../../actions/socket';
-import { SOCKET_CREATED, PLAYER_LIST } from '../../constants';
+import { WebSocket } from 'mock-socket';
+import { createSocket } from '../../actions/socket';
+import { WEBSOCKET_CONNECT } from '@giantmachines/redux-websocket';
+import dynamicMiddlewares from 'redux-dynamic-middlewares';
 
 const testTable = 'testTable';
-const middlewares = [thunk];
+const middlewares = [thunk, dynamicMiddlewares];
 const mockStore = configureMockStore(middlewares);
-const mockServer = new Server(`${process.env.BASE_WS_URL}/${testTable}`);
+//const mockServer = new Server(`${process.env.BASE_WS_URL}/${testTable}`);
 
 describe('Socket-actions Test suite', () => {
     let store;
-    const mockToken = 'Token testToken';
+    global.WebSocket = WebSocket;
 
     beforeEach(() => {
         store = mockStore({});
     });
 
-    it('Should init socket correctly', () => {
-        store.dispatch(initSocket(testTable, mockToken, store));
-        expect(store.getActions()[0].type).toBe(SOCKET_CREATED);
-        expect(store.getActions()[0].payload.table).toEqual(testTable);
-    });
-
-    it('Should dispatch player_list on player_list event', () => {
-        const emitObj = [{
-            username: 'bensi94'
-        }];
-
-        const responseObj = {
-            table: testTable,
-            players: emitObj
-        };
-        store.dispatch(initSocket(testTable, mockToken, store));
-
-        mockServer.emit('player_list', JSON.stringify(emitObj));
-
-        expect(store.getActions()[1].type).toBe(PLAYER_LIST);
-        expect(store.getActions()[1].payload).toEqual(responseObj);
+    it('Should create and open socket correctly', () => {
+        let url = `${process.env.BASE_WS_URL}/ws/${testTable}`;
+        store.dispatch(createSocket(testTable));
+        expect(store.getActions()[0].type).toBe(`${testTable}::${WEBSOCKET_CONNECT}`);
+        expect(store.getActions()[0].payload.url).toEqual(url);
     });
 });
