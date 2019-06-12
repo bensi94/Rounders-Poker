@@ -18,8 +18,11 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - FRONTEND_ORIGIN=${FRONTEND_HOST}:${FRONTEND_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
     depends_on:
       - db
+      - redis
 
   frontend:
     build:
@@ -48,3 +51,6 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
+
+  redis:
+    image: redis:5
