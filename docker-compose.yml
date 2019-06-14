@@ -8,6 +8,7 @@ services:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     volumes:
       - ./Backend/Src:/Src
+    restart: always
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
@@ -36,6 +37,7 @@ services:
       - ./Frontend/index.html:/Frontend/index.html
       - ./Frontend/package.json:/Frontend/package.json
       - ./Frontend/.babelrc:/Frontend/.babelrc
+    restart: always
     command: >
       sh -c "yarn run start"
     environment:
@@ -47,10 +49,14 @@ services:
 
   db:
     image: postgres:11-alpine
+    restart: always
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
 
   redis:
     image: redis:5
+    restart: always

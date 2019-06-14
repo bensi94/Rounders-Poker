@@ -3,7 +3,7 @@ import { WEBSOCKET_CONNECT, WEBSOCKET_OPEN } from '@giantmachines/redux-websocke
 
 describe('Socket-Reducers Test suite', () => {
     it('Should put url in redux store', () => {
-        const table = 'testTable';
+        const table = 'TEST_TABLE';
         const url = `${process.env.BASE_WS_URL}/${table}`;
         const action = {
             type: `${table}::${WEBSOCKET_CONNECT}`,
@@ -21,8 +21,8 @@ describe('Socket-Reducers Test suite', () => {
     });
 
     it('Should add second socket to the store when its created', () => {
-        const table1 = 'table';
-        const table2 = 'table2';
+        const table1 = 'TEST_TABLE';
+        const table2 = 'TEST_TABLE2';
 
         const url = `${process.env.BASE_WS_URL}/${table1}`;
         const url2 = `${process.env.BASE_WS_URL}/${table2}`;
@@ -54,7 +54,7 @@ describe('Socket-Reducers Test suite', () => {
     });
 
     it('Should set socket open when it opens', () => {
-        const table = 'testTable';
+        const table = 'TEST_TABLE';
         const url = `${process.env.BASE_WS_URL}/${table}`;
         const action = {
             type: `${table}::${WEBSOCKET_OPEN}`

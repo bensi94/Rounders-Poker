@@ -3,8 +3,6 @@
 # This is a simple script to run linting and test
 # with docker-compose  on  frontend and backend 
 
-echo "----------- BUILDING CONTAINERS -----------"
-docker-compose build
 echo "-----------RUNNING BACKEND TESTS-----------"
 docker-compose run backend sh -c "python manage.py test"
 docker-compose run backend sh -c "python -m pytest GameEngine/tests/"

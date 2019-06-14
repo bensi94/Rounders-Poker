@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSocket } from '../actions/socket';
 
 // Temp const should be replaced when we have multiple tables
-const CURRENT_TABLE = 'game';
+const CURRENT_TABLE = 'GAME';
 
 class Game extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.props.createSocket(CURRENT_TABLE);
+        this.props.createSocket(CURRENT_TABLE, this.props.token);
     }
 
     render() {
@@ -22,7 +22,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
     createSocket: PropTypes.func.isRequired,
-    tokenString: PropTypes.string.isRequired,
+    token: PropTypes.string,
     players: PropTypes.arrayOf(PropTypes.shape({
         username: PropTypes.string
     }))
@@ -32,17 +32,17 @@ const mapStateToProps = (state) => {
     if (state.tables[CURRENT_TABLE]) {
         return {
             players: state.tables[CURRENT_TABLE].players,
-            tokenString: `Token ${state.auth.token}`
+            token: state.auth.token
         };
     } else {
         return {
-            tokenString: `Token ${state.auth.token}`
+            token: state.auth.token
         };
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    createSocket: (table) => dispatch(createSocket(table))
+    createSocket: (table, token) => dispatch(createSocket(table, token))
 });
 
 

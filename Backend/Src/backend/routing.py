@@ -1,14 +1,14 @@
 from django.urls import re_path
 from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.auth import AuthMiddlewareStack
+from backend.token_auth import TokenAuthMiddleware
 from gameConnections.tableConsumer import TableConsumer
 
 websocket_urlpatterns = [
-    re_path(r'^ws/game$', TableConsumer)
+    re_path(r'^ws/(?P<table_id>[^/]+)/$', TableConsumer)
 ]
 
 application = ProtocolTypeRouter({
-    'websocket': AuthMiddlewareStack(
+    'websocket': TokenAuthMiddleware(
         URLRouter(
             websocket_urlpatterns
         )

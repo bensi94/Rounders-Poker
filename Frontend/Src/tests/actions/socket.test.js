@@ -5,7 +5,7 @@ import { createSocket } from '../../actions/socket';
 import { WEBSOCKET_CONNECT } from '@giantmachines/redux-websocket';
 import dynamicMiddlewares from 'redux-dynamic-middlewares';
 
-const testTable = 'testTable';
+const testTable = 'TEST_TABLE';
 const middlewares = [thunk, dynamicMiddlewares];
 const mockStore = configureMockStore(middlewares);
 //const mockServer = new Server(`${process.env.BASE_WS_URL}/${testTable}`);
@@ -19,8 +19,9 @@ describe('Socket-actions Test suite', () => {
     });
 
     it('Should create and open socket correctly', () => {
-        let url = `${process.env.BASE_WS_URL}/ws/${testTable}`;
-        store.dispatch(createSocket(testTable));
+        const mockToken = 'mockToken';
+        let url = `${process.env.BASE_WS_URL}/ws/${testTable}/?Token=${mockToken}`;
+        store.dispatch(createSocket(testTable, mockToken));
         expect(store.getActions()[0].type).toBe(`${testTable}::${WEBSOCKET_CONNECT}`);
         expect(store.getActions()[0].payload.url).toEqual(url);
     });
