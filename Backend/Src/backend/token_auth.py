@@ -1,5 +1,6 @@
 from channels.auth import AuthMiddlewareStack
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import AnonymousUser
 
 
 class TokenAuthMiddleware:
@@ -18,7 +19,7 @@ class TokenAuthMiddleware:
                 token = Token.objects.get(key=token_key)
                 scope['user'] = token.user
         except Token.DoesNotExist:
-            pass
+            scope['user'] = AnonymousUser()
         return self.inner(scope)
 
 

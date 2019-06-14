@@ -55,7 +55,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "${POSTGRE_PORT}:${DB_PORT}"
 
   redis:
     image: redis:5
