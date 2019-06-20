@@ -25,6 +25,25 @@ services:
       - db
       - redis
 
+  game_engine:
+    build:
+      context: ./Backend
+    volumes:
+      - ./Backend/Src:/Src
+    restart: always
+    command: > 
+      sh -c "python manage.py runworker game_engine"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - FRONTEND_ORIGIN=${FRONTEND_HOST}:${FRONTEND_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+    depends_on:
+      - backend
+
   frontend:
     build:
       context: ./Frontend
