@@ -29,7 +29,6 @@ class GameController(Thread):
         self._runing = True
         self._channel_layer = get_channel_layer()
         self._fnQueue = Queue()
-        print('Created table', table_id)
 
     def run(self):
         while self._runing:

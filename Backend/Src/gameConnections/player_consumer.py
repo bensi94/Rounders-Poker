@@ -18,17 +18,12 @@ class PlayerConsumer(AsyncWebsocketConsumer):
             self.user = str(self.scope['user'])
             await self.accept()
 
-            await self.channel_layer.group_add(
-                'table1',
-                self.channel_name
-            )
-
             await self.channel_layer.send(
                 'game_engine',
                 {
                     'type': 'player.new',
                     'player': self.user,
-                    'channel': self.channel_name,
+                    'channel': self.table_id,
                     'buy_in': 6
                 }
             )
@@ -41,7 +36,8 @@ class PlayerConsumer(AsyncWebsocketConsumer):
         print(text_data_json)
 
     async def state_update(self, event):
-        self.send(event["state"])
+        print(event['state'])
+        # self.send(event['state'])
 
     async def disconnect(self, event):
         # Leave the table
