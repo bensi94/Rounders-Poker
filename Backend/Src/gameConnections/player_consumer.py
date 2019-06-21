@@ -36,8 +36,7 @@ class PlayerConsumer(AsyncWebsocketConsumer):
         print(text_data_json)
 
     async def state_update(self, event):
-        print(event['state'])
-        # self.send(event['state'])
+        await self.send(text_data=json.dumps(event['state']))
 
     async def disconnect(self, event):
         # Leave the table

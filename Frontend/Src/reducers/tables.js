@@ -1,13 +1,13 @@
-import { PLAYER_LIST } from '../constants';
+import {
+    WEBSOCKET_MESSAGE
+} from '@giantmachines/redux-websocket';
 
 export default (state = {}, action) => {
+    let prefix = action.type.split('::')[0];
     switch (action.type) {
-        case PLAYER_LIST:
+        case `${prefix}::${WEBSOCKET_MESSAGE}`:
             return {
-                ...state,
-                [action.payload.table]: {
-                    players: action.payload.players
-                }
+                [prefix]: JSON.parse(action.payload.message)
             };
         default:
             return state;

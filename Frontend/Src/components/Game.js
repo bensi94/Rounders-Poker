@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSocket } from '../actions/socket';
 
-// Temp const should be replaced when we have multiple tables
-const CURRENT_TABLE = 'GAME';
 
 class Game extends React.Component {
     constructor(props) {
@@ -12,31 +10,46 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.props.createSocket(CURRENT_TABLE, this.props.token);
+        this.props.createSocket(this.props.tableID, this.props.token);
     }
 
     render() {
-        return <h1> Game </h1>;
+        return (
+            <>
+                <h1> Game </h1>
+                { this.props.players && Object.keys(this.props.players).map((key) => {
+                    return <div key={key}>{key}</div>;
+                })}
+            </>
+        );
     }
 }
 
 Game.propTypes = {
     createSocket: PropTypes.func.isRequired,
     token: PropTypes.string,
-    players: PropTypes.arrayOf(PropTypes.shape({
-        username: PropTypes.string
-    }))
+    players: PropTypes.objectOf(
+        PropTypes.shape({
+            stack: PropTypes.number,
+            bet: PropTypes.number,
+            status: PropTypes.string
+        })
+    ),
+    tableID: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {
-    if (state.tables[CURRENT_TABLE]) {
+    let tableID = state.router.location.pathname.substr(1);
+    if (state.tables[tableID]) {
         return {
-            players: state.tables[CURRENT_TABLE].players,
-            token: state.auth.token
+            players: state.tables[tableID].players,
+            token: state.auth.token,
+            tableID
         };
     } else {
         return {
-            token: state.auth.token
+            token: state.auth.token,
+            tableID
         };
     }
 };
