@@ -1,96 +1,30 @@
 import tablesReducer from '../../reducers/tables';
-import { PLAYER_LIST } from '../../constants';
-
-const table = 'testTable';
+import { WEBSOCKET_MESSAGE } from '@giantmachines/redux-websocket';
 
 describe('Tables-Reducers Test suite', () => {
-    it('Should add created player to the correct table', () => {
-        const list = [{
-            username: 'bensi94'
-        }];
+    it('Should change the message to the store state', () => {
+        const prefix = 'GAME';
+
+        const message = {
+            players: {
+                bensi94: {
+                    stack: 6,
+                    bet: 0,
+                    status: 'ACTIVE'
+                }
+            }
+        };
 
         const action = {
-            type: PLAYER_LIST,
+            type: prefix + '::' + WEBSOCKET_MESSAGE,
             payload: {
-                table,
-                players: list
+                message: JSON.stringify(message)
             }
         };
         const state = tablesReducer({}, action);
 
         const responseObj = {
-            [table]: {
-                players: list
-            }
-        };
-
-        expect(state).toEqual(responseObj);
-    });
-
-    it('Should add a second table to the list', () => {
-        const list = [{
-            username: 'bensi94'
-        }];
-
-        const testTable2 = 'testTable2';
-
-        const action = {
-            type: PLAYER_LIST,
-            payload: {
-                table: testTable2,
-                players: list
-            }
-        };
-        const state = tablesReducer({
-            [table]: {
-                players: list
-            }
-        }, action);
-
-        const responseObj = {
-            [table]: {
-                players: list
-            },
-            [testTable2]: {
-                players: list
-            }
-        };
-
-        expect(state).toEqual(responseObj);
-    });
-
-    it('Should add player to a list on current table', () => {
-        const oldList = [{
-            username: 'bensi94'
-        }];
-
-        const newList = [
-            {
-                username: 'bensi94'
-            },
-            {
-                username: 'thorir'
-            }
-        ];
-
-        const action = {
-            type: PLAYER_LIST,
-            payload: {
-                table,
-                players: newList
-            }
-        };
-
-        const state = tablesReducer({
-            [table]: {
-                players: oldList
-            }
-        }, action);
-
-        const responseObj = {
-            [table]: {
-                players: newList
-            }
+            [prefix]: message
         };
 
         expect(state).toEqual(responseObj);
