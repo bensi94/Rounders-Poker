@@ -17,8 +17,7 @@ module.exports = {
         open: true
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
-        mainFields: ['jsnext:main', 'main']
+        extensions: ['*', '.js', '.jsx', 'css']
     },
     module: {
         rules: [
@@ -46,7 +45,8 @@ module.exports = {
             template: path.resolve('./index.html')
         }),
         new webpack.DefinePlugin({
-            'process.env.BASE_API_URL': JSON.stringify(process.env.BASE_API_URL)
+            'process.env.BASE_API_URL': JSON.stringify(process.env.BASE_API_URL),
+            'process.env.BASE_WS_URL': JSON.stringify(process.env.BASE_WS_URL)
         })
     ]
 };

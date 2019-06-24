@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /requirements.txt 
 RUN apk add --update --no-cache postgresql-client
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
-    gcc libc-dev linux-headers postgresql-dev
+    gcc libc-dev linux-headers postgresql-dev libffi-dev
 RUN pip install -r /requirements.txt
 RUN apk del .tmp-build-deps
 
@@ -15,6 +15,7 @@ RUN apk del .tmp-build-deps
 RUN mkdir /Src
 WORKDIR /Src
 COPY ./Src /Src
+COPY ./pytest.ini /pytest.ini
 
 # Create a new user to run the backend, so it will not be run by root
 # This is done to reduce damage if the container is compromised

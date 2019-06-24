@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'core',
     'user',
+    'gameConnections',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -73,8 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
-
+ASGI_APPLICATION = 'backend.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -86,6 +87,15 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS'),
+    }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [(os.environ.get('REDIS_HOST'), os.environ.get('REDIS_PORT'))]
+        }
     }
 }
 

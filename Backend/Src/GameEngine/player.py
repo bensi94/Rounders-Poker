@@ -8,6 +8,13 @@ class Player:
         self._bet = 0
         self._status = STATUS_ACTIVE
 
+    def get_player_obj(self):
+        return {
+            "stack": self._stack,
+            "bet": self._bet,
+            "status": self._status
+        }
+
     def give_hand(self, hand):
         self._hand = hand
         self._status = STATUS_ACTIVE

@@ -24,7 +24,8 @@ export class Header extends React.Component {
 
     render() {
         let page;
-        if (!this.props.token && this.props.isAuthenticated === undefined) {
+        if (this.props.isAuthenticated === undefined ||
+            (this.props.isAuthenticated && !this.props.token)) {
             page = <Loading fullscreen/>;
             this.props.checkUser();
         } else {

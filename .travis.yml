@@ -9,8 +9,7 @@ before_script:
   - pip install docker-compose
 
 script:
-  - docker-compose run backend sh -c "python manage.py test"
-  - docker-compose run backend sh -c "python -m pytest GameEngine/tests/"
-  - docker-compose run frontend sh -c "yarn run test"
-  - docker-compose run backend sh -c "flake8"
-  - docker-compose run frontend sh -c "yarn run eslint"
+  - docker-compose run --rm backend sh -c "pytest"
+  - docker-compose run --rm frontend sh -c "yarn run test"
+  - docker-compose run --rm backend sh -c "flake8"
+  - docker-compose run --rm frontend sh -c "yarn run eslint"
