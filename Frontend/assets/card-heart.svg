@@ -1,0 +1,27 @@
+<svg id="e96d20d1-938f-4d7e-aaae-5aeb73750f88" data-name="A&apos;s" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 67 89">
+  <defs>
+    <linearGradient id="61164085-11c0-4634-a1dd-c8ba6defc557" x1="6.16" y1="44.27" x2="60.66" y2="44.27" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#e6e7e8"/>
+    </linearGradient>
+  </defs>
+  <title>card-heart</title>
+  <g id="0f8e4d85-2f6a-4447-8c72-a7597776f2fd" data-name="Heart card">
+    <g>
+      <image width="67" height="89" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABZCAYAAABlh5mOAAAACXBIWXMAAAsSAAALEgHS3X78AAAEr0lEQVR4Xu2cS2idZRCGx8RLtNGqeGsTIRCFKBXEKopxobR0o4huRKnFC3hZiJvqRuiiUMEuRAUvIOJCBHGjBUsXaiVWcCdFQVGDegzFInirFS+NbXyfM/+fTM75zwni5nx1As+iNOfLzPPNzHdWYwsLC9YP/ZxwPLBSnu1cVxAwJIYrTiyUOn5y6Suml4ih6qCTxYg4TawSo4VBzMRODuRSy2mU0iSCXz6pOmS1OEdcIMbEuLiwEIiVmIn9XHGmuZxTzKW0K6VRhi2JwOBodcCEuFRcIa4W14ppcd2AQ4zEeo1YL9aJSbHGXMqp1iCkszWoCERgc6o68EZxu7hH3CceqHhwQKnjI9Z7xWZxi7hBXG5+wWfbkpBGGfwHrUFFTFUf5qCtYod4SjwrnhcvFMBz4hnxhHhM3C9uFleZC6FCaJn2DIkyqAraY3X1i1QEIraJF8Wb4m0xI/aJDwrgfbFX7BaviifFw+ZCqBBahhmyWB381LNixHxYMiNuMq8IRCBhv/hSfCO+FXMF0BJfiU/Fh+INcyFUCFU/aV4dFMFQpwxahFnBsLzDvDU4YH91+I/ikDhcCL+Kn8X35lIQQoXQMswQhiojgSIgfzwszgtKhqeICcywZEZQFVQEIn4Xf4n5QjhiHu9v5kKokLfMZ8hmcaX55VMEXTJ4RcbN5wWTmGE5Y94ah6qDj4pjBfG3edxUCNXxrnja/JXh0scszA2z5TL4sjJt/jTxauwznxGU3Xz1BxYKgnipEFqmZT5UeWWYG1w6l0/ePWXwpYX3mueJqcy8KFkGcRM/eXC5XDKXTZ7k+7+VQT7kRX4pw1JGyoCUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQRSBmBlBFIGYGUEUgZgZQR+M8ypu34WhlRyyAP8qm3JJBnXxnj1r1MpGW+f+KIlSmDuFmG0jLPh7zIr+/+jKY1M++IWfGT+NN8U8mxQjhqHi9xEz95kA95kV/PzSrD1r2A6HGxS3wiDpqXGgdjer4AiPMP86r4TnxsvmKLvMiPPBt37vCPEVu+mupR8bL5apYvzIVgmJY5POAQ4y/iB3FAfCbeEy+JR8zzI0/yJW+X0WNpGZP2LnOLr5kLoUJmzXuPYTQ3wLTE1+Jz8ZF5e7witost5sNzwjzfpT1dDevszjO3tsl80CCECtlVHTpjg7/FjcvbK/aI181fkG3ibrFBXGK+o4t82/OiadEhlk4Xa8Vl5kKoEFoGKaXs96v3+u00l/CQuE1cb37RrLIjTxY7kveSjI4VmCz/O8NcCB+kZegxhg5TeJA3P3ZufLxT3Co2mi8pu1icby6Ciyff5VsfewjhA7TMhJW1E5TY6l2gCKDCLzJ/Rll9yVPaJaJLRsOS1FK3xRIjsdZbYs8y/3I1Yj4jFlujr4yOGcIHS90j/K/2B/eUEYTUUoatzA3TddztSrAeElaU0UNMkayUX80/HkDNNKyntQgAAAAASUVORK5CYII=" style="opacity: 0.5"/>
+      <g>
+        <rect x="6.41" y="6.27" width="54" height="76" rx="5" ry="5" style="fill: #e6e7e8"/>
+        <rect x="6.41" y="6.27" width="54" height="76" rx="5" ry="5" style="fill: none;stroke-miterlimit: 10;stroke-width: 0.5px;stroke: url(#61164085-11c0-4634-a1dd-c8ba6defc557)"/>
+      </g>
+    </g>
+    <g id="3cb033ef-9166-4ec5-8cca-6b37929f3d2c" data-name="Number high">
+      <text transform="translate(9.55 22.05)" style="font-size: 15px;fill: #ed3e50;font-family: Arial Narrow">A</text>
+      <path d="M33.53,26.21a1.85,1.85,0,0,0,.18-0.79,2.15,2.15,0,0,0-2.25-2,2.23,2.23,0,0,0-2.14,1.42,2.23,2.23,0,0,0-2.14-1.42,2.15,2.15,0,0,0-2.25,2,1.85,1.85,0,0,0,.23.9c0.37,0.67,4.15,5.37,4.15,5.37S33.18,26.93,33.53,26.21Z" transform="translate(-16)" style="fill: #ed3e50"/>
+    </g>
+    <g id="ebc8e99b-281f-4fd1-9510-99f3cd5e473e" data-name="Number low">
+      <text transform="translate(57.27 68.09) rotate(180)" style="font-size: 15px;fill: #ed3e50;font-family: Arial Narrow">A</text>
+      <path d="M65.3,63.06a1.85,1.85,0,0,0-.18.79,2.15,2.15,0,0,0,2.25,2,2.23,2.23,0,0,0,2.14-1.42,2.23,2.23,0,0,0,2.14,1.42,2.15,2.15,0,0,0,2.25-2,1.85,1.85,0,0,0-.23-0.9c-0.37-.67-4.15-5.37-4.15-5.37S65.64,62.33,65.3,63.06Z" transform="translate(-16)" style="fill: #ed3e50"/>
+    </g>
+    <path d="M58.77,41.3a4.1,4.1,0,0,0,.39-1.75,4.77,4.77,0,0,0-5-4.5,5,5,0,0,0-4.75,3.16,5,5,0,0,0-4.75-3.16,4.77,4.77,0,0,0-5,4.5,4.12,4.12,0,0,0,.52,2C41,43,49.41,53.48,49.41,53.48S58,42.92,58.77,41.3Z" transform="translate(-16)" style="fill: #ed3e50"/>
+  </g>
+</svg>

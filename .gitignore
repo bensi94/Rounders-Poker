@@ -141,3 +141,6 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+
+# Ignore illustrator files
+*.ai

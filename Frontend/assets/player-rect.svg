@@ -1,0 +1,8 @@
+<svg id="92f50c61-a635-413f-87df-d274975daa0e" data-name="Players" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 75">
+  <title>player-rect</title>
+  <g id="5f2ad952-a9de-49e6-aadd-7f71fef5b04b" data-name="Seat 1">
+    <rect width="150" height="75" rx="5" ry="5" style="opacity: 0.62"/>
+    <text transform="translate(22.7 56.62)" style="font-size: 29px;fill: #fff;font-family: Montserrat;font-weight: 700">$2,000</text>
+    <text transform="translate(40.03 21.96)" style="font-size: 20px;fill: #fff;font-family: Montserrat">pl<tspan x="18.92" y="0">a</tspan><tspan x="30.54" y="0">yer1</tspan></text>
+  </g>
+</svg>

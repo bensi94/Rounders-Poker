@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.1 27.85">
+  <defs>
+    <radialGradient id="1c3eb75c-3678-4f59-b072-9d79d0d8319c" cx="700" cy="-102.43" r="14" gradientTransform="matrix(1, 0, 0, -0.85, 0, 164.84)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8000b5"/>
+      <stop offset="1" stop-color="#710089"/>
+    </radialGradient>
+    <radialGradient id="1fbcf341-c57d-480f-b807-a3fe9f8e5ef4" cx="699.99" cy="-105.96" r="14" gradientTransform="matrix(1, 0, 0, -1, -685.94, -91.06)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#da7fff"/>
+      <stop offset="1" stop-color="#bd00ff"/>
+    </radialGradient>
+  </defs>
+  <title>pink-chip-vertical</title>
+  <g style="isolation: isolate">
+    <g id="6c114b08-6b20-4cda-bda2-6ed90403dfe4" data-name="Rack chips">
+      <g id="86e4b716-faf8-4751-a5cd-190523fb7de4" data-name="Pink chips">
+        <g id="3d720001-0073-4f3b-9ee7-f9b3b7735f91" data-name="Pink Chip top">
+          <g>
+            <g style="opacity: 0.5;mix-blend-mode: multiply">
+              <path d="M714,252.9c0-6.57-6.27-11.9-14-11.9s-14,5.33-14,11.9c0,0.2,0,2.2,0,2.4,0.37,6.29,6.49,9.5,14,9.5,7.27,0,13.32-3,14-9.08C714,255.34,714,253.29,714,252.9Z" transform="translate(-685.94 -240)"/>
+            </g>
+            <path d="M714,251.9c0-6.57-6.27-11.9-14-11.9s-14,5.33-14,11.9c0,0.2,0,2.2,0,2.4,0.37,6.29,6.49,9.5,14,9.5,7.27,0,13.32-3,14-9.08C714,254.34,714,252.29,714,251.9Z" transform="translate(-685.94 -240)" style="fill: url(#1c3eb75c-3678-4f59-b072-9d79d0d8319c)"/>
+          </g>
+          <path d="M700,259.55c-5,0-9-3.43-9-7.65s4-7.65,9-7.65,9,3.43,9,7.65S705,259.55,700,259.55Z" transform="translate(-685.94 -240)" style="fill: none;stroke: #000;stroke-miterlimit: 10;opacity: 0.3"/>
+          <path d="M700,260.29a11.86,11.86,0,0,0,2.05-.17l1.14,3.48a13.66,13.66,0,0,1-6.39,0l1.14-3.48A11.07,11.07,0,0,0,700,260.29Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+          <path d="M691.44,256.1a8.8,8.8,0,0,0,1.2,1.43l-3,2.58a10.54,10.54,0,0,1-2-2.16,9.32,9.32,0,0,1-1.21-2.54l4.12-.9A7.51,7.51,0,0,0,691.44,256.1Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+          <path d="M687.64,249.13a15.86,15.86,0,0,0-1.17,2.27v-3a9.32,9.32,0,0,1,1.21-2.54,10.54,10.54,0,0,1,2-2.16v3A23.74,23.74,0,0,0,687.64,249.13Z" transform="translate(-685.94 -240)" style="fill: #d1d1d1"/>
+          <path d="M700,243a28.22,28.22,0,0,0-3.17.17v-2.9A14,14,0,0,1,700,240a13.56,13.56,0,0,1,3.16.3l0,2.9A27.47,27.47,0,0,0,700,243Z" transform="translate(-685.94 -240)" style="fill: #d1d1d1"/>
+          <path d="M712.26,249.18a25.06,25.06,0,0,0-1.94-2.48v-3a10.54,10.54,0,0,1,2,2.16,9.32,9.32,0,0,1,1.21,2.54v3A15.05,15.05,0,0,0,712.26,249.18Z" transform="translate(-685.94 -240)" style="fill: #d1d1d1"/>
+          <path d="M708.54,256.1a8.05,8.05,0,0,0,.85-1.6l4.12,0.9a9.32,9.32,0,0,1-1.21,2.54,10.54,10.54,0,0,1-2,2.16l-3-2.58A8.21,8.21,0,0,0,708.54,256.1Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+          <g id="8cdb6e62-9d03-4ce7-a8c1-f3cdd255dd0d" data-name="Chips copy 10">
+            <g>
+              <g style="opacity: 0.5">
+                <ellipse cx="14.05" cy="15.9" rx="14" ry="11.9"/>
+                <ellipse cx="14.05" cy="15.9" rx="14" ry="11.9" style="fill: none;stroke: #000;stroke-miterlimit: 10;stroke-width: 0.10000000149011612px"/>
+              </g>
+              <g>
+                <ellipse cx="14.05" cy="14.9" rx="14" ry="11.9" style="fill: url(#1fbcf341-c57d-480f-b807-a3fe9f8e5ef4)"/>
+                <ellipse cx="14.05" cy="14.9" rx="14" ry="11.9" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.10000000149011612px"/>
+              </g>
+            </g>
+            <path d="M700,262.55c-5,0-9-3.43-9-7.65s4-7.65,9-7.65,9,3.43,9,7.65S705,262.55,700,262.55Z" transform="translate(-685.94 -240)" style="fill: none;stroke: #000;stroke-miterlimit: 10;opacity: 0.3"/>
+            <path d="M700,263.29a11.86,11.86,0,0,0,2.05-.17l1.14,3.48a13.66,13.66,0,0,1-6.39,0l1.14-3.48A11.07,11.07,0,0,0,700,263.29Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+            <path d="M691.44,259.1a8.8,8.8,0,0,0,1.2,1.43l-3,2.58a10.54,10.54,0,0,1-2-2.16,9.32,9.32,0,0,1-1.21-2.54l4.12-.9A7.51,7.51,0,0,0,691.44,259.1Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+            <path d="M691.44,250.7a8.05,8.05,0,0,0-.85,1.6l-4.12-.9a9.32,9.32,0,0,1,1.21-2.54,10.54,10.54,0,0,1,2-2.16l3,2.58A8.21,8.21,0,0,0,691.44,250.7Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+            <path d="M700,246.51a11.86,11.86,0,0,0-2.05.17l-1.14-3.48a13.66,13.66,0,0,1,6.39,0L702,246.68A11.07,11.07,0,0,0,700,246.51Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+            <path d="M708.54,250.7a8.8,8.8,0,0,0-1.2-1.43l3-2.58a10.54,10.54,0,0,1,2,2.16,9.32,9.32,0,0,1,1.21,2.54l-4.12.9A7.51,7.51,0,0,0,708.54,250.7Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+            <path d="M708.54,259.1a8.05,8.05,0,0,0,.85-1.6l4.12,0.9a9.32,9.32,0,0,1-1.21,2.54,10.54,10.54,0,0,1-2,2.16l-3-2.58A8.21,8.21,0,0,0,708.54,259.1Z" transform="translate(-685.94 -240)" style="fill: #fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.02 27.98">
+  <defs>
+    <radialGradient id="bc42c04c-ab4c-4b3f-8fe9-f76dc39a4f59" cx="781.59" cy="65.34" r="14" gradientTransform="translate(0 15.99) scale(1 0.85)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#007034"/>
+      <stop offset="1" stop-color="#004a23"/>
+    </radialGradient>
+    <radialGradient id="3ffc4f24-9105-4c71-ac42-77f6a93188f2" cx="781.58" cy="61.81" r="14" gradientTransform="translate(-767.58 -40.46) scale(1 0.85)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#009245"/>
+      <stop offset="1" stop-color="#006837"/>
+    </radialGradient>
+  </defs>
+  <title>green-chip-horizontal</title>
+  <g style="isolation: isolate">
+    <g id="d41417d5-34eb-43ac-b718-06992afb4b2e" data-name="Green Chip">
+      <g>
+        <g style="opacity: 0.5;mix-blend-mode: multiply">
+          <path d="M795.58,72.53c0,6.57-6.27,11.9-14,11.9s-14-5.33-14-11.9c0-.2,0-2.2,0-2.4,0.37-6.29,6.49-9.5,14-9.5,7.27,0,13.32,3,14,9.08C795.62,70.09,795.58,72.14,795.58,72.53Z" transform="translate(-767.58 -56.45)"/>
+        </g>
+        <path d="M795.58,71.53c0,6.57-6.27,11.9-14,11.9s-14-5.33-14-11.9c0-.2,0-2.2,0-2.4,0.37-6.29,6.49-9.5,14-9.5,7.27,0,13.32,3,14,9.08C795.62,69.09,795.58,71.14,795.58,71.53Z" transform="translate(-767.58 -56.45)" style="fill: url(#bc42c04c-ab4c-4b3f-8fe9-f76dc39a4f59)"/>
+      </g>
+      <path d="M781.58,63.88c-5,0-9,3.43-9,7.65s4,7.65,9,7.65,9-3.43,9-7.65S786.54,63.88,781.58,63.88Z" transform="translate(-767.58 -56.45)" style="fill: none;stroke: #000;stroke-miterlimit: 10;opacity: 0.3"/>
+      <path d="M781.58,63.14a11.86,11.86,0,0,1,2.05.17l1.14-3.48a13.66,13.66,0,0,0-6.39,0l1.14,3.48A11.07,11.07,0,0,1,781.58,63.14Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+      <path d="M773,67.33a8.8,8.8,0,0,1,1.2-1.43l-3-2.58a10.54,10.54,0,0,0-2,2.16A9.32,9.32,0,0,0,768.06,68l4.12,0.9A7.51,7.51,0,0,1,773,67.33Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+      <path d="M769.22,74.29A15.86,15.86,0,0,1,768.06,72v3a9.32,9.32,0,0,0,1.21,2.54,10.54,10.54,0,0,0,2,2.16v-3A23.74,23.74,0,0,1,769.22,74.29Z" transform="translate(-767.58 -56.45)" style="fill: #d1d1d1"/>
+      <path d="M781.55,80.41a28.22,28.22,0,0,1-3.17-.17v2.9a14,14,0,0,0,3.21.3,13.56,13.56,0,0,0,3.16-.3l0-2.9A27.47,27.47,0,0,1,781.55,80.41Z" transform="translate(-767.58 -56.45)" style="fill: #d1d1d1"/>
+      <path d="M793.85,74.25a25.06,25.06,0,0,1-1.94,2.48v3a10.54,10.54,0,0,0,2-2.16A9.32,9.32,0,0,0,795.1,75V72A15.05,15.05,0,0,1,793.85,74.25Z" transform="translate(-767.58 -56.45)" style="fill: #d1d1d1"/>
+      <path d="M790.13,67.33a8.05,8.05,0,0,1,.85,1.6l4.12-.9a9.32,9.32,0,0,0-1.21-2.54,10.54,10.54,0,0,0-2-2.16l-3,2.58A8.21,8.21,0,0,1,790.13,67.33Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+      <g id="ec22da91-0429-43dd-b310-6efa17f42c7e" data-name="Chips copy 6">
+        <ellipse cx="14" cy="12.08" rx="14" ry="11.9" style="fill: url(#3ffc4f24-9105-4c71-ac42-77f6a93188f2)"/>
+        <path d="M781.58,60.88c-5,0-9,3.43-9,7.65s4,7.65,9,7.65,9-3.43,9-7.65S786.54,60.88,781.58,60.88Z" transform="translate(-767.58 -56.45)" style="fill: none;stroke: #000;stroke-miterlimit: 10;opacity: 0.3"/>
+        <path d="M781.58,60.14a11.86,11.86,0,0,1,2.05.17l1.14-3.48a13.66,13.66,0,0,0-6.39,0l1.14,3.48A11.07,11.07,0,0,1,781.58,60.14Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+        <path d="M773,64.33a8.8,8.8,0,0,1,1.2-1.43l-3-2.58a10.54,10.54,0,0,0-2,2.16A9.32,9.32,0,0,0,768.06,65l4.12,0.9A7.51,7.51,0,0,1,773,64.33Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+        <path d="M773,72.73a8.05,8.05,0,0,1-.85-1.6l-4.12.9a9.32,9.32,0,0,0,1.21,2.54,10.54,10.54,0,0,0,2,2.16l3-2.58A8.21,8.21,0,0,1,773,72.73Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+        <path d="M781.58,76.92a11.86,11.86,0,0,1-2.05-.17l-1.14,3.48a13.66,13.66,0,0,0,6.39,0l-1.14-3.48A11.07,11.07,0,0,1,781.58,76.92Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+        <path d="M790.13,72.73a8.8,8.8,0,0,1-1.2,1.43l3,2.58a10.54,10.54,0,0,0,2-2.16A9.32,9.32,0,0,0,795.1,72l-4.12-.9A7.51,7.51,0,0,1,790.13,72.73Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+        <path d="M790.13,64.33a8.05,8.05,0,0,1,.85,1.6l4.12-.9a9.32,9.32,0,0,0-1.21-2.54,10.54,10.54,0,0,0-2-2.16l-3,2.58A8.21,8.21,0,0,1,790.13,64.33Z" transform="translate(-767.58 -56.45)" style="fill: #fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
