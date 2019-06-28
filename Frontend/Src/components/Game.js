@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSocket } from '../actions/socket';
-import DemoTable from '../../assets/demo2.svg';
+import TableBase from './Table/TableBase';
 
 
 class Game extends React.Component {
@@ -21,7 +21,9 @@ class Game extends React.Component {
                 { this.props.players && Object.keys(this.props.players).map((key) => {
                     return <div key={key}>{key}</div>;
                 })}
-                <DemoTable className="demo-table" width={1000}/>
+                <div className="game-full">
+                    <TableBase />
+                </div>
             </>
         );
     }

@@ -1,1 +1,1 @@
-module.exports = 'i-am-a-stubbed-file';
+module.exports = 'stubbed-asset';
