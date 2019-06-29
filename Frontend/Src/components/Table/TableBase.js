@@ -9,7 +9,7 @@ class TableBase extends React.Component {
         super(props);
 
         this.state = {
-            tableSize: 600
+            tableSize: 1000
         };
     }
 
@@ -18,7 +18,18 @@ class TableBase extends React.Component {
             <div className="table-base-container">
                 <TableBaseSVG width={`${this.state.tableSize}px`} height="100%" />
                 <ChipRack tableSize={this.state.tableSize} />
-                <Stack />
+                <Stack
+                    tableSize={this.state.tableSize}
+                    stackAmount={24839}
+                    left={50}
+                    top={50}
+                />
+                <Stack
+                    tableSize={this.state.tableSize}
+                    stackAmount={487}
+                    left={30}
+                    top={30}
+                />
             </div>
         );
     }

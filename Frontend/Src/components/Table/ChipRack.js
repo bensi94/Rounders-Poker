@@ -89,7 +89,8 @@ class ChipRack extends React.Component {
                     top: `${this.state.topConstant + i * this.state.topPercent}%`,
                     zIndex: `${i}`
                 };
-                chips.push(this.getChipComponent(component, style, `${index.toString()}_${i.toString()}`));
+                chips.push(this.getChipComponent(component,
+                    style, `${index.toString()}_${i.toString()}`));
             }
         });
 
@@ -106,7 +107,7 @@ class ChipRack extends React.Component {
 }
 
 ChipRack.propTypes = {
-    tableSize: PropTypes.number
+    tableSize: PropTypes.number.isRequired
 };
 
 export default ChipRack;
