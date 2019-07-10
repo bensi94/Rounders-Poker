@@ -2,6 +2,7 @@ import React from 'react';
 import TableBaseSVG from '../../../assets/table-base.svg';
 import Stack from './Stack';
 import ChipRack from './ChipRack';
+import Player from './Player';
 
 
 class TableBase extends React.Component {
@@ -30,6 +31,7 @@ class TableBase extends React.Component {
                     left={30}
                     top={30}
                 />
+                <Player tableSize={this.state.tableSize} left={10} top={10} stack={1000} name="bensi"/>
             </div>
         );
     }
