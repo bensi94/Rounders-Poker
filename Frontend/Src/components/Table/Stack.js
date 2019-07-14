@@ -23,7 +23,8 @@ class Stack extends React.Component {
                 'BlueChip',
                 'GreenChip'
             ],
-            chipStack: undefined
+            chipStack: undefined,
+            stackWidth: 0
         };
     }
 
@@ -92,6 +93,9 @@ class Stack extends React.Component {
                 chips.push(this.getChipComponent(this.state.chipRankList[i],
                     style, `${i.toString()}_${j.toString()}`));
             }
+            this.setState({
+                stackWidth: this.state.leftRatio * this.props.tableSize * (i + 1)
+            });
         }
 
         return chips;
@@ -100,11 +104,16 @@ class Stack extends React.Component {
     render() {
         let style = {
             left: `${this.props.left}%`,
-            top: `${this.props.top}%`
+            top: `${this.props.top}%`,
+            transform: `translateX(-${this.state.stackWidth / 2}px)`
         };
+
+        let labelPosClass = this.props.top > 50 ? 'lbl-pos-top' : 'lbl-pos-bottom';
+
         return (
             <div className="stack-wrapper" style={style}>
                 {this.state.chipStack}
+                <div className={`bet-amount-lbl ${labelPosClass}`}>${ this.props.stackAmount }</div>
             </div>
         );
     }

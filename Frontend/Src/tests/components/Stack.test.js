@@ -3,11 +3,15 @@ import { shallow } from 'enzyme';
 
 import Stack from '../../components/Table/Stack';
 
-
 describe('Stack Test suite', () => {
     let wrapper;
 
     it('Should render component correctly', () => {
+        wrapper = shallow(
+            <Stack stackAmount={24839}
+                tableSize={500}
+                left={10}
+                top={10}/>);
         expect(wrapper).toMatchSnapshot();
     });
 
@@ -77,5 +81,22 @@ describe('Stack Test suite', () => {
         // Third component
         expect(respThree.props.width).toBe(1000);
         expect(respThree.props.style).toStrictEqual(styleThree);
+    });
+
+    it('should be displying correct bet label', () => {
+        wrapper = shallow(
+            <Stack stackAmount={12}
+                tableSize={1000}
+                left={10}
+                top={10}/>);
+
+        wrapper.instance().setState({
+            widthRatio: 1,
+            leftRatio: 1,
+            topRatio: 1,
+            heightRatio: 1
+        });
+        expect(wrapper.find('.bet-amount-lbl').hasClass('lbl-pos-bottom')).toBe(true);
+        expect(wrapper.find('.bet-amount-lbl').first().text()).toBe('$12');
     });
 });
