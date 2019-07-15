@@ -132,7 +132,7 @@ Player.propTypes = {
     stack: PropTypes.number.isRequired,
     bet: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    seatNumber: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    seatNumber: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9]).isRequired
 
 };
 
