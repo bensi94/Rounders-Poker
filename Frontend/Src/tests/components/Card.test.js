@@ -40,4 +40,20 @@ describe('Card Test suite', () => {
         wrapper = shallow(<Card card = "Ab" />);
         expect(console.error).toHaveBeenCalledTimes(1);
     });
+
+    it('Should render A of hearts on prop', () => {
+        wrapper = shallow(<Card card = "Ah" />);
+        expect(wrapper.find('text').length).toBe(2);
+        expect(wrapper.find('text').at(0).text()).toBe('A');
+        expect(wrapper.find('text').at(1).text()).toBe('A');
+        expect(wrapper.find('title').at(0).text()).toBe('card-heart');
+    });
+
+    it('Should render 9 of spades on prop', () => {
+        wrapper = shallow(<Card card = "9s" />);
+        expect(wrapper.find('text').length).toBe(2);
+        expect(wrapper.find('text').at(0).text()).toBe('9');
+        expect(wrapper.find('text').at(1).text()).toBe('9');
+        expect(wrapper.find('title').at(0).text()).toBe('card-spades');
+    });
 });

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Board Test sutie Should render component correctly 1`] = `
+<div
+  className="board-wrapper"
+>
+  <Card
+    card="Ah"
+    key="Ah"
+  />
+  <Card
+    card="As"
+    key="As"
+  />
+  <Card
+    card="9d"
+    key="9d"
+  />
+  <Card
+    card="6c"
+    key="6c"
+  />
+  <Card
+    card="7c"
+    key="7c"
+  />
+  <Stack
+    left={50}
+    stackAmount={99999}
+    tableSize={1000}
+    top={90}
+  />
+</div>
+`;

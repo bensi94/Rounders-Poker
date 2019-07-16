@@ -2,7 +2,7 @@ import React from 'react';
 import TableBaseSVG from '../../../assets/table-base.svg';
 import ChipRack from './ChipRack';
 import Player from './Player';
-import Card from './Card';
+import Board from './Board';
 
 
 class TableBase extends React.Component {
@@ -28,7 +28,7 @@ class TableBase extends React.Component {
                 <Player tableSize={this.state.tableSize} seatNumber={7} stack={124} name="bensi"/>
                 <Player tableSize={this.state.tableSize} seatNumber={8} stack={132} bet={2342} name="bensi"/>
                 <Player tableSize={this.state.tableSize} seatNumber={9} stack={2342} bet={2342} name="bensi"/>
-                <Card card="As"/>
+                <Board tableSize={this.state.tableSize} board={['Ah', 'As', '9d', '6c', '7c']} pot={99999}/>
             </div>
         );
     }
