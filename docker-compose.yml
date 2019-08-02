@@ -56,6 +56,7 @@ services:
       - ./Frontend/index.html:/Frontend/index.html
       - ./Frontend/package.json:/Frontend/package.json
       - ./Frontend/.babelrc:/Frontend/.babelrc
+      - ./Frontend/assets:/Frontend/assets
     restart: always
     command: >
       sh -c "yarn run start"

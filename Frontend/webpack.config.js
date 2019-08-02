@@ -35,7 +35,28 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(ttf|eot|svg|woff|woff2)(\?.+)?$/,
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: "babel-loader"
+                    },
+                    {
+                        loader: "react-svg-loader",
+                        options: {
+                            jsx: true, // true outputs JSX tags
+                            svgo: {
+                                plugins: [
+                                    {
+                                        cleanupIDs: false
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)(\?.+)?$/,
                 loader: 'file-loader?name=[hash:12].[ext]'
             }
         ]

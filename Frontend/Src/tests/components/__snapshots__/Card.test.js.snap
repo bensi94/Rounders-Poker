@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Test suite Should render component correctly 1`] = `
+<div
+  className="card-wrapper"
+>
+  <svg
+    className="card-base"
+    data-name="A's"
+    id="bcb7fd9d-bab4-42c0-8618-7c28c00ccc49"
+    viewBox="0 0 68 90"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient
+        gradientUnits="userSpaceOnUse"
+        id="c598038e-929c-49a3-bb73-1bcb01594f60"
+        x1="6.91"
+        x2="61.41"
+        y1="44.9"
+        y2="44.9"
+      >
+        <stop
+          offset="0"
+          stopColor="#fff"
+        />
+        <stop
+          offset="1"
+          stopColor="#e6e7e8"
+        />
+      </linearGradient>
+    </defs>
+    <title>
+      card-heart
+    </title>
+    <g
+      data-name="Heart card"
+      id="0f8e4d85-2f6a-4447-8c72-a7597776f2fd"
+    >
+      <g>
+        <rect
+          className="card-rect-1"
+          height="76"
+          rx="5"
+          ry="5"
+          width="54"
+          x="6.41"
+          y="6.27"
+        />
+        <rect
+          className="card-rect-2"
+          height="76"
+          rx="5"
+          ry="5"
+          width="54"
+          x="6.41"
+          y="6.27"
+        />
+      </g>
+      <path
+        className="card-red"
+        d="M58.77,41.3a4.1,4.1,0,0,0,.39-1.75,4.77,4.77,0,0,0-5-4.5,5,5,0,0,0-4.75,3.16,5,5,0, 0,0-4.75-3.16,4.77,4.77,0,0,0-5,4.5,4.12,4.12,0,0,0,.52,2C41,43,49.41,53.48,49.41, 53.48S58,42.92,58.77,41.3Z"
+        transform="translate(-16)"
+      />
+      <g
+        data-name="Number high"
+        id="3cb033ef-9166-4ec5-8cca-6b37929f3d2c"
+      >
+        <path
+          className="card-red"
+          d="M33.53,26.21a1.85,1.85,0,0,0,.18-0.79,2.15,2.15,0,0,0-2.25-2,2.23,2.23,0,0, 0-2.14,1.42,2.23,2.23,0,0,0-2.14-1.42,2.15,2.15,0,0,0-2.25,2,1.85,1.85,0,0,0, .23.9c0.37,0.67,4.15,5.37,4.15,5.37S33.18,26.93,33.53,26.21Z"
+          transform="translate(-16)"
+        />
+        <text
+          className="card-red card-digit"
+          transform="translate(9.55 22.05)"
+        >
+          A
+        </text>
+      </g>
+      <g
+        data-name="Number low copy 3"
+        id="dcd80689-f491-456f-950d-327c7ff45193"
+      >
+        <text
+          className="card-red card-digit"
+          transform="translate(57.27 68.09) rotate(180)"
+        >
+          A
+        </text>
+        <path
+          className="card-red"
+          d="M65.3,63.06a1.85,1.85,0,0,0-.18.79,2.15,2.15,0,0,0,2.25,2,2.23,2.23,0,0,0, 2.14-1.42,2.23,2.23,0,0,0,2.14,1.42,2.15,2.15,0,0,0,2.25-2,1.85,1.85,0,0, 0-.23-0.9c-0.37-.67-4.15-5.37-4.15-5.37S65.64,62.33,65.3,63.06Z"
+          transform="translate(-16)"
+        />
+      </g>
+    </g>
+  </svg>
+</div>
+`;

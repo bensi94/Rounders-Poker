@@ -1,0 +1,27 @@
+<svg id="3c6c9ea5-c4f5-44c9-8dd6-54f621bff69a" data-name="A&apos;s" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 68 90">
+  <defs>
+    <linearGradient id="ad7d75f5-bc48-4dc3-87cf-69b2f9d3e2d5" x1="6.91" y1="44.9" x2="61.41" y2="44.9" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#e6e7e8"/>
+    </linearGradient>
+  </defs>
+  <title>card-clubs</title>
+  <g id="a08d324b-7b80-48b0-87f3-15f3d72deae0" data-name="Club card">
+    <g>
+      <image width="68" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEUAAABbCAYAAAAlUUjCAAAACXBIWXMAAAsSAAALEgHS3X78AAAFCUlEQVR4Xu2cS6hVdRSHl/dY3bKHSfbAKwlmL0oii6TboKhJKD0gorCgblgR0aQgkBwEBUVE76RoEBGEExv0ICzDFBoEUQk9MKqbhBA9zOzpo+vvu2vvo+69zj331mTvXINvds4+a3//tdb/jH42NjZmyYH0/UDtC2bT2ki/95qylP0ePiA6BdNbQlkvtU9K0mRllBIOFYPiCDFDHNlwqJFaDxeHiUOsImhKUmxfZyBjsPiRY8VscaKYI4bE3IZCbdR4kjhezBJHm0vicHmvcTmTkmL7uoMvzygeyA+cIs4W54nF4kIxLC5qGNREbdRIrQvFaeJkcYKYaS6HzqmJ6SfkqOIhC4qHXyauFjeIEbFc3FZwe0Mo67nVvMYbxTXicnNhCJonjjM/8JqYXiPDBxFC650pLhbXijvFSvGweEI8I1Y1FGp7Ujwi7hf3iFvEleZddKr5KqBjGKUJpUwvPsgXzhCXipvMZTwrVos3xTrxntjYUKjtXfGWWCNeFI+ay7nOvGvmm6+GQfPpmBZJoUsYm2PMW4zZpP0w/ZJ4W3wovhBfi1GxpaF8a17jZrFJvC9eE8+Je81HapH5ruQS6XZLtEuwxrwxNkvNzb5gbv0z8Z34UfwifhU7Ggq1bRc/i+/ND/Bj8y5/StxhPgVcHtyqNMNALymMDlfuueJ68aB4VXwithY/9KfYKXY1HGr8W/xuLofu+UC8Iu4zvzS4TVkV3RGK9gkbeY75dXazeMx8bL4sHvyX2C32iH9aAHUi6A/xg/hcvGF+WXCLcqtyodAMPaUwX0PmG5or92mx3rz96JKdxY+NtQjE0DGM/FfmlwS354j54dMENMP4XuklhX+Ew+b3PTfOBvPWY1ax3jYp1Evd7JlR85uJK5v/Mhw+TdBdthNJ4crizxB3PlccG73tUqif9+CQOWwOnffkfQ96KbwP78X7pRRLKV1SSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCUgpASklIKUEpJSAlBKQUgJSSkBKCahK2WD/MgBi2P5fUSHkvvynqJAhq4fKfGMeKkM4y57ih9rCbvO6t5mHyrwjHrcphMpE8UNrzVOwfjKP8eEHdrWEMpfpN/PAqk/NU7weEsvM44fIoOoZP9SxelDVA+Y5aR+ZzyNi6JgdLYGRoUMQQpcQbfayWCGuEmdZn6CqjtUjze4Wz5t3C2LoGEaJHbOlBYyay6BDEMIBE4LHPrnEPACPLMl6pFkhZsAODL9jr9BiK83FEG2GnPXmy3djC2CprhOvm3cIQu4SV4hzzJO7uvskklLulTIm8XRzm4ihYxgldgzLl1tpVQvgliGpix3CyNAhCDnf/ODpErJqOzaBFLqFQE1uIXYLYuiYJeaZiyzfJqaLVinro9YR84Nlh3DIdMg889xIAny7XVKTUtktjBFiZhcPYMewfC+w5ubQVqHGMpd2kflSnW8+MnRIKYRG6C2lIoaOYZTYMSzfNiQWV6FWaqZ2DhgZ7BBGpiakp5TKKPHFtmVbVymzrnmHMsp5fIdYRciEUvYTU8rpWLtS0KuU9Y93hgUyJiWlh6BW0+89pyTlYGIvmoWJtTuLpM0AAAAASUVORK5CYII=" style="opacity: 0.5"/>
+      <g>
+        <rect x="7.16" y="6.9" width="54" height="76" rx="5" ry="5" style="fill: #e6e7e8"/>
+        <rect x="7.16" y="6.9" width="54" height="76" rx="5" ry="5" style="fill: none;stroke-miterlimit: 10;stroke-width: 0.5px;stroke: url(#ad7d75f5-bc48-4dc3-87cf-69b2f9d3e2d5)"/>
+      </g>
+    </g>
+    <path d="M196.89,41.9a5.49,5.49,0,0,0-1.17.14,4.26,4.26,0,0,0,1.42-3.14,5,5,0,0,0-10,0A4.26,4.26,0,0,0,188.56,42a5.49,5.49,0,0,0-1.17-.14,4.77,4.77,0,0,0-5,4.5,4.77,4.77,0,0,0,5,4.5,5.13,5.13,0,0,0,4-1.81,10.9,10.9,0,0,1-2,5.32h5.5a10.9,10.9,0,0,1-2-5.32,5.13,5.13,0,0,0,4,1.81,4.77,4.77,0,0,0,5-4.5A4.77,4.77,0,0,0,196.89,41.9Z" transform="translate(-157.98 0.09)" style="fill: #2f3034"/>
+    <g id="4e3def2d-d7f2-4f1d-9ee1-62b6e96ffe55" data-name="Number high copy 2">
+      <text transform="translate(10.3 22.14)" style="font-size: 15px;fill: #2f3034;font-family: Arial Narrow">A</text>
+      <path d="M174.18,26.41a2.47,2.47,0,0,0-.53.06,1.92,1.92,0,0,0,.64-1.41,2.26,2.26,0,0,0-4.5,0,1.92,1.92,0,0,0,.64,1.41,2.47,2.47,0,0,0-.53-0.06,2,2,0,1,0,0,4.05,2.31,2.31,0,0,0,1.79-.81,4.9,4.9,0,0,1-.89,2.4h2.47a4.9,4.9,0,0,1-.89-2.4,2.31,2.31,0,0,0,1.79.81A2,2,0,1,0,174.18,26.41Z" transform="translate(-157.98 0.09)" style="fill: #2f3034"/>
+    </g>
+    <g id="e2bbbb44-025a-4f3d-9fbb-015758646b77" data-name="Number low copy 2">
+      <text transform="translate(58.02 68.18) rotate(180)" style="font-size: 15px;fill: #2f3034;font-family: Arial Narrow">A</text>
+      <path d="M210.1,62.85a2.47,2.47,0,0,0,.53-0.06A1.92,1.92,0,0,0,210,64.2a2.26,2.26,0,0,0,4.5,0,1.92,1.92,0,0,0-.64-1.41,2.47,2.47,0,0,0,.53.06,2,2,0,1,0,0-4.05,2.31,2.31,0,0,0-1.79.81,4.9,4.9,0,0,1,.89-2.4H211a4.9,4.9,0,0,1,.89,2.4,2.31,2.31,0,0,0-1.79-.81A2,2,0,1,0,210.1,62.85Z" transform="translate(-157.98 0.09)" style="fill: #2f3034"/>
+    </g>
+  </g>
+</svg>

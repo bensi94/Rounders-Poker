@@ -1,0 +1,27 @@
+<svg id="1262aba3-61be-4155-9f1a-9912ffb3fc07" data-name="A&apos;s" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 67 89">
+  <defs>
+    <linearGradient id="c2e06221-e3af-400a-b431-69fee9c38c40" x1="6.16" y1="44.36" x2="60.66" y2="44.36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#e6e7e8"/>
+    </linearGradient>
+  </defs>
+  <title>card-dimond</title>
+  <g id="4fefe516-9bda-42af-a3e8-03ff61bcde3a" data-name="Dimond card">
+    <g>
+      <image width="67" height="89" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABaCAYAAAABz/BZAAAACXBIWXMAAAsSAAALEgHS3X78AAAEuklEQVR4Xu2cTYiVZRiGH89oTWraj0k1kxzQFkqC/WFkGwmCQKIQDDHwBzRxoStdSCshyIVaYrlzFbiRCKyFaDApCEGroEBEHN2ECCpmkE463tc839ec88w5c1y0mHd4hGsj53ze9+X7Pt9ZPTY6OmrJOL0/YDZjOtCr56RCWh7UEH0VMwulzk+XnnK6yWhUD3tM9IvZYo6YWxhkJjsd6FIL6iqmm4xZ4gkxTzwrnhcvikHxUiGQdcA8+3PiKXNBj5uLGTsxXYVYuwy+uEAsEkvFq2KleFusEu9McchI1rfE6+IVsVi8YC6G/+yOUqIQPsQRw+jL5hLeFx+LTWKr+LRi+xSlzkfWLWKD+FCsFitEUzxj41ImCjGXwd3qrz6MTSyvE7vEPnFQHBHfiKMF8LX4Snwh9opt4gPxprkUTgrXZ2ymdBKCLQYR945jtlbsqR58QpwSQ+KsOFcAP4ufxA/iW3FA7DSXwknh+jAa2k5JLYS7xBR+WiwR74od4nD1wF/FBXFZXBFXC2BYXBK/i/PiO3MpnBSuz2LzU0LvRsvoaLsuzI7l4iPxmTgufjEXcV3cErfFXwVAzpvimrkYpHBSuD7MFAYtfelN/xlRCMOUY/SG+ETsFz+KP8xl/C3uipFCuGee9465FE7KSfOZssG8J69kek8Qwj3iPg2Yv6q2mA8k7iB2b1UPvy8eFMS/5rk5KfQ4I74070dP+rbNEf60DtRB8/c394xhymAaNj9+I9U/MloQ5OWkkH/YvA+96EdP+tK7qxB+4fHDhvc4r9ez5gOKO1mqEHKTnx70oRf96EnfRxLCDxze5edsegmhD73ol0IshaSQSAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgmkkEAKCaSQQAoJpJBACgn8L0JWWft2iCs2PYTQgz71dgh69hQyaL5Xg5VXbKQasvH9IfesTCGt+0OGzHvRr+f+kNYNM5vFIXFaXBQ3xD/mG1seFAR5yU1+etCHXvSbdMNMn/kuHnbyvCbWi8/F9+I38af5sePhGB8pAHKSl9zkpwd96EU/enbdQcRf9Juv+1sm1ojd4pj5mpoL1UMxXdKWKvKSm/z0oA+96EdP+tJ7XEhlpWG+z2u+aJpP4I3mNo9XD8PwRfO7yIC6OoUh37B5XnKTnx70oRf9muZ92/eYVULqOcLxWWhu7z3z4cNDMMtxO21lbLsj35B5XnKTnx70oRf96Enf/+ZHFNIwt/Wk+arQ5dWXMbq7eiADqYR9iOQjJ3nJTX560Ide9KPn2OmwKKRFSp/5wsR51ZcwyfHizjGImM5TfWNm67ZM8pKb/PSgD73oN2ExZJuQDlIwyLFqVg9iKq+0Mnaqko+c5CU3+ZvmfejVUcYEIUEKx4k7xuBhGvOKGrBytu6Sk7zkJj896EOvjjI6CgkzZaaVvZe5007mtpnxSEJapNRi+qzczd119jERNomMSYV0kVMsvTrWPAQEK6J5zBMiTAAAAABJRU5ErkJggg==" style="opacity: 0.5"/>
+      <g>
+        <rect x="6.41" y="6.36" width="54" height="76" rx="5" ry="5" style="fill: #e6e7e8"/>
+        <rect x="6.41" y="6.36" width="54" height="76" rx="5" ry="5" style="fill: none;stroke-miterlimit: 10;stroke-width: 0.5px;stroke: url(#c2e06221-e3af-400a-b431-69fee9c38c40)"/>
+      </g>
+    </g>
+    <g id="d31fe825-54c3-4c86-8492-0eb0b54d0812" data-name="Number high copy">
+      <text transform="translate(9.55 22.14)" style="font-size: 15px;fill: #ed3e50;font-family: Arial Narrow">A</text>
+      <path d="M246,27.54c-1.27,0-4.3,3-4.3,4.3,0-1.27-3-4.3-4.3-4.3,1.27,0,4.3-3,4.3-4.3C241.72,24.52,244.74,27.54,246,27.54Z" transform="translate(-228.4 0.09)" style="fill: #ed3e50"/>
+    </g>
+    <g id="654097e9-a3c7-429f-af84-a970a24e5786" data-name="Number low copy">
+      <text transform="translate(57.27 68.18) rotate(180)" style="font-size: 15px;fill: #ed3e50;font-family: Arial Narrow">A</text>
+      <path d="M286.2,61.73c-1.27,0-4.3,3-4.3,4.3,0-1.27-3-4.3-4.3-4.3,1.27,0,4.3-3,4.3-4.3C281.91,58.7,284.93,61.73,286.2,61.73Z" transform="translate(-228.4 0.09)" style="fill: #ed3e50"/>
+    </g>
+    <path d="M271.36,43.89c-2.83,0-9.55,6.72-9.55,9.55,0-2.83-6.72-9.55-9.55-9.55,2.83,0,9.55-6.72,9.55-9.55C261.81,37.17,268.53,43.89,271.36,43.89Z" transform="translate(-228.4 0.09)" style="fill: #ed3e50"/>
+  </g>
+</svg>

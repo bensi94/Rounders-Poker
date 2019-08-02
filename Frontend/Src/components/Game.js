@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSocket } from '../actions/socket';
+import TableBase from './Table/TableBase';
 
 
 class Game extends React.Component {
@@ -20,6 +21,9 @@ class Game extends React.Component {
                 { this.props.players && Object.keys(this.props.players).map((key) => {
                     return <div key={key}>{key}</div>;
                 })}
+                <div className="game-full">
+                    <TableBase />
+                </div>
             </>
         );
     }

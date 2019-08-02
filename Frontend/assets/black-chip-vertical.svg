@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.1 27.85">
+  <defs>
+    <radialGradient id="98a301b5-21dc-4b6a-b36e-3e55a2be3751" cx="733.46" cy="-102.43" r="14" gradientTransform="matrix(1, 0, 0, -0.85, 0, 164.84)" gradientUnits="userSpaceOnUse">
+      <stop offset="0"/>
+      <stop offset="1" stop-color="#1a1a1a"/>
+    </radialGradient>
+    <radialGradient id="300e50f9-fe0e-4bbe-8992-99d7cd8d690a" cx="733.45" cy="-105.96" r="14" gradientTransform="matrix(1, 0, 0, -1, -719.4, -91.06)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4d4d4d"/>
+      <stop offset="1" stop-color="#333"/>
+    </radialGradient>
+  </defs>
+  <title>black-chip-vertical</title>
+  <g style="isolation: isolate">
+    <g id="1a0c1369-60f4-461b-9623-8378081015d8" data-name="Rack chips">
+      <g id="ec5a6b14-578f-4231-87c1-19c0a5e316aa" data-name="Black chips">
+        <g id="d1a4d8ad-f53f-47fa-86d7-40a8f50c42a7" data-name="Black Chip top">
+          <g>
+            <g style="opacity: 0.5;mix-blend-mode: multiply">
+              <path d="M747.45,252.9c0-6.57-6.27-11.9-14-11.9s-14,5.33-14,11.9c0,0.2,0,2.2,0,2.4,0.37,6.29,6.49,9.5,14,9.5,7.27,0,13.32-3,14-9.08C747.5,255.34,747.45,253.29,747.45,252.9Z" transform="translate(-719.4 -240)"/>
+            </g>
+            <path d="M747.45,251.9c0-6.57-6.27-11.9-14-11.9s-14,5.33-14,11.9c0,0.2,0,2.2,0,2.4,0.37,6.29,6.49,9.5,14,9.5,7.27,0,13.32-3,14-9.08C747.5,254.34,747.45,252.29,747.45,251.9Z" transform="translate(-719.4 -240)" style="fill: url(#98a301b5-21dc-4b6a-b36e-3e55a2be3751)"/>
+          </g>
+          <path d="M733.45,259.55c-5,0-9-3.43-9-7.65s4-7.65,9-7.65,9,3.43,9,7.65S738.42,259.55,733.45,259.55Z" transform="translate(-719.4 -240)" style="fill: none;stroke: #000;stroke-miterlimit: 10;opacity: 0.3"/>
+          <path d="M733.45,260.29a11.86,11.86,0,0,0,2.05-.17l1.14,3.48a13.66,13.66,0,0,1-6.39,0l1.14-3.48A11.07,11.07,0,0,0,733.45,260.29Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+          <path d="M724.9,256.1a8.8,8.8,0,0,0,1.2,1.43l-3,2.58a10.54,10.54,0,0,1-2-2.16,9.32,9.32,0,0,1-1.21-2.54l4.12-.9A7.51,7.51,0,0,0,724.9,256.1Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+          <path d="M721.1,249.13a15.86,15.86,0,0,0-1.17,2.27v-3a9.32,9.32,0,0,1,1.21-2.54,10.54,10.54,0,0,1,2-2.16v3A23.74,23.74,0,0,0,721.1,249.13Z" transform="translate(-719.4 -240)" style="fill: #d1d1d1"/>
+          <path d="M733.43,243a28.22,28.22,0,0,0-3.17.17v-2.9a14,14,0,0,1,3.21-.3,13.56,13.56,0,0,1,3.16.3l0,2.9A27.47,27.47,0,0,0,733.43,243Z" transform="translate(-719.4 -240)" style="fill: #d1d1d1"/>
+          <path d="M745.72,249.18a25.06,25.06,0,0,0-1.94-2.48v-3a10.54,10.54,0,0,1,2,2.16A9.32,9.32,0,0,1,747,248.4v3A15.05,15.05,0,0,0,745.72,249.18Z" transform="translate(-719.4 -240)" style="fill: #d1d1d1"/>
+          <g>
+            <g style="opacity: 0.5">
+              <path d="M742,257.1a8.05,8.05,0,0,0,.85-1.6l4.12,0.9a9.32,9.32,0,0,1-1.21,2.54,10.54,10.54,0,0,1-2,2.16l-3-2.58A8.21,8.21,0,0,0,742,257.1Z" transform="translate(-719.4 -240)"/>
+            </g>
+            <path d="M742,256.1a8.05,8.05,0,0,0,.85-1.6l4.12,0.9a9.32,9.32,0,0,1-1.21,2.54,10.54,10.54,0,0,1-2,2.16l-3-2.58A8.21,8.21,0,0,0,742,256.1Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+          </g>
+          <g id="c7de9f74-5a34-48d4-9607-f3b24cf863a0" data-name="Chips copy 11">
+            <g>
+              <g style="opacity: 0.5">
+                <ellipse cx="14.05" cy="15.9" rx="14" ry="11.9"/>
+                <ellipse cx="14.05" cy="15.9" rx="14" ry="11.9" style="fill: none;stroke: #000;stroke-miterlimit: 10;stroke-width: 0.10000000149011612px"/>
+              </g>
+              <g>
+                <ellipse cx="14.05" cy="14.9" rx="14" ry="11.9" style="fill: url(#300e50f9-fe0e-4bbe-8992-99d7cd8d690a)"/>
+                <ellipse cx="14.05" cy="14.9" rx="14" ry="11.9" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.10000000149011612px"/>
+              </g>
+            </g>
+            <path d="M733.45,262.55c-5,0-9-3.43-9-7.65s4-7.65,9-7.65,9,3.43,9,7.65S738.42,262.55,733.45,262.55Z" transform="translate(-719.4 -240)" style="fill: none;stroke: #000;stroke-miterlimit: 10;opacity: 0.3"/>
+            <path d="M733.45,263.29a11.86,11.86,0,0,0,2.05-.17l1.14,3.48a13.66,13.66,0,0,1-6.39,0l1.14-3.48A11.07,11.07,0,0,0,733.45,263.29Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+            <path d="M724.9,259.1a8.8,8.8,0,0,0,1.2,1.43l-3,2.58a10.54,10.54,0,0,1-2-2.16,9.32,9.32,0,0,1-1.21-2.54l4.12-.9A7.51,7.51,0,0,0,724.9,259.1Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+            <path d="M724.9,250.7a8.05,8.05,0,0,0-.85,1.6l-4.12-.9a9.32,9.32,0,0,1,1.21-2.54,10.54,10.54,0,0,1,2-2.16l3,2.58A8.21,8.21,0,0,0,724.9,250.7Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+            <path d="M733.45,246.51a11.86,11.86,0,0,0-2.05.17l-1.14-3.48a13.66,13.66,0,0,1,6.39,0l-1.14,3.48A11.07,11.07,0,0,0,733.45,246.51Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+            <path d="M742,250.7a8.8,8.8,0,0,0-1.2-1.43l3-2.58a10.54,10.54,0,0,1,2,2.16A9.32,9.32,0,0,1,747,251.4l-4.12.9A7.51,7.51,0,0,0,742,250.7Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+            <path d="M742,259.1a8.05,8.05,0,0,0,.85-1.6l4.12,0.9a9.32,9.32,0,0,1-1.21,2.54,10.54,10.54,0,0,1-2,2.16l-3-2.58A8.21,8.21,0,0,0,742,259.1Z" transform="translate(-719.4 -240)" style="fill: #fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

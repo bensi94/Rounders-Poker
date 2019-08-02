@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Player test sutie should render component correctly 1`] = `
+<Fragment>
+  <div
+    className="player-rect"
+    style={
+      Object {
+        "left": "70%",
+        "top": "-14%",
+        "width": "16%",
+      }
+    }
+  >
+    <div
+      className="player-card-wrapper"
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <div
+        className="card-wrapper player-card-back"
+        key="left"
+      >
+        <stubbed-asset />
+      </div>
+      <div
+        className="card-wrapper"
+        key="right"
+      >
+        <stubbed-asset />
+      </div>
+    </div>
+    <svg
+      id="92f50c61-a635-413f-87df-d274975daa0e"
+      viewBox="0 0 150 75"
+    >
+      <title>
+        player-rect
+      </title>
+      <g
+        data-name="Seat 1"
+        id="5f2ad952-a9de-49e6-aadd-7f71fef5b04b"
+      >
+        <rect
+          className="player-rect-bg"
+          height="75"
+          rx="5"
+          ry="5"
+          width="150"
+        />
+        <text
+          className="player-react-stack-text"
+          transform="translate(75 56.62)"
+        >
+          $
+          100
+        </text>
+        <text
+          className="player-react-title-text"
+          transform="translate(75 21.96)"
+        >
+          bensi
+        </text>
+      </g>
+    </svg>
+  </div>
+  <Stack
+    left={80}
+    stackAmount={10}
+    tableSize={1000}
+    top={13}
+  />
+</Fragment>
+`;
