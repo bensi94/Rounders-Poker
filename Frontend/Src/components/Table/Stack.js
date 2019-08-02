@@ -16,6 +16,7 @@ class Stack extends React.Component {
             leftRatio: 0.028,
             topRatio: 0.003,
             heightRatio: 0.025,
+            fontRatio: 0.011,
             chipRankList: [
                 'PinkChip',
                 'BlackChip',
@@ -113,7 +114,11 @@ class Stack extends React.Component {
         return (
             <div className="stack-wrapper" style={style}>
                 {this.state.chipStack}
-                <div className={`bet-amount-lbl ${labelPosClass}`}>${ this.props.stackAmount }</div>
+                <div className={`bet-amount-lbl ${labelPosClass}`}
+                    style={{ fontSize: `${this.props.tableSize * this.state.fontRatio}pt` }}
+                >
+                    ${ this.props.stackAmount }
+                </div>
             </div>
         );
     }

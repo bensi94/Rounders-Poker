@@ -60,7 +60,7 @@
 		"test": "jest",
 		"test:watch": "jest --watchAll",
 		"test:coverage": "jest --coverage --colors",
-		"eslint-fix": "eslint--fix \"./Src/**/*.js\"",
+		"eslint-fix": "eslint --fix \"./Src/**/*.js\"",
 		"eslint": "./node_modules/.bin/eslint **.js \"./Src/**/*.js\"",
 		"build": "webpack --mode production"
 	}
