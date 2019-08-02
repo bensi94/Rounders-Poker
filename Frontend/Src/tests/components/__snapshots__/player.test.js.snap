@@ -7,11 +7,32 @@ exports[`Player test sutie should render component correctly 1`] = `
     style={
       Object {
         "left": "70%",
-        "top": "-4%",
+        "top": "-14%",
         "width": "16%",
       }
     }
   >
+    <div
+      className="player-card-wrapper"
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <div
+        className="card-wrapper player-card-back"
+        key="left"
+      >
+        <stubbed-asset />
+      </div>
+      <div
+        className="card-wrapper"
+        key="right"
+      >
+        <stubbed-asset />
+      </div>
+    </div>
     <svg
       id="92f50c61-a635-413f-87df-d274975daa0e"
       viewBox="0 0 150 75"

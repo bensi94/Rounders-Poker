@@ -325,6 +325,11 @@ exports[`Stack Test suite Should render component correctly 1`] = `
   />
   <div
     className="bet-amount-lbl lbl-pos-bottom"
+    style={
+      Object {
+        "fontSize": "5.5pt",
+      }
+    }
   >
     $
     24839

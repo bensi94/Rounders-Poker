@@ -14,6 +14,7 @@ describe('Player test sutie', () => {
                 bet={10}
                 name="bensi"
                 seatNumber={1}
+                status="ACTIVE"
             />
         );
         expect(wrapper).toMatchSnapshot();
@@ -26,14 +27,19 @@ describe('Player test sutie', () => {
                 bet={10}
                 name="bensi"
                 seatNumber={1}
+                cards={['Kc', 'Kh']}
+                status="ACTIVE"
             />
         );
         let caseStateObj = {
             rectLeft: '70%',
-            rectTop: '-4%',
+            rectTop: '-14%',
             stackLeft: 80,
             stackTop: 13,
-            widthPercent: '16%'
+            widthPercent: '16%',
+            cardOpacity: {
+                opacity: 1
+            }
         };
         expect(wrapper.instance().state).toStrictEqual(caseStateObj);
     });
@@ -45,6 +51,8 @@ describe('Player test sutie', () => {
                 bet={10}
                 name="bensi"
                 seatNumber={1}
+                cards={['Kc', 'Kh']}
+                status="ACTIVE"
             />
         );
         expect(wrapper.find('Stack').length).toBe(1);
@@ -56,6 +64,7 @@ describe('Player test sutie', () => {
                 stack={100}
                 name="bensi"
                 seatNumber={1}
+                status="FOLDED"
             />
         );
         expect(wrapper.find('Stack').length).toBe(0);
