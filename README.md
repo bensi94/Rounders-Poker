@@ -9,6 +9,10 @@ This project is currently a work in progress.
 
 ![App profile](https://github.com/bensi94/Rounders-Poker/blob/master/app-profile.png)
 
+Socket connections between frontend and backend have been set up and soon as users enter the /game path they are added to the pool of users observing the table. All the base graphics for the poker table, stacks, users and card have been added to the platform and are generated based on passed props that will later come from the game state from the backend.
+
+![Single table preview](https://github.com/bensi94/Rounders-Poker/blob/master/single-table-preview.png)
+
 ## Running the application  
 
 Only dependency to run the application is Docker.  
