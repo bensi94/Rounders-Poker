@@ -4,3 +4,7 @@ exclude =
     __pycache__,
     manage.py,
     settings.py
+
+per-file-ignores = 
+    core/models/__init__.py:F401
+    Backend/Src/core/models/__init__.py:F401

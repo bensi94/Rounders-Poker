@@ -1,22 +1,9 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.translation import gettext as _
 
+from core.admins.UserAdmin import UserAdmin
+from core.admins.TableAdmin import TableAdmin
 from core import models
 
 
-class UserAdmin(BaseUserAdmin):
-    ordering = ['id']
-    list_display = ['username', 'name']
-    fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        (_('Personal Info'), {'fields': ('name',)}),
-        (
-            _('Permissions'),
-            {'fields': ('is_active', 'is_staff', 'is_superuser')}
-        ),
-        (_('Important dates'), {'fields': ('last_login',)})
-    )
-
-
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Table, TableAdmin)
