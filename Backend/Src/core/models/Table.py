@@ -8,11 +8,11 @@ class Table(models.Model):
     status = [('A', 'Active'), ('W', 'Waiting'), ('C', 'Closed')]
 
     name = models.CharField(max_length=255)
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     small_blind = models.PositiveIntegerField()
     big_blind = models.PositiveIntegerField()
-    hand_count = models.BigIntegerField()
-    average_pot = models.FloatField()
-    max_players = models.PositiveSmallIntegerField()
-    type = models.CharField(max_length=1, choices=table_types)
-    status = models.CharField(max_length=1, choices=status)
+    hand_count = models.BigIntegerField(default=0)
+    average_pot = models.FloatField(default=0.0)
+    max_players = models.PositiveSmallIntegerField(default=9)
+    type = models.CharField(max_length=1, choices=table_types, default='C')
+    status = models.CharField(max_length=1, choices=status, default='W')
