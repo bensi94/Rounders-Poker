@@ -1,5 +1,5 @@
 from django.test import TestCase
-from core.models.Table import Table
+from core.models.table import Table
 from unittest import mock
 import pytz
 import datetime

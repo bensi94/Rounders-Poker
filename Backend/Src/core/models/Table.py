@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class Table(models.Model):
@@ -9,8 +10,8 @@ class Table(models.Model):
 
     name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
-    small_blind = models.PositiveIntegerField()
-    big_blind = models.PositiveIntegerField()
+    small_blind = models.FloatField(validators=[MinValueValidator(0)])
+    big_blind = models.FloatField(validators=[MinValueValidator(0)])
     hand_count = models.BigIntegerField(default=0)
     average_pot = models.FloatField(default=0.0)
     max_players = models.PositiveSmallIntegerField(default=9)
