@@ -15,7 +15,8 @@ schemas = {
                     'properties': {
                         'seatnumber': {
                             'type': 'integer',
-                            'minimum': 1
+                            'minimum': 1,
+                            'unique': True
                         },
                         'player': {
                             'type': 'integer',
@@ -120,11 +121,11 @@ schemas = {
 class JsonSchemaValidator:
 
     def __init__(self, schema):
-        self.schema = schema
+        self.schema = schemas[schema]
 
     def __call__(self, json_value):
 
         try:
             validate(json_value, self.schema)
         except JSONValidationError as error:
-            raise ValidationError(error.schema['error_msg'])
+            raise ValidationError('Error validating JSON: ' + error.message)

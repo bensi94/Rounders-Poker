@@ -10,5 +10,5 @@ class Hand(models.Model):
 
     table = models.ForeignKey(Table, null=True, on_delete=models.SET_NULL)
     created = models.DateTimeField(auto_now_add=True)
-    history = JSONField(validators=[JsonSchemaValidator(
-        'hand_history_schema')])
+    history = JSONField(default=dict, validators=[JsonSchemaValidator(
+        schema='hand_history_schema')])
