@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'core',
     'user',
     'game_connections',
-    'channels'
+    'channels',
+    'game_engine'
 ]
 
 MIDDLEWARE = [
