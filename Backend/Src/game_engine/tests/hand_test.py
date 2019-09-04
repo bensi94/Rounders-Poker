@@ -1,5 +1,5 @@
-from GameEngine.hand import Hand
-from GameEngine.player import Player
+from game_engine.hand import Hand
+from game_engine.player import Player
 
 
 def test_pay_blinds():

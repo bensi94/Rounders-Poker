@@ -1,6 +1,6 @@
-from GameEngine.player import Player
-from GameEngine.card import Card
-from GameEngine.constants import STATUS_ACTIVE, STATUS_FOLDED
+from game_engine.player import Player
+from game_engine.card import Card
+from game_engine.constants import STATUS_ACTIVE, STATUS_FOLDED
 
 
 def test_give_hand():

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'core',
     'user',
-    'gameConnections',
+    'game_connections',
     'channels'
 ]
 

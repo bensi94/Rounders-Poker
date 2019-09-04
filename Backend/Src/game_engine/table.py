@@ -3,7 +3,7 @@ from collections import OrderedDict
 import random
 
 # Internal
-from GameEngine.constants import PENDING, RUNNING
+from game_engine.constants import PENDING, RUNNING
 
 
 class Table:

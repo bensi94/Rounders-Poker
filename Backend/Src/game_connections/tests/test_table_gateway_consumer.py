@@ -1,6 +1,6 @@
 from django.test import TestCase
-from gameConnections.table_gateway_consumer import TableGatewayConsumer
-from GameEngine.game_controller import GameController
+from game_connections.table_gateway_consumer import TableGatewayConsumer
+from game_engine.game_controller import GameController
 
 
 class TestTableGatewayConsumer(TestCase):

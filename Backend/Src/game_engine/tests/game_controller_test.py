@@ -1,4 +1,4 @@
-from GameEngine.game_controller import GameController
+from game_engine.game_controller import GameController
 from django.test import TestCase
 
 

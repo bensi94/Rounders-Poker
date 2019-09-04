@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class GameConnectionsConfig(AppConfig):
-    name = 'gameConnections'
+    name = 'game_connections'

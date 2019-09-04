@@ -1,4 +1,4 @@
-from GameEngine.constants import STATUS_ACTIVE, STATUS_FOLDED
+from game_engine.constants import STATUS_ACTIVE, STATUS_FOLDED
 
 
 class Player:

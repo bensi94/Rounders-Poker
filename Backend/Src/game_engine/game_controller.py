@@ -4,10 +4,10 @@ from channels.layers import get_channel_layer
 from queue import Queue
 from functools import wraps
 
-from GameEngine.table import Table
-from GameEngine.hand import Hand
-from GameEngine.constants import MAX_PLAYERS, SMALL_BLIND, BIG_BLIND
-from GameEngine.player import Player
+from game_engine.table import Table
+from game_engine.hand import Hand
+from game_engine.constants import MAX_PLAYERS, SMALL_BLIND, BIG_BLIND
+from game_engine.player import Player
 
 
 class GameController(Thread):

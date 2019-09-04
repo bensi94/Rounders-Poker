@@ -1,4 +1,4 @@
-from GameEngine.card import Card
+from game_engine.card import Card
 
 
 # Should generate rank of suite by input

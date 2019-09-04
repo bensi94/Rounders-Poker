@@ -2,8 +2,8 @@
 from collections import deque
 
 # Internal
-from GameEngine.constants import SUITES, RANKS
-from GameEngine.card import Card
+from game_engine.constants import SUITES, RANKS
+from game_engine.card import Card
 from random import shuffle
 
 

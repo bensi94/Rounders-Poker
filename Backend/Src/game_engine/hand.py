@@ -1,4 +1,4 @@
-from GameEngine.deck import Deck
+from game_engine.deck import Deck
 
 
 class Hand:

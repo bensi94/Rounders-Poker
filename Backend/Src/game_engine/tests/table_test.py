@@ -1,4 +1,4 @@
-from GameEngine.table import Table
+from game_engine.table import Table
 import pytest
 
 

@@ -1,5 +1,5 @@
 from channels.consumer import SyncConsumer
-from GameEngine.game_controller import GameController
+from game_engine.game_controller import GameController
 
 
 class TableGatewayConsumer(SyncConsumer):
