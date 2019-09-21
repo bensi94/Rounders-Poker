@@ -157,7 +157,7 @@ const mapDispatchToProps = (dispatch) => ({
     clearSignup: () => dispatch(clearSignup()),
     clearLogin: () => dispatch(clearLogin()),
     login: (user) => dispatch(login(user)),
-    redirectGame: () => dispatch(push('/game')),
+    redirectGame: () => dispatch(push('/table/1')),
     checkUser: () => dispatch(checkUser())
 });
 

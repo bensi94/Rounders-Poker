@@ -6,7 +6,6 @@ from functools import wraps
 
 from game_engine.table import Table
 from game_engine.hand import Hand
-from game_engine.constants import MAX_PLAYERS, SMALL_BLIND, BIG_BLIND
 from game_engine.player import Player
 
 
@@ -21,11 +20,11 @@ class GameController(Thread):
     functions that are called on the thread.
     """
 
-    def __init__(self, table_id):
+    def __init__(self, table):
         Thread.__init__(self)
-        self._table = Table(MAX_PLAYERS, (SMALL_BLIND, BIG_BLIND))
+        self._table = Table(table)
         self._players = {}
-        self._table_id = table_id
+        self._table_id = table.id
         self._runing = True
         self._channel_layer = get_channel_layer()
         self._fnQueue = Queue()

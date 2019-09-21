@@ -26,7 +26,7 @@ export class Navbar extends React.Component {
         if (this.props.isAuthenticated) {
             return (
                 <Menu className="navBar" mode="horizontal" theme="dark">
-                    <NavLink exact to="/game"
+                    <NavLink exact to="/table/1"
                         className="navlink"
                         activeClassName="active-navlink"
                         isActive={this.updateIsActive}

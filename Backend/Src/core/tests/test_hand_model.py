@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from unittest import mock
 import pytz
 import datetime
-import pytest
 
 from core.models.table import Table
 from core.models.hand import Hand
@@ -34,7 +33,6 @@ class HandModelTests(TestCase):
 
             self.assertEqual(hand.history, valid_history_example)
 
-    @pytest.mark.focus
     def test_creating_invalid_hand(self):
         """Test creating hand with invalid json"""
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Loading, Alert } from "element-react";
 import { connect } from 'react-redux';
 import { createSocket } from '../actions/socket';
 import TableBase from './Table/TableBase';
@@ -15,6 +16,18 @@ class Game extends React.Component {
     }
 
     render() {
+        if (this.props.error) {
+            return (
+                <Alert title={this.props.error.type}
+                    type="error"
+                    showIcon
+                />
+            );
+        } else if (this.props.waiting) {
+            return (
+                <Loading text="Loading Table" />
+            );
+        }
         return (
             <>
                 <h1> Game </h1>
@@ -39,20 +52,30 @@ Game.propTypes = {
             status: PropTypes.string
         })
     ),
-    tableID: PropTypes.string.isRequired
+    tableID: PropTypes.string.isRequired,
+    error: PropTypes.shape({
+        type: PropTypes.string,
+        error: PropTypes.shape({
+            type: PropTypes.string
+        })
+    }),
+    waiting: PropTypes.bool
 };
 
-const mapStateToProps = (state) => {
-    let tableID = state.router.location.pathname.substr(1);
+const mapStateToProps = (state, { match }) => {
+    let tableID = match.params.tableID;
     if (state.tables[tableID]) {
+        let error = state.tables[tableID].error;
         return {
             players: state.tables[tableID].players,
             token: state.auth.token,
-            tableID
+            tableID,
+            error
         };
     } else {
         return {
             token: state.auth.token,
+            waiting: true,
             tableID
         };
     }

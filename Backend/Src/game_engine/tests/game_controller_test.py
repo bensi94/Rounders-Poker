@@ -1,11 +1,20 @@
 from game_engine.game_controller import GameController
 from django.test import TestCase
+from unittest.mock import Mock
+
+from core.models.table import Table
 
 
 class TestGameController(TestCase):
 
     def setUp(self):
-        self.controller = GameController('table_1')
+        table = Table.objects.create(
+            name='Table1',
+            small_blind=10,
+            big_blind=20,
+        )
+        self.controller = GameController(table)
+        self.controller.broadcast_state = Mock()
 
     def test_get_button_ordered_players(self):
         self.controller._players[5] = 'Bensi'

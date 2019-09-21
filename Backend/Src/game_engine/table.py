@@ -8,13 +8,14 @@ from game_engine.constants import PENDING, RUNNING
 
 class Table:
 
-    def __init__(self, max_players, blinds):
-        self._max_players = max_players
-        self._small_blind, self._big_blind = blinds
+    def __init__(self, table):
+        self._max_players = table.max_players
+        self._small_blind = table.small_blind
+        self._big_blind = table.big_blind
 
         self._seats = OrderedDict()
         # Assign seats at the table to None and players will
-        for seat in range(1, max_players+1):
+        for seat in range(1, self._max_players+1):
             self._seats[seat] = None
 
         # Pending means the game is not running at table
