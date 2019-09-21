@@ -23,7 +23,8 @@ class PlayerConsumer(AsyncWebsocketConsumer):
                 {
                     'type': 'player.new',
                     'player': self.user,
-                    'channel': self.table_id,
+                    'table': self.table_id,
+                    'channel': self.channel_name,
                     'buy_in': 6
                 }
             )
@@ -37,6 +38,10 @@ class PlayerConsumer(AsyncWebsocketConsumer):
 
     async def state_update(self, event):
         await self.send(text_data=json.dumps(event['state']))
+
+    async def individual_update(self, event):
+        if 'error' in event:
+            await self.send(text_data=json.dumps(event))
 
     async def disconnect(self, event):
         # Leave the table

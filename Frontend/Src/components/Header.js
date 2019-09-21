@@ -36,7 +36,7 @@ export class Header extends React.Component {
                         <Route exact path="/" component={FrontPage} />
                         <PublicRoute exact path="/login" component={Login} />
                         <PublicRoute exact path="/signup" component={Signup} />
-                        <PrivateRoute exact path="/game" component={Game} />
+                        <PrivateRoute exact path="/table/:tableID" component={Game} />
                         <Route component={FrontPage} />
                     </Switch>
                 </React.Fragment>
