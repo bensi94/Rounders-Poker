@@ -29,3 +29,6 @@ class TableModelTests(TestCase):
         self.assertEqual(table.max_players, 9)
         self.assertEqual(table.type, 'C')
         self.assertEqual(table.status, 'W')
+        self.assertEqual(table.dealer_seat, None)
+        self.assertEqual(table.sb_seat, None)
+        self.assertEqual(table.bb_seat, None)

@@ -1,37 +1,40 @@
+from django.test import TestCase
+
 from game_engine.hand import Hand
 from game_engine.player import Player
 
 
-def test_pay_blinds():
-    player1 = Player(100)
-    player2 = Player(200)
-    player3 = Player(300)
+class TestHand(TestCase):
 
-    players = [player1, player2, player3]
-    blinds = 10, 20
+    def test_pay_blinds(self):
+        player1 = Player(100, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
 
-    hand = Hand(players, blinds)
-    hand.pay_blinds()
+        players = [player1, player2, player3]
+        blinds = 10, 20
 
-    assert hand._players[0]._stack == 100 - 10
-    assert hand._players[0]._bet == 10
-    assert hand._players[1]._stack == 200 - 20
-    assert hand._players[1]._bet == 20
-    assert hand._players[2]._stack == 300
-    assert hand._players[2]._bet == 0
+        hand = Hand(players, blinds)
+        hand.pay_blinds()
 
+        assert hand._players[0]._stack == 100 - 10
+        assert hand._players[0]._bet == 10
+        assert hand._players[1]._stack == 200 - 20
+        assert hand._players[1]._bet == 20
+        assert hand._players[2]._stack == 300
+        assert hand._players[2]._bet == 0
 
-def test_pay_blinds_two_players():
-    player1 = Player(100)
-    player2 = Player(200)
+    def test_pay_blinds_two_players(self):
+        player1 = Player(100, 1)
+        player2 = Player(200, 2)
 
-    players = [player1, player2]
-    blinds = 10, 20
+        players = [player1, player2]
+        blinds = 10, 20
 
-    hand = Hand(players, blinds)
-    hand.pay_blinds()
+        hand = Hand(players, blinds)
+        hand.pay_blinds()
 
-    assert hand._players[0]._stack == 100 - 20
-    assert hand._players[0]._bet == 20
-    assert hand._players[1]._stack == 200 - 10
-    assert hand._players[1]._bet == 10
+        assert hand._players[0]._stack == 100 - 20
+        assert hand._players[0]._bet == 20
+        assert hand._players[1]._stack == 200 - 10
+        assert hand._players[1]._bet == 10

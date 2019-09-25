@@ -32,8 +32,10 @@ class TestTableGatewayConsumer(TestCase):
 
         event = {
             'table': table.id,
-            'player': 'player_1',
-            'buy_in': 100
+            'user': 'player_1',
+            'buy_in': 100,
+            'seat_number': 1,
+            'channel': 1
         }
         self.consumer.player_new(event)
 
@@ -44,9 +46,9 @@ class TestTableGatewayConsumer(TestCase):
         """Tests that a table that is not in the database does not exist"""
         event = {
             'table': 1,
-            'player': 'player_1',
+            'user': 'player_1',
             'buy_in': 100,
-            'channel': 1
+            'channel': str(1)
         }
 
         mock_response = mock.Mock()
@@ -57,8 +59,35 @@ class TestTableGatewayConsumer(TestCase):
 
             self.consumer.player_new(event)
             mock_response.assert_called_with(
-                1,
+                str(1),
                 {'type': 'individual_update', 'error': {'type': 'Table.DoesNotExist'}}
+            )
+
+    def test_table_closed_response(self):
+        """Tests that a closed table will send that individual response to the channel"""
+
+        table = Table.objects.create(
+            name='Table1',
+            small_blind=10,
+            big_blind=20,
+            status=Table.CLOSED
+        )
+
+        event = {
+            'table': table.id,
+            'user': 'user_1',
+            'channel': str(1)
+        }
+
+        mock_response = mock.Mock()
+        with mock.patch(
+            'game_connections.table_gateway_consumer.async_to_sync',
+            return_value=mock_response
+        ):
+            self.consumer.observer_new(event)
+            mock_response.assert_called_with(
+                str(1),
+                {'type': 'individual_update', 'error': {'type': 'Table.Closed'}}
             )
 
     def tearDown(self):
