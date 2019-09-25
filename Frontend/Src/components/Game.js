@@ -32,7 +32,10 @@ class Game extends React.Component {
             <>
                 <h1> Game </h1>
                 { this.props.players && Object.keys(this.props.players).map((key) => {
-                    return <div key={key}>{key}</div>;
+                    return <div key={key}>Player: {key}</div>;
+                })}
+                { this.props.observers && this.props.observers.map((observer) => {
+                    return <div key={observer}>Observer: {observer}</div>;
                 })}
                 <div className="game-full">
                     <TableBase />
@@ -52,6 +55,7 @@ Game.propTypes = {
             status: PropTypes.string
         })
     ),
+    observers: PropTypes.arrayOf(PropTypes.string),
     tableID: PropTypes.string.isRequired,
     error: PropTypes.shape({
         type: PropTypes.string,
@@ -68,6 +72,7 @@ const mapStateToProps = (state, { match }) => {
         let error = state.tables[tableID].error;
         return {
             players: state.tables[tableID].players,
+            observers: state.tables[tableID].observers,
             token: state.auth.token,
             tableID,
             error

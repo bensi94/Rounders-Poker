@@ -3,10 +3,11 @@ from game_engine.constants import STATUS_ACTIVE, STATUS_FOLDED
 
 class Player:
 
-    def __init__(self, stack):
+    def __init__(self, stack, seat_number):
         self._stack = stack
         self._bet = 0
         self._status = STATUS_ACTIVE
+        self._seat_number = seat_number
 
     def get_player_obj(self):
         return {

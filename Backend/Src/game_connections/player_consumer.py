@@ -3,7 +3,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 
 class PlayerConsumer(AsyncWebsocketConsumer):
-    '''Handels all socket communications for each player'''
+    """Handels all socket communications for each player"""
 
     async def connect(self):
         # User that is not authenticated (anonymous) should not be accepted
@@ -12,7 +12,7 @@ class PlayerConsumer(AsyncWebsocketConsumer):
 
             # Join the table
             await self.channel_layer.group_add(
-                self.table_id,
+                str(self.table_id),
                 self.channel_name
             )
             self.user = str(self.scope['user'])
@@ -21,11 +21,10 @@ class PlayerConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.send(
                 'game_engine',
                 {
-                    'type': 'player.new',
-                    'player': self.user,
+                    'type': 'observer.new',
+                    'user': self.user,
                     'table': self.table_id,
-                    'channel': self.channel_name,
-                    'buy_in': 6
+                    'channel': self.channel_name
                 }
             )
 
@@ -46,6 +45,6 @@ class PlayerConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, event):
         # Leave the table
         await self.channel_layer.group_discard(
-            self.table_id,
+            str(self.table_id),
             self.channel_name
         )
