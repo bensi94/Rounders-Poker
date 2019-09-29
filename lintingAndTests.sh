@@ -4,7 +4,7 @@
 # with docker-compose  on  frontend and backend 
 
 echo "-----------RUNNING BACKEND TESTS-----------"
-docker-compose run --rm backend sh -c "pytest"
+docker-compose run --rm backend sh -c "python -m pytest"
 echo "-----------RUNNING FONTEND TESTS-----------"
 docker-compose run --rm frontend sh -c "yarn run test"
 echo "-----------RUNNING BACKEND LINTING -----------"
