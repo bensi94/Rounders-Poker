@@ -1,6 +1,5 @@
 from django.test import TestCase
 from core.models.table import Table as Table_Object
-import pytest
 
 from game_engine.table import Table
 
@@ -66,7 +65,7 @@ class TestTable(TestCase):
         return_value, return_msg = table.sit_at_table(user, seat)
 
         # Checks if user is seated at seat 5 (should be KeyError)
-        with pytest.raises(KeyError):
+        with self.assertRaises(KeyError):
             assert table._seats[seat] != user
         assert return_msg == 'Invalid seat, user not seated'
         assert return_value is False
