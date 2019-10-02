@@ -17,12 +17,12 @@ class TestHand(TestCase):
         hand = Hand(players, blinds)
         hand.pay_blinds()
 
-        assert hand._players[0]._stack == 100 - 10
-        assert hand._players[0]._bet == 10
-        assert hand._players[1]._stack == 200 - 20
-        assert hand._players[1]._bet == 20
-        assert hand._players[2]._stack == 300
-        assert hand._players[2]._bet == 0
+        assert hand._players[0].stack == 100 - 10
+        assert hand._players[0].bet == 10
+        assert hand._players[1].stack == 200 - 20
+        assert hand._players[1].bet == 20
+        assert hand._players[2].stack == 300
+        assert hand._players[2].bet == 0
 
     def test_pay_blinds_two_players(self):
         player1 = Player(100, 1)
@@ -34,7 +34,7 @@ class TestHand(TestCase):
         hand = Hand(players, blinds)
         hand.pay_blinds()
 
-        assert hand._players[0]._stack == 100 - 20
-        assert hand._players[0]._bet == 20
-        assert hand._players[1]._stack == 200 - 10
-        assert hand._players[1]._bet == 10
+        assert hand._players[0].stack == 100 - 20
+        assert hand._players[0].bet == 20
+        assert hand._players[1].stack == 200 - 10
+        assert hand._players[1].bet == 10

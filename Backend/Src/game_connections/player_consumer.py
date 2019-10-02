@@ -36,7 +36,10 @@ class PlayerConsumer(AsyncWebsocketConsumer):
         print(text_data_json)
 
     async def state_update(self, event):
-        await self.send(text_data=json.dumps(event['state']))
+        if 'error' in event:
+            await self.send(text_data=json.dumps(event))
+        else:
+            await self.send(text_data=json.dumps(event['state']))
 
     async def individual_update(self, event):
         if 'error' in event:
