@@ -3,9 +3,14 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from queue import Queue
 from functools import wraps
+from jsonschema import validate, ValidationError
 import logging
+import random
 
+from game_engine import constants as const
 from game_engine.player import Player
+from core.models.table import Table
+from game_engine.utils.game_state_schema import game_state_schema
 
 
 class GameController(Thread):
@@ -19,6 +24,18 @@ class GameController(Thread):
     functions that are called on the thread.
     """
 
+    INITIAL_GAME_STATE = {
+        "stage": "",
+        "dealer_seat": 0,
+        "sb_seat": 0,
+        "bb_seat": 0,
+        "small_blind": 0,
+        "big_blind": 0,
+        "community_cards": [],
+        "pot": 0,
+        "action_on_seat": 0
+    }
+
     def __init__(self, table_id):
         Thread.__init__(self)
         self._players = {}
@@ -28,8 +45,9 @@ class GameController(Thread):
         self._channel_layer = get_channel_layer()
         self._fnQueue = Queue()
         self._first = True
-        self._game_state = {}
+        self._game_state = self.INITIAL_GAME_STATE
         self._hand = None
+        self._seat_order = []
 
     def run(self):
         while self._runing:
@@ -37,6 +55,7 @@ class GameController(Thread):
             fn, a, kw = self._fnQueue.get()
             fn(self, *a, **kw)
             self._fnQueue.task_done()
+            self.broadcast_state()
             self.add_next_action()
 
     # This function is uses the current game state to determine what should be the next action it
@@ -58,61 +77,121 @@ class GameController(Thread):
         return wrapper
 
     @add_to_thread_queue
-    def add_player(self, player, buy_in, seat_number, channel_id):
+    def add_player(self, player, buy_in, seatnumber, channel_id):
         # User can not be a player and observer at the same time
         if player in self._observers:
             self._observers.remove(player)
         self._players[player] = {
-            "player": Player(buy_in, seat_number),
+            "player": Player(buy_in, seatnumber, player),
             "channel_id": channel_id
         }
-        self.broadcast_state()
 
     @add_to_thread_queue
     def add_observer(self, observer, channel_id):
         self._observers[observer] = {
             "channel_id": channel_id
         }
-        self.broadcast_state()
 
     def broadcast_state(self):
-        async_to_sync(self._channel_layer.group_send)(
-            str(self._table_id), {"type": "state_update", "state": self.render()}
-        )
+
+        try:
+            state = self.render()
+            validate(state, game_state_schema)
+            async_to_sync(self._channel_layer.group_send)(
+                str(self._table_id), {"type": "state_update", "state": self.render()}
+            )
+        except ValidationError as error:
+            async_to_sync(self._channel_layer.group_send)(
+                str(self._table_id), {"type": "state_update", "error": error.message}
+            )
 
     def render(self):
         return {
-            "players": {
-                player_id: player['player'].get_player_obj()
-                for player_id, player in self._players.items()
-            },
-            "observers": [observer_key for observer_key, obj in self._observers]
+            **self._game_state,
+            "players": [
+                player['player'].get_player_obj()
+                for player in self._players.values()
+            ],
+            "observers": [observer_key for observer_key in self._observers.keys()],
         }
 
     @add_to_thread_queue
-    def set_up_table(self):
+    def setup_table(self):
+        """Sets the table up for next hand"""
         if len(self._players) >= 2:
-            pass
+            active_count = 0
 
-    # This function uses the button to order the players in right order
-    # Button player last, others before
-    # def get_button_ordered_players(self):
-    #     button = self._table.get_button()
-    #     players_positions = sorted(self._players.keys())
-    #     more_then_button = []
-    #     less_then_button = []
+            table = Table.objects.get(pk=self._table_id)
+            seats = []
 
-    #     # Here we do a little tricks around the button to position the
-    #     # players in the right order
-    #     for position in players_positions:
-    #         if position < button:
-    #             less_then_button.append(self._players[position])
-    #         elif position > button:
-    #             more_then_button.append(self._players[position])
+            # All players that are waiting will be made active
+            for player_key, player_val in self._players.items():
+                player = player_val['player']
+                if player.status == const.STATUS_WAITING:
+                    player.status = const.STATUS_ACTIVE
 
-    #     # If there are players in higher seat then button they come first
-    #     # Then seat 1 to button and the button seat last
-    #     return more_then_button + less_then_button + [self._players[button]]
+                if player.status == const.STATUS_ACTIVE:
+                    seats.append((player.seatnumber, player_key))
+                    active_count += 1
+
+            # We need at least 2 Active players to play
+            if active_count < 2:
+                return
+
+            # We need to sort the seats we have
+            seats = sorted(seats)
+            dealer_seat = None
+
+            # If we have a dealer_seat it means that we need to move the dealer_seat
+            if table.dealer_seat:
+
+                # We try to find next seat (bigger seat) and assign that seat as dealer_seat
+                for seatnumber, player in seats:
+                    if seatnumber > table.dealer_seat:
+                        dealer_seat = seatnumber
+                        break
+
+                # If we do not find a bigger seat it means that we are at the first (active) seat
+                if not dealer_seat:
+                    dealer_seat = seats[0][0]  # The seatnumber in the tuple
+            else:
+                dealer_seat = random.choice(seats)[0]
+
+            for i, (seatnumber, player) in enumerate(seats):
+                if seatnumber == dealer_seat:
+                    back = seats[:i+1]
+                    front = seats[i+1:]
+                    self._seat_order = [player for (seatnumber, player) in front + back]
+                    break
+
+            action_on_seat = None
+
+            # If there are only two players the dealer is small blind and first player is big blind
+            # If two players the action is on the dealer/small_blind else the action is on bb+1
+            if active_count == 2:
+                sb_seat = self._players[self._seat_order[-1]]['player'].seatnumber
+                bb_seat = self._players[self._seat_order[0]]['player'].seatnumber
+                action_on_seat = self._players[self._seat_order[1]]['player'].seatnumber
+            else:
+                sb_seat = self._players[self._seat_order[0]]['player'].seatnumber
+                bb_seat = self._players[self._seat_order[1]]['player'].seatnumber
+                action_on_seat = self._players[self._seat_order[2]]['player'].seatnumber
+
+            # Update Game_state
+            self._game_state['stage'] = const.PREFLOP
+            self._game_state['dealer_seat'] = dealer_seat
+            self._game_state['sb_seat'] = sb_seat
+            self._game_state['bb_seat'] = bb_seat
+            self._game_state['small_blind'] = table.small_blind
+            self._game_state['big_blind'] = table.big_blind
+            self._game_state['action_on_seat'] = action_on_seat
+
+            # Update Table Model
+            table.dealer_seat = dealer_seat
+            table.sb_seat = sb_seat
+            table.bb_seat = bb_seat
+            table.status = Table.ACTIVE
+            table.save()
 
     @add_to_thread_queue
     def stop_thread(self):

@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from game_engine.player import Player
 from game_engine.card import Card
-from game_engine.constants import STATUS_ACTIVE, STATUS_FOLDED
+from game_engine.constants import STATUS_FOLDED
 
 
 class TestPlayer(TestCase):
@@ -17,54 +17,45 @@ class TestPlayer(TestCase):
         hand = (card1, card2)
         player.give_hand(hand)
 
-        assert player._hand[0].__str__() == '8 of hearts'
-        assert player._hand[1].__str__() == '9 of spades'
-
-    def test_get_and_set_seat(self):
-        player = Player(100, self.SEAT_NUMBER)
-
-        seat = 5
-        player.set_seat(seat)
-
-        assert player.get_seat() == seat
+        assert player.hand[0].__str__() == '8 of hearts'
+        assert player.hand[1].__str__() == '9 of spades'
 
     def test_bet_valid(self):
         player = Player(100, self.SEAT_NUMBER)
 
-        retrun_val = player.bet(50)
+        retrun_val = player.bet_amount(50)
 
-        assert player._stack == 50
-        assert player._bet == 50
+        assert player.stack == 50
+        assert player.bet == 50
         assert retrun_val is True
 
     def test_bet_invalid(self):
         player = Player(100, self.SEAT_NUMBER)
 
-        retrun_val = player.bet(200)
+        retrun_val = player.bet_amount(200)
 
-        assert player._stack == 100
-        assert player._bet == 0
+        assert player.stack == 100
+        assert player.bet == 0
         assert retrun_val is False
 
     def test_fold(self):
         player = Player(100, self.SEAT_NUMBER)
 
-        player.bet(50)
+        player.bet_amount(50)
         player.fold()
 
-        assert player._stack == 50
-        assert player._status == STATUS_FOLDED
+        assert player.stack == 50
+        assert player.status == STATUS_FOLDED
 
-    def test_get_state(self):
+    def test_get_player_obj(self):
         stack = 100
         bet = 50
 
         player = Player(stack, self.SEAT_NUMBER)
-        player.bet(bet)
+        player.bet_amount(bet)
 
-        state = player.get_state()
+        state = player.get_player_obj()
 
-        assert state['status'] == STATUS_ACTIVE
         assert state['stack'] == stack-bet
         assert state['bet'] == bet
 
@@ -75,8 +66,8 @@ class TestPlayer(TestCase):
         player = Player(stack, self.SEAT_NUMBER)
         player.pay_blind(blind)
 
-        assert player._bet == blind
-        assert player._stack == stack - blind
+        assert player.bet == blind
+        assert player.stack == stack - blind
 
     # Test when blind is more than stack
     def test_pay_blind_less(self):
@@ -86,12 +77,12 @@ class TestPlayer(TestCase):
         player = Player(stack, self.SEAT_NUMBER)
         player.pay_blind(blind)
 
-        assert player._bet == stack
-        assert player._stack == 0
+        assert player.bet == stack
+        assert player.stack == 0
 
     def test_reset_bet(self):
         player1 = Player(100, self.SEAT_NUMBER)
-        player1.bet(20)
+        player1.bet_amount(20)
         player1.reset_bet()
 
-        assert player1._bet == 0
+        assert player1.bet == 0
