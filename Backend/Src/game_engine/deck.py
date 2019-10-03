@@ -2,18 +2,14 @@
 from collections import deque
 
 # Internal
-from game_engine.constants import SUITES, RANKS
-from game_engine.card import Card
+from game_engine import constants as const
 from random import shuffle
 
 
 class Deck:
 
     def __init__(self):
-        list_of_cards = []
-        for suite in SUITES:
-            for rank in RANKS:
-                list_of_cards.append(Card(suite, rank))
+        list_of_cards = const.DECK.copy()
         shuffle(list_of_cards)
         self._cards = deque(list_of_cards)
 

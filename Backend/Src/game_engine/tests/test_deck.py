@@ -14,8 +14,8 @@ def test_all_cards_unique():
     deck = Deck()
     for card in deck._cards:
         if card.__str__() not in seen:
-            uniq.append(card.__str__())
-            seen.add(card.__str__())
+            uniq.append(card)
+            seen.add(card)
     assert len(uniq) == 52
 
 
@@ -24,7 +24,7 @@ def test_all_cards_unique():
 def test_get_hand():
     deck = Deck()
     card1, card2 = deck.get_hand()
-    assert card1.__str__() != card2.__str__()
+    assert card1 != card2
     assert len(deck._cards) == 50
 
 
@@ -35,7 +35,7 @@ def test_get_flop():
     deck.get_hand()  # Hand for player 2, 50-2=48
 
     card1, card2, card3 = deck.get_flop()  # 48-4(flop+burn card) = 44
-    assert card1.__str__() != card2.__str__() != card3.__str__()
+    assert card1 != card2 != card3
     assert len(deck._cards) == 44
 
 

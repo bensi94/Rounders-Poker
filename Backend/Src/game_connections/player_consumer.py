@@ -44,6 +44,8 @@ class PlayerConsumer(AsyncWebsocketConsumer):
     async def individual_update(self, event):
         if 'error' in event:
             await self.send(text_data=json.dumps(event))
+        if 'cards' in event:
+            await self.send(text_data=json.dumps(event))
 
     async def disconnect(self, event):
         # Leave the table

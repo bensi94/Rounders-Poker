@@ -10,6 +10,13 @@ class Player:
         self.seatnumber = seatnumber
         self.last_action = ''
         self.user = user
+        self.cards = ('', '')
+
+    def __str__(self):
+        return str(self.get_player_obj())
+
+    def __repr__(self):
+        return self.__str__()
 
     def get_player_obj(self):
         return {
