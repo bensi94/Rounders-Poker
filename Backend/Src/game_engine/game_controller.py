@@ -4,11 +4,11 @@ from channels.layers import get_channel_layer
 from queue import Queue
 from functools import wraps
 from jsonschema import validate, ValidationError
-import logging
 import random
 
 from game_engine import constants as const
 from game_engine.player import Player
+from game_engine.hand import Hand
 from core.models.table import Table
 from game_engine.utils.game_state_schema import game_state_schema
 
@@ -48,12 +48,21 @@ class GameController(Thread):
         self._game_state = self.INITIAL_GAME_STATE
         self._hand = None
         self._seat_order = []
+        self._waiting_for_user = False
 
     def run(self):
         while self._runing:
-            logging.info(self._fnQueue)
             fn, a, kw = self._fnQueue.get()
-            fn(self, *a, **kw)
+            print(fn.__name__)  # USED to for debug
+
+            # The reason why we do this so any function can return const.WAIT (FALSE)
+            # if it needs the add_next_action function and the thread to go into wait mode
+            # This happens for example everytime we wait for user to do an aciton
+            if fn(self, *a, **kw) is None or const.RUN:
+                self._waiting_for_user = const.RUN
+            else:
+                self._waiting_for_user = const.WAIT
+
             self._fnQueue.task_done()
             self.broadcast_state()
             self.add_next_action()
@@ -64,8 +73,14 @@ class GameController(Thread):
     # for external call, for example user to do.
     # The point of it is the controller will never have to let any external actions starve
     def add_next_action(self):
-        if not self._game_state:
-            pass
+        # We don't add any actions if we are waiting for user action
+        if self._waiting_for_user:
+            return
+
+        if self._game_state['stage'] == '':
+            self.setup_table()
+        elif self._hand is None:
+            self.init_hand()
 
     # This is decorater that takes the function being called and adds
     # it to the queue of functions that the controller is running.
@@ -73,14 +88,17 @@ class GameController(Thread):
     def add_to_thread_queue(fn):
         @wraps(fn)
         def wrapper(self, *a, **kw):
-            self._fnQueue.put((fn, a, kw))
+            # This is done to prevent the exact same function, with
+            # same arguments, to be added to the queue more than once
+            if (fn, a, kw) not in list(self._fnQueue.queue):
+                self._fnQueue.put((fn, a, kw))
         return wrapper
 
     @add_to_thread_queue
     def add_player(self, player, buy_in, seatnumber, channel_id):
         # User can not be a player and observer at the same time
         if player in self._observers:
-            self._observers.remove(player)
+            del self._observers[player]
         self._players[player] = {
             "player": Player(buy_in, seatnumber, player),
             "channel_id": channel_id
@@ -100,6 +118,15 @@ class GameController(Thread):
             async_to_sync(self._channel_layer.group_send)(
                 str(self._table_id), {"type": "state_update", "state": self.render()}
             )
+            for player in self._players.values():
+                async_to_sync(self._channel_layer.send)(
+                    player['channel_id'],
+                    {
+                        'type': 'individual_update',
+                        'cards': ''.join(player['player'].cards)
+                    }
+                )
+
         except ValidationError as error:
             async_to_sync(self._channel_layer.group_send)(
                 str(self._table_id), {"type": "state_update", "error": error.message}
@@ -118,80 +145,88 @@ class GameController(Thread):
     @add_to_thread_queue
     def setup_table(self):
         """Sets the table up for next hand"""
-        if len(self._players) >= 2:
-            active_count = 0
+        if len(self._players) < 2:
+            return const.WAIT
 
-            table = Table.objects.get(pk=self._table_id)
-            seats = []
+        active_count = 0
 
-            # All players that are waiting will be made active
-            for player_key, player_val in self._players.items():
-                player = player_val['player']
-                if player.status == const.STATUS_WAITING:
-                    player.status = const.STATUS_ACTIVE
+        table = Table.objects.get(pk=self._table_id)
+        seats = []
 
-                if player.status == const.STATUS_ACTIVE:
-                    seats.append((player.seatnumber, player_key))
-                    active_count += 1
+        # All players that are waiting will be made active
+        for player_val in self._players.values():
+            player = player_val['player']
+            if player.status == const.STATUS_WAITING:
+                player.status = const.STATUS_ACTIVE
 
-            # We need at least 2 Active players to play
-            if active_count < 2:
-                return
+            if player.status == const.STATUS_ACTIVE:
+                seats.append((player.seatnumber, player))
+                active_count += 1
 
-            # We need to sort the seats we have
-            seats = sorted(seats)
-            dealer_seat = None
+        # We need at least 2 Active players to play
+        if active_count < 2:
+            return const.WAIT
 
-            # If we have a dealer_seat it means that we need to move the dealer_seat
-            if table.dealer_seat:
+        # We need to sort the seats we have
+        seats = sorted(seats)
+        dealer_seat = None
 
-                # We try to find next seat (bigger seat) and assign that seat as dealer_seat
-                for seatnumber, player in seats:
-                    if seatnumber > table.dealer_seat:
-                        dealer_seat = seatnumber
-                        break
+        # If we have a dealer_seat it means that we need to move the dealer_seat
+        if table.dealer_seat:
 
-                # If we do not find a bigger seat it means that we are at the first (active) seat
-                if not dealer_seat:
-                    dealer_seat = seats[0][0]  # The seatnumber in the tuple
-            else:
-                dealer_seat = random.choice(seats)[0]
-
-            for i, (seatnumber, player) in enumerate(seats):
-                if seatnumber == dealer_seat:
-                    back = seats[:i+1]
-                    front = seats[i+1:]
-                    self._seat_order = [player for (seatnumber, player) in front + back]
+            # We try to find next seat (bigger seat) and assign that seat as dealer_seat
+            for seatnumber, player in seats:
+                if seatnumber > table.dealer_seat:
+                    dealer_seat = seatnumber
                     break
 
-            action_on_seat = None
+            # If we do not find a bigger seat it means that we are at the first (active) seat
+            if not dealer_seat:
+                dealer_seat = seats[0][0]  # The seatnumber in the tuple
+        else:
+            dealer_seat = random.choice(seats)[0]
 
-            # If there are only two players the dealer is small blind and first player is big blind
-            # If two players the action is on the dealer/small_blind else the action is on bb+1
-            if active_count == 2:
-                sb_seat = self._players[self._seat_order[-1]]['player'].seatnumber
-                bb_seat = self._players[self._seat_order[0]]['player'].seatnumber
-                action_on_seat = self._players[self._seat_order[1]]['player'].seatnumber
-            else:
-                sb_seat = self._players[self._seat_order[0]]['player'].seatnumber
-                bb_seat = self._players[self._seat_order[1]]['player'].seatnumber
-                action_on_seat = self._players[self._seat_order[2]]['player'].seatnumber
+        for i, (seatnumber, player) in enumerate(seats):
+            if seatnumber == dealer_seat:
+                back = seats[:i+1]
+                front = seats[i+1:]
+                self._seat_order = [player for (seatnumber, player) in front + back]
+                break
 
-            # Update Game_state
-            self._game_state['stage'] = const.PREFLOP
-            self._game_state['dealer_seat'] = dealer_seat
-            self._game_state['sb_seat'] = sb_seat
-            self._game_state['bb_seat'] = bb_seat
-            self._game_state['small_blind'] = table.small_blind
-            self._game_state['big_blind'] = table.big_blind
-            self._game_state['action_on_seat'] = action_on_seat
+        action_on_seat = None
 
-            # Update Table Model
-            table.dealer_seat = dealer_seat
-            table.sb_seat = sb_seat
-            table.bb_seat = bb_seat
-            table.status = Table.ACTIVE
-            table.save()
+        # If there are only two players the dealer is small blind and first player is big blind
+        # If two players the action is on the dealer/small_blind else the action is on bb+1
+        if active_count == 2:
+            sb_seat = self._seat_order[-1].seatnumber
+            bb_seat = self._seat_order[0].seatnumber
+            action_on_seat = self._seat_order[1].seatnumber
+        else:
+            sb_seat = self._seat_order[0].seatnumber
+            bb_seat = self._seat_order[1].seatnumber
+            action_on_seat = self._seat_order[2].seatnumber
+
+        # Update Game_state
+        self._game_state['stage'] = const.PREFLOP
+        self._game_state['dealer_seat'] = dealer_seat
+        self._game_state['sb_seat'] = sb_seat
+        self._game_state['bb_seat'] = bb_seat
+        self._game_state['small_blind'] = table.small_blind
+        self._game_state['big_blind'] = table.big_blind
+        self._game_state['action_on_seat'] = action_on_seat
+
+        # Update Table Model
+        table.dealer_seat = dealer_seat
+        table.sb_seat = sb_seat
+        table.bb_seat = bb_seat
+        table.status = Table.ACTIVE
+        table.save()
+
+    @add_to_thread_queue
+    def init_hand(self):
+        self._hand = Hand(
+            self._seat_order, (self._game_state['small_blind'], self._game_state['big_blind'])
+        )
 
     @add_to_thread_queue
     def stop_thread(self):

@@ -66,3 +66,5 @@ class TableGatewayConsumer(SyncConsumer):
 
         if table:
             self.tables[event['table']].add_observer(event['user'], event['channel'])
+            self.tables[event['table']].add_player('bensi', 100, 1, event['channel'])
+            self.tables[event['table']].add_player('bensi2', 200, 2, event['channel'])

@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from game_engine.player import Player
-from game_engine.card import Card
 from game_engine.constants import STATUS_FOLDED
 
 
@@ -11,14 +10,14 @@ class TestPlayer(TestCase):
 
     def test_give_hand(self):
         player = Player(100, self.SEAT_NUMBER)
-        card1 = Card('hearts', '8')
-        card2 = Card('spades', '9')
+        card1 = '8h'
+        card2 = '9s'
 
         hand = (card1, card2)
         player.give_hand(hand)
 
-        assert player.hand[0].__str__() == '8 of hearts'
-        assert player.hand[1].__str__() == '9 of spades'
+        assert player.hand[0] == '8h'
+        assert player.hand[1] == '9s'
 
     def test_bet_valid(self):
         player = Player(100, self.SEAT_NUMBER)
