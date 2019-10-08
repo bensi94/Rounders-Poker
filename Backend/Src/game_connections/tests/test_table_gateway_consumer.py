@@ -35,7 +35,7 @@ class TestTableGatewayConsumer(TestCase):
             'user': 'player_1',
             'buy_in': 100,
             'seat_number': 1,
-            'channel': 1
+            'channel': str(1)
         }
         self.consumer.player_new(event)
 
