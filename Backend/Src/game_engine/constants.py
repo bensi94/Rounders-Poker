@@ -39,3 +39,8 @@ CALL = 'CALL'
 CHECK = 'CHECK'
 FOLD = 'FOLD'
 RAISE = 'RAISE'
+
+
+# Update table responses
+PLAYER_ACTION = 'PLAYER_ACTION'
+END_HAND = 'END_HAND'

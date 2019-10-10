@@ -82,7 +82,7 @@ class GameController(Thread):
         elif self._hand is None:
             self.init_hand()
         elif self.action_on_player is None:
-            self.next_player_action()
+            self.update_table()
 
     # This is decorater that takes the function being called and adds
     # it to the queue of functions that the controller is running.
@@ -229,14 +229,11 @@ class GameController(Thread):
         self._hand = Hand(
             self._seat_order, (self._game_state['small_blind'], self._game_state['big_blind'])
         )
-        self._game_state = {
-            **self._game_state,
-            **self._hand.get_hand_object()
-        }
+        self.update_table()
 
     @add_to_thread_queue
-    def next_player_action(self):
-        self._hand.next_player_action()
+    def update_table(self):
+        self._hand.update_table()
 
     @add_to_thread_queue
     def stop_thread(self):

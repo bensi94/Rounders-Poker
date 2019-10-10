@@ -336,6 +336,68 @@ class TestPlayer(TestCase):
 
         self.assertEqual(actions, hero.get_possible_actions(15, 0, 20))
 
+    def test_get_possible_actions_13(self):
+        """Hero is next to do preflop after an all in from the UTG player"""
+
+        hero = Player(800, self.SEAT_NUMBER)
+
+        actions = [
+            {
+                "type": const.CALL,
+                "amount": 34
+            },
+            {
+                "type": const.RAISE,
+                "min": 40,
+                "max": 800
+            },
+            {
+                "type": const.FOLD
+            }
+        ]
+
+        self.assertEqual(actions, hero.get_possible_actions(34, 20, 20))
+
+    def test_get_possible_actions_14(self):
+        """Hero is next to do and can only call or fold because of stack size"""
+
+        hero = Player(100, self.SEAT_NUMBER)
+
+        actions = [
+            {
+                "type": const.CALL,
+                "amount": 100,
+            },
+            {
+                "type": const.FOLD
+            }
+        ]
+
+        self.assertEqual(actions, hero.get_possible_actions(200, 0, 20))
+
+    def test_get_possible_actions_15(self):
+        """Hero is small blind on the button in a heads up setting"""
+
+        hero = Player(100, self.SEAT_NUMBER)
+        hero.pay_blind(10, const.POST_SB)
+
+        actions = [
+            {
+                "type": const.CALL,
+                "amount": 20
+            },
+            {
+                "type": const.RAISE,
+                "min": 40,
+                "max": 100
+            },
+            {
+                "type": const.FOLD
+            }
+        ]
+
+        self.assertEqual(actions, hero.get_possible_actions(20, 0, 20))
+
     def test_validate_action_valid(self):
         """Simple test that test the validate action function. With valid action"""
 

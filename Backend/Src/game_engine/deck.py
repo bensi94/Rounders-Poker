@@ -18,9 +18,7 @@ class Deck:
 
     def get_flop(self):
         self._cards.popleft()  # Burn card (standard in texas hold'em poker)
-        return (self._cards.popleft(),
-                self._cards.popleft(),
-                self._cards.popleft())
+        return self._cards.popleft(), self._cards.popleft(), self._cards.popleft()
 
     # Used to get turn or river
     def get_next_card(self):

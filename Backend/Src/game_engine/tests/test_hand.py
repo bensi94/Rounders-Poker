@@ -135,7 +135,6 @@ class TestHand(TestCase):
         """
         This test checks what functions are called after a player a player_action: BET
         """
-        return
         player1 = Player(100, 1)
         player2 = Player(200, 2)
         player1.status = const.STATUS_ACTIVE
@@ -148,16 +147,278 @@ class TestHand(TestCase):
 
         hand.update_action_queue = Mock()
 
+        player1.get_possible_actions(0, 0, 20)
+
         action = {
             "type": const.BET,
             "amount": 50
         }
 
-        hand.player_action(action)
+        hand.player_action(action, player1)
+        hand.update_action_queue.assert_called_once()
 
-    def test_player_action_last_call(self):
+    def test_player_action_correct_updates01(self):
+        """This case happens when a player is first to raise the big blind"""
+
+        player1 = Player(100, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+        hand.update_action_queue = Mock()
+
+        player3.get_possible_actions(20, 0, 20)
+
+        action = {
+            "type": const.RAISE,
+            "amount": 50
+        }
+
+        hand.player_action(action, player3)
+
+        self.assertEqual(hand._current_max_bet, 50)
+        self.assertEqual(hand.last_legal_raise, 30)
+        self.assertEqual(hand._pot, 80)
+        hand.update_action_queue.assert_called_once()
+
+    def test_player_action_correct_updates02(self):
+        """Player goes all in for less than 2 big blinds UTG"""
+
+        player1 = Player(100, 1)
+        player2 = Player(200, 2)
+        player3 = Player(34, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+        hand.update_action_queue = Mock()
+
+        player3.get_possible_actions(20, 0, 20)
+
+        action = {
+            "type": const.RAISE,
+            "amount": 34
+        }
+
+        hand.player_action(action, player3)
+
+        self.assertEqual(hand._current_max_bet, 34)
+        self.assertEqual(hand.last_legal_raise, 20)
+        self.assertEqual(hand._pot, 64)
+        hand.update_action_queue.assert_called_once()
+
+    def test_player_action_correct_updates03(self):
+        """Big blind player re raises a raise heads up"""
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+
+        players = [player1, player2]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+        hand.update_action_queue = Mock()
+
+        player2.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.RAISE,
+            "amount": 60
+        }, player2)
+
+        self.assertEqual(hand._current_max_bet, 60)
+        self.assertEqual(hand.last_legal_raise, 40)
+        self.assertEqual(hand._pot, 80)
+        hand.update_action_queue.assert_called_once()
+
+        player1.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.RAISE,
+            "amount": 120
+        }, player1)
+
+        self.assertEqual(hand._current_max_bet, 120)
+        self.assertEqual(hand.last_legal_raise, 60)
+        self.assertEqual(hand._pot, 180)
+        self.assertEqual(hand.update_action_queue.call_count, 2)
+
+    def test_player_action_correct_updates04(self):
         """
-        This test checks what functions are called after a
-        player_action: LAST CALL in queue
+        Action is post flop and goes like this:
+            Player 1: BET 40
+            Player 2: CALL 40
+            Player 3: RAISE 100
+            Player 4: FOLD
+            Player 5: RE-RAISE ALL-IN 150
+        Pot starts as 30 (SB + BB) in the example, for simplicity, would be more in full example
         """
-        pass
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
+        player4 = Player(400, 4)
+        player5 = Player(150, 5)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+        player4.status = const.STATUS_ACTIVE
+        player5.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3, player4, player5]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+        hand.update_action_queue = Mock()
+
+        player1.reset_bet()
+        player2.reset_bet()
+        hand._current_max_bet = 0
+
+        player1.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.BET,
+            "amount": 40
+        }, player1)
+
+        self.assertEqual(hand._current_max_bet, 40)
+        self.assertEqual(hand.last_legal_raise, 0)
+        self.assertEqual(hand._pot, 70)  # Would be more in full round
+        self.assertEqual(hand.update_action_queue.call_count, 1)
+
+        player2.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.CALL,
+            "amount": 40
+        }, player2)
+
+        self.assertEqual(hand._current_max_bet, 40)
+        self.assertEqual(hand.last_legal_raise, 0)
+        self.assertEqual(hand._pot, 110)
+        self.assertEqual(hand.update_action_queue.call_count, 1)
+
+        player3.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.RAISE,
+            "amount": 100
+        }, player3)
+
+        self.assertEqual(hand._current_max_bet, 100)
+        self.assertEqual(hand.last_legal_raise, 60)
+        self.assertEqual(hand._pot, 210)
+        self.assertEqual(hand.update_action_queue.call_count, 2)
+
+        player4.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.FOLD,
+        }, player4)
+
+        self.assertEqual(hand._current_max_bet, 100)
+        self.assertEqual(hand.last_legal_raise, 60)
+        self.assertEqual(hand._pot, 210)
+        self.assertEqual(hand.update_action_queue.call_count, 2)
+
+        player5.get_possible_actions(hand._current_max_bet, hand.last_legal_raise, hand._big_blind)
+
+        hand.player_action({
+            "type": const.RAISE,
+            "amount": 150
+        }, player5)
+
+        self.assertEqual(hand._current_max_bet, 150)
+        self.assertEqual(hand.last_legal_raise, 60)
+        self.assertEqual(hand._pot, 360)
+        self.assertEqual(hand.update_action_queue.call_count, 3)
+
+    def test_update_table01(self):
+        """This test happens at the beginning of a hand after it's been dealt"""
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        response = hand.update_table()
+
+        self.assertEqual(response, {
+            "response": const.PLAYER_ACTION,
+            "player": player3
+        })
+        self.assertEqual(hand.action_on_player, player3)
+        self.assertEqual(len(hand.action_queue), 2)
+        self.assertEqual(hand._board, [])
+        self.assertEqual(hand.stage, const.PREFLOP)
+
+    def test_update_table02(self):
+        """Should be testing that it proceed to next stage on empty action queue"""
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        hand.action_queue = deque()
+        response = hand.update_table()
+
+        self.assertEqual(hand.action_on_player, player1)
+        self.assertEqual(len(hand.action_queue), 2)
+        self.assertEqual(len(hand._board), 3)
+        self.assertEqual(response, {
+            "response": const.PLAYER_ACTION,
+            "player": player1
+        })
+        self.assertEqual(hand.stage, const.FLOP)
+
+    def test_update_table03(self):
+        """Should be ending hand if there is only one player active and he's not in the queue"""
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_FOLDED
+        player3.status = const.STATUS_FOLDED
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        hand.action_queue = deque()
+        response = hand.update_table()
+
+        self.assertEqual(len(hand.action_queue), 0)
+        self.assertEqual(hand._board, [])
+        self.assertEqual(response, {
+            "response": const.END_HAND
+        })
+        self.assertEqual(hand.stage, const.PREFLOP)
