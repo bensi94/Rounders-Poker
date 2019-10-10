@@ -10,6 +10,7 @@ class Hand:
     def __init__(self, players, blinds):
         self._board = []
         self._pot = 0
+        self._side_pots = []
         self._current_max_bet = 0
         self._players = players
         self._deck = Deck()
@@ -18,6 +19,7 @@ class Hand:
         self.deal_hand()
         self.action_on_player = None
         self.last_legal_raise = 0
+        self.stage = const.PREFLOP
 
     def deal_hand(self):
         self.pay_blinds()
@@ -47,6 +49,8 @@ class Hand:
             self._players[0].pay_blind(self._small_blind, const.POST_SB)
             self._players[1].pay_blind(self._big_blind, const.POST_BB)
             self._current_max_bet = self._players[1].bet
+
+        self._pot = self._players[0].bet + self._players[1].bet
 
     # This method is used after a bet or raise to add active players to the action Queue
     def update_action_queue(self, last_action_player):
@@ -78,15 +82,87 @@ class Hand:
             if player.status == const.STATUS_ACTIVE:
                 self.action_queue.append(player)
 
-    def next_player_action(self):
-        pass
+    # This method is used to update the table from all states, after a player action or after a deal
+    def update_table(self):
+        self.check_and_update_side_pots()
+
+        # First we need to get the counts
+        active_count = 0
+        all_in_count = 0
+        for player in self._players:
+            if player.status == const.STATUS_ACTIVE:
+                active_count += 1
+            elif player.status == const.STATUS_ALL_IN:
+                all_in_count += 1
+
+        if all_in_count == 0 and active_count <= 1:
+            return {
+                "response": const.END_HAND
+            }
+
+        if not self.action_queue:
+            if active_count <= 1:
+                return {
+                    "response": const.END_HAND
+                }
+
+            # If the action queue is empty and still has players, it means that there are
+            # no remaining actions on that street
+            if self.stage == const.PREFLOP:
+                # PREFLOP --> FLOP
+                self.stage = const.FLOP
+                self._board = [*self._deck.get_flop()]
+                self.fill_action_queue()
+            elif self.stage == const.FLOP:
+                # FLOP --> RIVER
+                self.stage = const.TURN
+                self._board.append(self._deck.get_next_card())
+                self.fill_action_queue()
+            elif self.stage == const.TURN:
+                # TURN --> RIVER
+                self.stage = const.RIVER
+                self._board.append(self._deck.get_next_card())
+                self.fill_action_queue()
+            else:
+                # River is done and hand needs to go to showdown
+                return {
+                    "response": const.END_HAND
+                }
+
+        self.action_on_player = self.action_queue.popleft()
+
+        return {
+            "response": const.PLAYER_ACTION,
+            "player": self.action_on_player
+        }
 
     def player_action(self, action, player):
         player.validate_action(action)
+        old_player_bet = player.bet
+        player.action(action)
 
+        # if the action is a Bet or Raise the action Queue needs to be updated
         if action['type'] == const.BET or action['type'] == const.RAISE:
+            # If there is a raise we need ot update the last legal raise
+            if action['type'] == const.RAISE:
+                # This happens if player goes all in for less than a legal raise
+                if player.bet < self._big_blind * 2:
+                    self.last_legal_raise = self._big_blind
+                else:
+                    if self._current_max_bet + self.last_legal_raise < player.bet:
+                        self.last_legal_raise = player.bet - self._current_max_bet
+
+            # Updateing the current_max_bet
             self._current_max_bet = player.bet
             self.update_action_queue()
+
+        if (action['type'] == const.CALL or
+                action['type'] == const.BET or action['type'] == const.RAISE):
+            self._pot += action['amount'] - old_player_bet
+
+    # Checks if a side pot should be created or updated
+    def check_and_update_side_pots(self):
+        pass
 
     def get_hand_obj(self):
         pass

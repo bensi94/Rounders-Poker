@@ -6,6 +6,7 @@ class Player:
     def __init__(self, stack, seatnumber, user=''):
         self.stack = stack
         self.bet = 0
+        self.total_bets_in_hand = 0
         self.status = const.STATUS_WAITING
         self.seatnumber = seatnumber
         self.last_action = ''
@@ -32,6 +33,9 @@ class Player:
     def give_hand(self, hand):
         self.hand = hand
         self.status = const.STATUS_ACTIVE
+        self.total_bets_in_hand = 0
+        self.reset_bet()
+        self.last_action = ''
 
     def action(self, action):
         action_type = action['type']
@@ -49,8 +53,8 @@ class Player:
         if amount > self.stack:
             # Returns False if the amount is invalid(more then stack)
             return False
-        self.stack -= amount
-        self.bet += amount
+        self.stack -= amount - self.bet
+        self.bet = amount
 
         if self.stack == 0:
             self.status = const.STATUS_ALL_IN
@@ -118,6 +122,8 @@ class Player:
                     min_raise_allowed = big_blind*2
                 elif last_legal_raise == 0:
                     min_raise_allowed = current_max_bet*2
+                elif current_max_bet < big_blind*2:
+                    min_raise_allowed = big_blind*2
                 else:
                     min_raise_allowed = current_max_bet + last_legal_raise
 
@@ -149,6 +155,8 @@ class Player:
                 elif action['type'] == const.BET or action['type'] == const.RAISE:
                     if action['amount'] < a['min'] or action['amount'] > a['max']:
                         raise ValueError('Action failed: Invalid Amount')
+                    else:
+                        return
                 else:
                     return
 
