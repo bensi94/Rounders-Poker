@@ -22,9 +22,12 @@ class Hand:
         self.stage = const.PREFLOP
 
     def deal_hand(self):
-        self.pay_blinds()
         for player in self._players:
-            player.cards = self._deck.get_hand()
+            if player.status == const.STATUS_ACTIVE:
+                cards = self._deck.get_hand()
+                player.give_hand(cards)
+
+        self.pay_blinds()
 
         # In heads up we can manually add the players to the first queue
         if len(self._players) == 2:
@@ -162,7 +165,59 @@ class Hand:
 
     # Checks if a side pot should be created or updated
     def check_and_update_side_pots(self):
-        pass
+
+        # First we sort the players depending on how much they have already put out
+        sorted_players = sorted(self._players, key=lambda sort_key: (
+            sort_key.total_bets_in_hand, sort_key.stack))
+
+        # Carry over is essentially used to move dead money (where the player is not all in)
+        carry_overs = []
+        # All new all_in amounts get added to t hits list
+        previous_all_in_amounts = []
+
+        for i, player in enumerate(sorted_players):
+
+            # We only need to make a side pot if a player is all in
+            if player.status == const.STATUS_ALL_IN:
+                # Because it's sorted by total bet amount we know that all players with
+                # more than current player can be part of this side pot
+                player_count = len(sorted_players[i:])
+                amount = player.total_bets_in_hand * player_count
+                players = []
+
+                # We need to collect all the players that can win the current side pot
+                # They need to be active or all in
+                for sub_player in sorted_players[i:]:
+                    if (sub_player.status == const.STATUS_ACTIVE or
+                            sub_player.status == const.STATUS_ALL_IN):
+                        players.append(sub_player)
+
+                for i, prev_amount in enumerate(previous_all_in_amounts):
+                    # Because the prev all_in array is in fact sorted, because of the player sort
+                    # We can use the amount that was the previous before to subtract form current
+                    # previous, so we do not over subtract
+                    if i != 0:
+                        prev_amount = prev_amount - previous_all_in_amounts[i-1]
+
+                    # If previous all ins are less then carry overs, we need to subtract them
+                    # from the carry_overs because they are already in a side pot
+                    for i, carry_over in enumerate(carry_overs):
+                        if prev_amount < carry_over:
+                            carry_overs[i] -= prev_amount
+
+                    amount -= prev_amount * player_count
+
+                amount += sum(carry_overs)
+
+                self._side_pots.append({
+                    "pot": amount,
+                    "players": set(players)
+                })
+
+                carry_overs = []
+                previous_all_in_amounts.append(player.total_bets_in_hand)
+            else:
+                carry_overs.append(player.total_bets_in_hand)
 
     def get_hand_obj(self):
         pass

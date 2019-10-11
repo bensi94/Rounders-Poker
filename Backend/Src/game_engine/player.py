@@ -30,9 +30,8 @@ class Player:
             "bet": self.bet
         }
 
-    def give_hand(self, hand):
-        self.hand = hand
-        self.status = const.STATUS_ACTIVE
+    def give_hand(self, cards):
+        self.cards = cards
         self.total_bets_in_hand = 0
         self.reset_bet()
         self.last_action = ''
@@ -50,10 +49,11 @@ class Player:
     # bet_amount function will be used for betting, raising and calling
     # because they work the same way.
     def bet_amount(self, amount):
-        if amount > self.stack:
+        if amount - self.bet > self.stack:
             # Returns False if the amount is invalid(more then stack)
             return False
         self.stack -= amount - self.bet
+        self.total_bets_in_hand += amount - self.bet
         self.bet = amount
 
         if self.stack == 0:
@@ -76,6 +76,7 @@ class Player:
             self.stack = self.stack - blind_val
             self.bet += blind_val
 
+        self.total_bets_in_hand = self.bet
         self.last_action = action_name
 
     def get_possible_actions(
