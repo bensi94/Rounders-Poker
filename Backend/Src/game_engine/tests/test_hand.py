@@ -76,14 +76,15 @@ class TestHand(TestCase):
         player3 = Player(300, 3)
         player4 = Player(400, 4)
 
+        players = [player1, player2, player3, player4]
+
+        hand = Hand(players, (10, 20))
+
         player1.status = const.STATUS_ACTIVE
         player2.status = const.STATUS_ACTIVE
         player3.status = const.STATUS_FOLDED
         player4.status = const.STATUS_ACTIVE
 
-        players = [player1, player2, player3, player4]
-
-        hand = Hand(players, (10, 20))
         hand.action_queue = deque()
 
         # Execution
@@ -377,12 +378,13 @@ class TestHand(TestCase):
         player1 = Player(200, 1)
         player2 = Player(200, 2)
         player3 = Player(300, 3)
-        player1.status = const.STATUS_ACTIVE
-        player2.status = const.STATUS_ACTIVE
-        player3.status = const.STATUS_ACTIVE
 
         players = [player1, player2, player3]
         blinds = 10, 20
+
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
 
         hand = Hand(players, blinds)
 
@@ -422,3 +424,216 @@ class TestHand(TestCase):
             "response": const.END_HAND
         })
         self.assertEqual(hand.stage, const.PREFLOP)
+
+    def test_check_and_update_side_pots01(self):
+        """There should be no side pots if no player is all in"""
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(300, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        hand.check_and_update_side_pots()
+
+        self.assertEqual(hand._side_pots, [])
+
+    def test_check_and_update_side_pots02(self):
+        """One player is all in others are still playing"""
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(40, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+        player3.bet_amount(40)
+
+        hand.check_and_update_side_pots()
+
+        self.assertEqual(hand._side_pots, [{
+            "pot": 70,
+            "players": set([player3])
+        }])
+
+    def test_check_and_update_side_pots03(self):
+        """Player 3 goes all_in and player 1 does bigger all_in"""
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(40, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        player3.bet_amount(40)
+        player1.bet_amount(200)
+
+        hand.check_and_update_side_pots()
+
+        self.assertEqual(hand._side_pots, [
+            {
+                "pot": 100,
+                "players": set([player3, player1])
+            },
+            {
+                "pot": 160,
+                "players": set([player1])
+            }
+        ])
+
+    def test_check_and_update_side_pots04(self):
+        """ALL 3 players go all in with last player going smaller"""
+
+        player1 = Player(7, 1)
+        player2 = Player(500, 2)
+        player3 = Player(40, 3)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        player3.bet_amount(40)
+        player2.bet_amount(40)
+
+        hand.check_and_update_side_pots()
+
+        self.assertEqual(hand._side_pots, [
+            {
+                "pot": 21,
+                "players": set([player1, player3, player2])
+            },
+            {
+                "pot": 66,
+                "players": set([player3, player2])
+            }
+        ])
+
+    def test_check_and_update_side_pots05(self):
+        """
+        Little all in madness:
+        player 1: has stack of 4 and is sb, ALL IN
+        player 2: Action is here but the player has payed 20 BB
+        player 3: ALL IN 50
+        player 4: ALL in 14
+        player 5: ALL IN 300
+        player 6: ALL IN 60
+        """
+
+        player1 = Player(4, 1)
+        player2 = Player(20, 2)
+        player3 = Player(50, 3)
+        player4 = Player(14, 4)
+        player5 = Player(300, 5)
+        player6 = Player(60, 6)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+        player4.status = const.STATUS_ACTIVE
+        player5.status = const.STATUS_ACTIVE
+        player6.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3, player4, player5, player6]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        player3.bet_amount(50)
+        player4.bet_amount(14)
+        player5.bet_amount(300)
+        player6.bet_amount(60)
+
+        hand.check_and_update_side_pots()
+
+        self.assertEqual(hand._side_pots, [
+            {
+                "pot": 24,
+                "players": set([player1, player2, player3, player4, player5, player6])
+            },
+            {
+                "pot": 50,
+                "players": set([player2, player3, player4, player5, player6])
+            },
+            {
+                "pot": 114,
+                "players": set([player3, player5, player6])
+            },
+            {
+                "pot": 20,
+                "players": set([player5, player6])
+            },
+            {
+                "pot": 240,
+                "players": set([player5])
+            }
+        ])
+
+    def test_check_and_update_side_pots06(self):
+        """
+        Test designed to test the carry over:
+        player 1: SB, action is here next
+        player 2: 20 BB
+        player 3: ALL IN 4
+        player 4: ALL in 14
+        player 5: CALL 20
+        player 6: ALL IN 300
+        """
+
+        player1 = Player(200, 1)
+        player2 = Player(200, 2)
+        player3 = Player(4, 3)
+        player4 = Player(14, 4)
+        player5 = Player(200, 5)
+        player6 = Player(300, 6)
+        player1.status = const.STATUS_ACTIVE
+        player2.status = const.STATUS_ACTIVE
+        player3.status = const.STATUS_ACTIVE
+        player4.status = const.STATUS_ACTIVE
+        player5.status = const.STATUS_ACTIVE
+        player6.status = const.STATUS_ACTIVE
+
+        players = [player1, player2, player3, player4, player5, player6]
+        blinds = 10, 20
+
+        hand = Hand(players, blinds)
+
+        player3.bet_amount(4)
+        player4.bet_amount(14)
+        player5.bet_amount(20)
+        player6.bet_amount(300)
+
+        hand.check_and_update_side_pots()
+
+        self.assertEqual(hand._side_pots, [
+            {
+                "pot": 24,
+                "players": set([player1, player2, player3, player4, player5, player6])
+            },
+            {
+                "pot": 46,
+                "players": set([player2, player4, player5, player6])
+            },
+            {
+                "pot": 298,
+                "players": set([player6])
+            }
+        ])

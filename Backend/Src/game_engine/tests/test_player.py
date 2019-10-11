@@ -16,8 +16,8 @@ class TestPlayer(TestCase):
         hand = (card1, card2)
         player.give_hand(hand)
 
-        assert player.hand[0] == '8h'
-        assert player.hand[1] == '9s'
+        assert player.cards[0] == '8h'
+        assert player.cards[1] == '9s'
 
     def test_bet_valid(self):
         player = Player(100, self.SEAT_NUMBER)
