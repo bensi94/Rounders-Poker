@@ -49,6 +49,7 @@ class GameController(Thread):
         self._hand = None
         self._seat_order = []
         self._waiting_for_user = False
+        self._action_on_player = None
 
     def run(self):
         while self._runing:
@@ -81,7 +82,7 @@ class GameController(Thread):
             self.setup_table()
         elif self._hand is None:
             self.init_hand()
-        elif self.action_on_player is None:
+        elif self._action_on_player is None:
             self.update_table()
 
     # This is decorater that takes the function being called and adds

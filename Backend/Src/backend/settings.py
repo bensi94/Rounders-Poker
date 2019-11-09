@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'user',
     'game_connections',
     'channels',
-    'game_engine'
+    'game_engine',
+    'hand_evaluator'
 ]
 
 MIDDLEWARE = [
